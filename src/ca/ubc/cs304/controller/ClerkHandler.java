@@ -14,20 +14,8 @@ public class ClerkHandler {
         this.cdh = cdh;
     }
 
-    public int viewNumberOfVehicles(String carType, String location, TimeInterval timeInterval) {
-        return -1;
-    }
 
-    public VehicleModel[] viewVehicles(String carType, String location, TimeInterval timeInterval) {
-        return null;
-    }
 
-    public void addCustomerToDatabase(String dlicense, String cellphone, String name, String address) {
 
-    }
-
-    public Object makeReservation() {
-        return null;
-    }
 
 }
