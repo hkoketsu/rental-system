@@ -11,7 +11,7 @@ public class CustomerHandler {
     public CustomerHandler (DatabaseConnectionHandler cdh) {
         this.cdh = cdh;
     }
-    
+
     public int viewNumberOfVehicles(String carType, String location, TimeInterval timeInterval) {
         return -1;
     }

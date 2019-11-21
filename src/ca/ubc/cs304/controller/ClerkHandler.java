@@ -1,8 +1,10 @@
 package ca.ubc.cs304.controller;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
-import ca.ubc.cs304.model.TimeInterval;
-import ca.ubc.cs304.model.VehicleModel;
+import ca.ubc.cs304.model.RentalReceipt;
+import ca.ubc.cs304.model.RentalReport;
+import ca.ubc.cs304.model.ReturnReceipt;
+import ca.ubc.cs304.model.ReturnReport;
 
 import java.sql.Date;
 
@@ -14,8 +16,29 @@ public class ClerkHandler {
         this.cdh = cdh;
     }
 
+    public RentalReceipt rentVehicle() {
+        return null;
+    }
 
+    public ReturnReceipt returnRental(String rid) {
+        return null;
+    }
 
+    public RentalReport generateRentalReport() {
+        return null;
+    }
+
+    public RentalReport generateBranchRentalReport(String branchLocation, String branchCity) {
+        return null;
+    }
+
+    public ReturnReport generateReturnReport() {
+        return null;
+    }
+
+    public ReturnReport generateBranchReturnReport(String branchLocation, String branchCity) {
+        return null;
+    }
 
 
 }
