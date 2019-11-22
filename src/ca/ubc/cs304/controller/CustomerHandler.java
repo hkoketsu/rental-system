@@ -13,11 +13,18 @@ public class CustomerHandler {
     }
 
     public int viewNumberOfVehicles(String carType, String location, TimeInterval timeInterval) {
-        return -1;
+        int numberOfVehicles = cdh.numberOfVehiclesNotRented(carType, location, timeInterval);
+        if (timeInterval != null) {
+            int numberOfReservedVehicles = cdh.numberOfReservedVehicles(carType, timeInterval);
+            if (numberOfVehicles <= numberOfReservedVehicles) {
+                return 0;
+            }
+        }
+        return numberOfVehicles;
     }
 
     public VehicleModel[] viewVehicles(String carType, String location, TimeInterval timeInterval) {
-        return null;
+        return cdh.getVehicles(carType, location, timeInterval);
     }
 
     public void addCustomerToDatabase(String dlicense, String cellphone, String name, String address) {

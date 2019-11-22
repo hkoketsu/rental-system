@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.TimeInterval;
+import ca.ubc.cs304.model.VehicleModel;
 
 /**
  * This class handles all database related transactions
@@ -58,7 +60,7 @@ public class DatabaseConnectionHandler {
 			rollbackConnection();
 		}
 	}
-	
+
 	public void insertBranch(BranchModel model) {
 		try {
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?,?,?,?)");
@@ -160,6 +162,160 @@ public class DatabaseConnectionHandler {
 			connection.rollback();	
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	public VehicleModel[] getVehicles(String carType, String location, TimeInterval timeInterval) {
+		try {
+			ArrayList<VehicleModel> result = new ArrayList<VehicleModel>();
+			String query = "SELECT * FROM vehicles v";
+			if (carType != null && location != null && timeInterval != null) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+				query += " AND v.location = <locationInput>";
+				query += " AND v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.from >= <intpu.from>" + timeInterval.getFromDate() +
+						" OR r.to <= " + timeInterval.getToDate() + ")";
+			} else if (carType != null && location != null ) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+				query += " AND v.location = <locationInput>";
+			} else if (location != null && timeInterval != null) {
+				query += " WHERE v.location = <locationInput>";
+				query += " AND v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
+						" OR r.toDate <= " + timeInterval.getToDate() + ")";
+			} else if (carType != null && timeInterval != null) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+				query += " AND v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.from >= " + timeInterval.getFromDate() +
+						" OR r.to <= " + timeInterval.getToDate() + ")";
+			} else if (carType != null ) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+			} else if (location != null ) {
+				query += " WHERE v.location = <locationInput>";
+			} else if (timeInterval != null) {
+				query += " WHERE v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
+						" OR r.toDate <= " + timeInterval.getToDate() + ")";
+			}
+
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while(rs.next()) {
+				VehicleModel model = new VehicleModel(
+						rs.getNString("vlicense"),
+						rs.getNString("make"),
+						rs.getNString("model"),
+						rs.getNString("year"),
+						rs.getNString("color"),
+						rs.getNString("odometer"),
+						rs.getNString("vtname"),
+						rs.getNString("location"),
+						rs.getNString("city"),
+						rs.getNString("status")
+				);
+				result.add(model);
+			}
+			rs.close();
+			stmt.close();
+
+			return result.toArray(new VehicleModel[result.size()]);
+
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			return null;
+		}
+	}
+
+	public int numberOfVehiclesNotRented(String carType, String location, TimeInterval timeInterval) {
+		try {
+			int result;
+			String query = "SELECT count(*) FROM vehicles v";
+			if (carType != null && location != null && timeInterval != null) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+				query += " AND v.location = <locationInput>";
+				query += " AND v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.from >= <intpu.from>" + timeInterval.getFromDate() +
+						" OR r.to <= " + timeInterval.getToDate() + ")";
+			} else if (carType != null && location != null ) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+				query += " AND v.location = <locationInput>";
+			} else if (location != null && timeInterval != null) {
+				query += " WHERE v.location = <locationInput>";
+				query += " AND v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
+						" OR r.toDate <= " + timeInterval.getToDate() + ")";
+			} else if (carType != null && timeInterval != null) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+				query += " AND v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.from >= " + timeInterval.getFromDate() +
+						" OR r.to <= " + timeInterval.getToDate() + ")";
+			} else if (carType != null ) {
+				query += " WHERE  v.vtname = <carTypeInput>";
+			} else if (location != null ) {
+				query += " WHERE v.location = <locationInput>";
+			} else if (timeInterval != null) {
+				query += " WHERE v.vlicence NOT IN ( " +
+						"SELECT r.vlicence " +
+						"FROM rentals r " +
+						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
+						" OR r.toDate <= " + timeInterval.getToDate() + ")";
+			}
+
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			result = rs.getInt("total");
+
+			rs.close();
+			stmt.close();
+			return result;
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			return -1;
+		}
+	}
+
+	public int numberOfReservedVehicles(String carType, TimeInterval timeInterval) {
+		try {
+			int result;
+			String query = "SELECT count(*) FROM reservations r";
+			if (carType != null && timeInterval != null) {
+				query += " WHERE r.vtname = " + carType;
+				query += " AND r.fromDate >= " + timeInterval.getFromDate();
+				query += " AND r.toDate <= " + timeInterval.getToDate();
+			} else if (carType != null) {
+				query += " WHERE r.vtname = " + carType;
+			} else if (timeInterval != null) {
+				query += " WHERE r.fromDate >= " + timeInterval.getFromDate();
+				query += " AND r.toDate <= " + timeInterval.getToDate();
+			}
+
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			result = rs.getInt("total");
+
+			rs.close();
+			stmt.close();
+			return result;
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			return -1;
 		}
 	}
 }

@@ -2,6 +2,7 @@ package ca.ubc.cs304.model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 public class TimeInterval {
 
@@ -21,5 +22,13 @@ public class TimeInterval {
     public Time getFromTime(){
         return null;
     }
+
+//    public Timestamp getFromTimestamp(){
+//        return null;
+//    }
+//
+//    public Timestamp getToTimestamp(){
+//        return null;
+//    }
 
 }
