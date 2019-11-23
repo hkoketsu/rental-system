@@ -57,7 +57,15 @@ public class CustomerHandler {
         List<String> confNoList = Arrays.asList(confNoArr);
         String confNo;
         do {
-            confNo = this.getSaltString();
+            confNo = "cf";
+            Random random = new Random();
+            confNo += random.nextInt(10);
+            confNo += this.getRandomLetter();
+            confNo += random.nextInt(10);
+            confNo += random.nextInt(10);
+            confNo += random.nextInt(10);
+            confNo += this.getRandomLetter();
+            confNo += random.nextInt(10);
         } while (confNoList.contains(confNo));
 
         ReservationModel model = new ReservationModel(confNo, carType, cellphone,
@@ -70,11 +78,11 @@ public class CustomerHandler {
 
 
     // from: https://stackoverflow.com/questions/20536566/creating-a-random-string-with-a-z-and-0-9-in-java
-    private String getSaltString() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    private String getRandomLetter() {
+        String SALTCHARS = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 8) { // length of the random string.
+        while (salt.length() < 1) { // length of the random string.
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
