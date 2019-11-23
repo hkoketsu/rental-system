@@ -112,9 +112,9 @@ public class DatabaseConnectionHandler {
             ps.setString(2, model.getVtname());
             ps.setString(3, model.getCellphone());
             ps.setDate(4, model.getFromDate());
-            ps.setTime(5, model.getFromTime());
+            ps.setString(5, model.getFromTime());
             ps.setDate(6, model.getToDate());
-            ps.setTime(7, model.getToTime());
+            ps.setString(7, model.getToTime());
 //			if (model.getPhoneNumber() == 0) {
 //				ps.setNull(5, java.sql.Types.INTEGER);
 //			} else {

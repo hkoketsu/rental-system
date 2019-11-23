@@ -5,30 +5,31 @@ import java.sql.Time;
 import java.sql.Timestamp;
 
 public class TimeInterval {
+    Date fromDate;
+    Date toDate;
+    String fromTime;
+    String toTime;
 
-    public TimeInterval(Date FromDate, Date ToDate, Time ToTime, Time FromTime){
-
+    public TimeInterval(Date fromDate, Date toDate, String fromTime, String toTime) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.fromTime = fromTime;
+        this.toTime = toTime;
     }
 
-    public Date getFromDate(){
-        return null;
-    }
-    public Date getToDate(){
-        return null;
-    }
-    public Time getToTime(){
-        return null;
-    }
-    public Time getFromTime(){
-        return null;
+    public Date getFromDate() {
+        return fromDate;
     }
 
-//    public Timestamp getFromTimestamp(){
-//        return null;
-//    }
-//
-//    public Timestamp getToTimestamp(){
-//        return null;
-//    }
+    public Date getToDate() {
+        return toDate;
+    }
 
+    public String getFromTime() {
+        return fromTime;
+    }
+
+    public String getToTime() {
+        return toTime;
+    }
 }

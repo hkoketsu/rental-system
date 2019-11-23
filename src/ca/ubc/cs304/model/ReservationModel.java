@@ -8,11 +8,11 @@ public class ReservationModel {
     private String vtname;
     private String cellphone;
     private Date fromDate;
-    private Time fromTime;
+    private String fromTime;
     private Date toDate;
-    private Time toTime;
+    private String toTime;
 
-    public ReservationModel(String confNo, String vtname, String cellphone, Date fromDate, Time fromTime, Date toDate, Time toTime) {
+    public ReservationModel(String confNo, String vtname, String cellphone, Date fromDate, String fromTime, Date toDate, String toTime) {
         this.confNo = confNo;
         this.vtname = vtname;
         this.cellphone = cellphone;
@@ -38,7 +38,7 @@ public class ReservationModel {
         return fromDate;
     }
 
-    public Time getFromTime() {
+    public String getFromTime() {
         return fromTime;
     }
 
@@ -46,7 +46,7 @@ public class ReservationModel {
         return toDate;
     }
 
-    public Time getToTime() {
+    public String getToTime() {
         return toTime;
     }
 }
