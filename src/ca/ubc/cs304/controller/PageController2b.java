@@ -1,9 +1,11 @@
 package ca.ubc.cs304.controller;
 
-
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+/***
+ * Page for selecting clerk actions
+ */
 public class PageController2b extends PageController {
     public void onClick(ActionEvent e) {
         Button button = (Button) e.getSource();

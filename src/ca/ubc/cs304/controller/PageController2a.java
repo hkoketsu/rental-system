@@ -11,13 +11,16 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/***
+ * Page for searching vehicles
+ */
 public class PageController2a extends PageController implements Initializable {
-    @FXML ChoiceBox vehicleTypeChoices;
-    @FXML ChoiceBox branchChoices;
+    @FXML ChoiceBox<String> vehicleTypeChoices;
+    @FXML ChoiceBox<String> branchChoices;
     @FXML DatePicker pickupDatePicker;
-    @FXML ChoiceBox pickupTimeChoices;
+    @FXML ChoiceBox<String> pickupTimeChoices;
     @FXML DatePicker returnDatePicker;
-    @FXML ChoiceBox returnTimeChoices;
+    @FXML ChoiceBox<String> returnTimeChoices;
     @FXML Button searchButton;
 
     @FXML Label vehicleTypeLabel;
@@ -59,20 +62,12 @@ public class PageController2a extends PageController implements Initializable {
     }
 
     public void onClickSearchButton() {
-        String vehicleType = vehicleTypeChoices.getValue() != null
-                ? vehicleTypeChoices.getValue().toString()
-                : null;
-        String branch = branchChoices.getValue() != null
-                ? branchChoices.getValue().toString()
-                : null;
+        String vehicleType = vehicleTypeChoices.getValue();
+        String branch = branchChoices.getValue();
         LocalDate pickUpDate = pickupDatePicker.getValue();
         LocalDate returnDate = returnDatePicker.getValue();
-        String  pickupTime = pickupTimeChoices.getValue() != null
-                ? pickupTimeChoices.getValue().toString()
-                : null;
-        String returnTime = returnTimeChoices.getValue() != null
-                ? returnTimeChoices.getValue().toString()
-                : null;
+        String  pickupTime = pickupTimeChoices.getValue();
+        String returnTime = returnTimeChoices.getValue();
 
         resultPane.setVisible(true);
 

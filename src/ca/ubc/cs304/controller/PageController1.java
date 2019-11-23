@@ -1,6 +1,8 @@
 package ca.ubc.cs304.controller;
 
-
+/***
+    Page for selecting customer or clerk
+ */
 public class PageController1 extends PageController {
 
     public void onCustomerButtonClick() {

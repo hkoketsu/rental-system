@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * Page for adding customer information when reservation was not ready
+ */
 public class PageController4ab extends PageController implements Initializable {
     @FXML Label vehicleTypeLabel;
     @FXML Label branchLabel;

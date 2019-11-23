@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * Page for displaying rental receipt
+ */
 public class PageController4ba extends PageController implements Initializable {
     @FXML Label vehicleTypeLabel;
     @FXML Label branchLabel;
@@ -65,7 +68,7 @@ public class PageController4ba extends PageController implements Initializable {
 
     @Override
     public void loadParameter(Object[]...params) {
-        if (params != null || params[0].length == 1) {
+        if (params != null && params[0].length == 1) {
             confirmationNumber = params[0][0].toString();
         }
     }

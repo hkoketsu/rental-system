@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * Page for selecting a report type
+ */
 public class PageController3bc extends PageController implements Initializable {
     @FXML ChoiceBox branchChoiceBox;
     @FXML Label errorLabel;
@@ -22,7 +25,7 @@ public class PageController3bc extends PageController implements Initializable {
 
     public void onClick(ActionEvent e) {
         Button button = (Button) e.getSource();
-        String branch = null;
+        String branch;
         switch (button.getId()) {
             case "CompanyRental":
                 setPage(PageController4bca.class, "4bca", new String[]{"rental"});

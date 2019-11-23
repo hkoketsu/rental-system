@@ -5,6 +5,9 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * Page for branch report
+ */
 public class PageController4bcb extends PageController implements Initializable {
     private boolean forRent;
     private String branch;
@@ -17,9 +20,9 @@ public class PageController4bcb extends PageController implements Initializable 
 
     @Override
     public void loadParameter(Object[]...params) {
-        if (params != null || params[0].length == 2) {
+        if (params != null && params[0].length == 2) {
             String[] paramsStr = (String[]) params[0];
-            forRent = paramsStr[0] == "rental";
+            forRent = paramsStr[0].equals("rental");
             branch = paramsStr[1];
         }
     }

@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * Page for displaying rental completion
+ */
 public class PageController5ba extends PageController implements Initializable {
     @FXML Label customerNameLabel;
     @FXML Label rentalIdLabel;

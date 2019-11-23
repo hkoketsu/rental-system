@@ -7,6 +7,9 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * Page for displaying return receipt
+ */
 public class PageController4bb extends PageController implements Initializable {
     @FXML Label rentalIdLabel;
     @FXML Label dateLabel;

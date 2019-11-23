@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/***
+ * Page for returning vehicle
+ */
 public class PageController3bb extends PageController implements Initializable {
     @FXML TextField rentalIdTextField;
     @FXML TextField odometerTextField;

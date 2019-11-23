@@ -10,6 +10,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
+/***
+ * Page for displaying reservation completion
+ */
 public class PageController5a extends PageController implements Initializable {
     private String confirmationNumber;
 

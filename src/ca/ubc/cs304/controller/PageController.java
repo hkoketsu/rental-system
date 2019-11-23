@@ -2,6 +2,9 @@ package ca.ubc.cs304.controller;
 
 import ca.ubc.cs304.app.App;
 
+/***
+ * Base class for all the page controllers
+ */
 public class PageController {
     private App application;
 

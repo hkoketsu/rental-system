@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/***
+ * Page for adding customer information for reservation
+ */
 public class PageController4a extends PageController implements Initializable {
     @FXML Label vehicleTypeLabel;
     @FXML Label branchLabel;
@@ -30,7 +33,7 @@ public class PageController4a extends PageController implements Initializable {
 
     @Override
     public void loadParameter(Object[]...params) {
-        if (params != null || params[0].length == 4) {
+        if (params != null && params[0].length == 4) {
             String[] paramsStr = (String[]) params[0];
             vehicleType = paramsStr[0];
             branch = paramsStr[1];

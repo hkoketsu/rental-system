@@ -4,6 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+/***
+ * Page for rent with reservation
+ * Input for confirmation number
+ */
 public class PageController3ba extends PageController {
     @FXML TextField confirmationNumberTextField;
     @FXML Label errorLabel;
