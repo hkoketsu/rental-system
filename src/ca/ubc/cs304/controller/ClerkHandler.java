@@ -20,6 +20,10 @@ public class ClerkHandler {
         return null;
     }
 
+    public double estimateCost(String carType) {
+        return -1;
+    }
+
     public ReturnReceipt returnRental(String rid) {
         return null;
     }

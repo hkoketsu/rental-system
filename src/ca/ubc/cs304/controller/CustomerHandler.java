@@ -49,10 +49,6 @@ public class CustomerHandler {
         }
     }
 
-    public double estimateCost(String carType) {
-        return -1;
-    }
-
     // Returns the confno of the created reservation
     // Gets list of confNo's from database
     // Generates random confNo's until one is created that is not in the database

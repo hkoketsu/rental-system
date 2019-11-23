@@ -202,6 +202,41 @@ public class DatabaseConnectionHandler {
         return result.toArray(new CustomerModel[result.size()]);
     }
 
+//    public double[] getCustomerInfo() {
+//        ArrayList<CustomerModel> result = new ArrayList<CustomerModel>();
+//
+//        try {
+//            Statement stmt = connection.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM customer");
+//
+////    		// get info on ResultSet
+////    		ResultSetMetaData rsmd = rs.getMetaData();
+////
+////    		System.out.println(" ");
+////
+////    		// display column names;
+////    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+////    			// get column name and print it
+////    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+////    		}
+//
+//            while (rs.next()) {
+//                CustomerModel model = new CustomerModel(rs.getString("dlicense"),
+//                        rs.getString("cellphone"),
+//                        rs.getString("name"),
+//                        rs.getString("address"));
+//                result.add(model);
+//            }
+//
+//            rs.close();
+//            stmt.close();
+//        } catch (SQLException e) {
+//            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+//        }
+//
+//        return result.toArray(new CustomerModel[result.size()]);
+//    }
+
 
     public String[] getReservationConfnoInfo() {
         ArrayList<String> result = new ArrayList<String>();
