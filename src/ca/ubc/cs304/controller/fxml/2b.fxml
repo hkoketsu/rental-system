@@ -12,22 +12,22 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="137.0" layoutY="100.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Rent (with Reservation)">
+      <Button id="Rent W/ Reservation" onAction="#onClick" layoutX="137.0" layoutY="100.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Rent (with Reservation)">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="137.0" layoutY="173.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Rent (without Reservation)">
+      <Button id="Rent W/O Reservation" onAction="#onClick" layoutX="137.0" layoutY="173.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Rent (without Reservation)">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="137.0" layoutY="248.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Return Vehicle">
+      <Button id="Return" layoutX="137.0" onAction="#onClick"  layoutY="248.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Return Vehicle">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="137.0" layoutY="320.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Generate Report">
+      <Button id="Report" layoutX="137.0" onAction="#onClick" layoutY="320.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="326.0" text="Generate Report">
          <font>
             <Font size="14.0" />
          </font>

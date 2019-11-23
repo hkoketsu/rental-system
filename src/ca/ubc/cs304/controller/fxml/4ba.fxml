@@ -4,14 +4,18 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController4ba">
    <children>
-      <Text layoutX="43.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation Information">
+      <Text layoutX="22.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation Information">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
+      <Text layoutX="35.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation Number: ">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Label fx:id="confirmationNumberLabel" layoutX="183.0" layoutY="73.0" prefHeight="17.0" prefWidth="200.0" />
       <Pane layoutX="35.0" layoutY="98.0" prefHeight="143.0" prefWidth="250.0">
          <children>
             <Text layoutX="4.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle:">
@@ -23,12 +27,12 @@
             <Text layoutX="4.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch:" />
             <Text layoutX="4.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup:" />
             <Text layoutX="4.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return:" />
-            <Label id="VehicleTypeLabel" layoutX="64.0" layoutY="32.0" prefHeight="17.0" prefWidth="133.0" />
-            <Label id="BranchLabel" layoutX="64.0" layoutY="50.0" prefHeight="17.0" prefWidth="133.0" />
-            <Label id="PickupLabel" layoutX="64.0" layoutY="69.0" prefHeight="17.0" prefWidth="133.0" />
-            <Label id="ReturnLabel" layoutX="64.0" layoutY="87.0" prefHeight="17.0" prefWidth="133.0" />
+            <Label fx:id="vehicleTypeLabel" layoutX="64.0" layoutY="32.0" prefHeight="17.0" prefWidth="133.0" />
+            <Label fx:id="branchLabel" layoutX="64.0" layoutY="50.0" prefHeight="17.0" prefWidth="133.0" />
+            <Label fx:id="pickupLabel" layoutX="64.0" layoutY="69.0" prefHeight="17.0" prefWidth="133.0" />
+            <Label fx:id="returnLabel" layoutX="64.0" layoutY="87.0" prefHeight="17.0" prefWidth="133.0" />
             <Text layoutX="2.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Odometer:" />
-            <TextField id="OdometerTextField" layoutX="66.0" layoutY="113.0" prefHeight="25.0" prefWidth="125.0" />
+            <TextField fx:id="odometerTextField" layoutX="66.0" layoutY="113.0" prefHeight="25.0" prefWidth="125.0" />
          </children>
       </Pane>
       <Pane layoutX="273.0" layoutY="99.0" prefHeight="246.0" prefWidth="259.0">
@@ -41,24 +45,23 @@
             <Text layoutX="4.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
             <Text layoutX="4.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone #:" />
             <Text layoutX="4.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DLicense #:" />
-            <Label id="NameLabel" layoutX="74.0" layoutY="31.0" prefHeight="17.0" prefWidth="127.0" />
-            <Label id="PhoneNumberLabel" layoutX="74.0" layoutY="49.0" prefHeight="17.0" prefWidth="128.0" />
-            <Label id="DriverLicenseLabel" layoutX="74.0" layoutY="69.0" prefHeight="17.0" prefWidth="127.0" />
+            <Label fx:id="nameLabel" layoutX="74.0" layoutY="31.0" prefHeight="17.0" prefWidth="127.0" />
+            <Label fx:id="phoneNumberLabel" layoutX="74.0" layoutY="49.0" prefHeight="17.0" prefWidth="128.0" />
+            <Label fx:id="driverLicenseLabel" layoutX="74.0" layoutY="69.0" prefHeight="17.0" prefWidth="127.0" />
             <Text layoutX="3.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit Card">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
             <Text layoutX="4.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number: " />
-            <TextField id="CreditNumberTextField" layoutX="67.0" layoutY="131.0" />
             <Text layoutX="4.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " />
             <Text layoutX="4.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exp. Date:" />
-            <TextField id="CreditNameTextField" layoutX="67.0" layoutY="163.0" />
-            <TextField id="CreditExpDateTextField" layoutX="67.0" layoutY="195.0" />
+            <TextField fx:id="creditNumberTextField" layoutX="67.0" layoutY="131.0" />
+            <TextField fx:id="creditNameTextField" layoutX="67.0" layoutY="163.0" />
+            <TextField fx:id="expDateTextField" layoutX="67.0" layoutY="195.0" />
          </children>
       </Pane>
-      <Button layoutX="444.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Proceed" />
-      <Text layoutX="44.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation Number: " />
-      <Label id="ConfirmationNumberLabel" layoutX="183.0" layoutY="73.0" prefHeight="17.0" prefWidth="200.0" />
+      <Button fx:id="proceedButton" onAction="#onClickProceed" layoutX="444.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Proceed" />
+      <Label fx:id="errorLabel" layoutX="35.0" layoutY="267.0" prefHeight="44.0" prefWidth="200.0" text="Error: Please fill in all the information" textFill="RED" visible="false" />
    </children>
 </Pane>

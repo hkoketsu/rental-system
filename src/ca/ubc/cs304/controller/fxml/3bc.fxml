@@ -4,7 +4,6 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController3bc">
    <children>
       <Text layoutX="33.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Reports">
@@ -22,27 +21,27 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Button id="CompanyRentalButton" layoutX="97.0" layoutY="138.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="166.0" text="Daily Rental Report">
+      <Button id="CompanyRental" layoutX="97.0" layoutY="138.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="166.0" text="Daily Rental Report">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button id="CompanyReturnButton" layoutX="295.0" layoutY="136.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="180.0" text="Daily Return Report">
+      <Button id="CompanyReturn" layoutX="295.0" layoutY="136.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="180.0" text="Daily Return Report">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button id="BranchRentalButton" layoutX="96.0" layoutY="261.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="166.0" text="Daily Rental Report">
+      <Button id="BranchRental" layoutX="96.0" layoutY="261.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="166.0" text="Daily Rental Report">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button id="BranchReturnButton" layoutX="294.0" layoutY="261.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="182.0" text="Daily Return Report">
+      <Button id="BranchReturn" layoutX="294.0" layoutY="261.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="182.0" text="Daily Return Report">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <ChoiceBox id="BranchChoiceBox" layoutX="123.0" layoutY="213.0" prefHeight="25.0" prefWidth="190.0" />
-      <Label layoutX="333.0" layoutY="217.0" prefHeight="17.0" prefWidth="158.0" text="Error: Choose a branch" textFill="RED" visible="false" />
+      <ChoiceBox fx:id="branchChoiceBox" layoutX="123.0" layoutY="213.0" prefHeight="25.0" prefWidth="190.0" />
+      <Label fx:id="errorLabel" layoutX="333.0" layoutY="217.0" prefHeight="17.0" prefWidth="158.0" text="Error: Choose a branch" textFill="RED" visible="false" />
    </children>
 </Pane>

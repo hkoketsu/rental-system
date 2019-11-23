@@ -16,17 +16,17 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField id="ConfirmationNumberTextField" layoutX="281.0" layoutY="157.0">
+      <TextField fx:id="confirmationNumberTextField" layoutX="281.0" layoutY="157.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Button layoutX="393.0" layoutY="270.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Next">
+      <Button fx:id="nextButton" onAction="#onClickNextButton" layoutX="393.0" layoutY="270.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Next">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label id="ErrorLabel" layoutX="96.0" layoutY="106.0" text="Error: The confimation number was not found" textFill="RED" visible="false">
+      <Label fx:id="errorLabel" layoutX="96.0" layoutY="106.0" text="Error: The confimation number was not found" textFill="RED" visible="false">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

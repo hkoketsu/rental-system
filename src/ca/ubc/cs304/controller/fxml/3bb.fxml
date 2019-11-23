@@ -4,15 +4,14 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="ca.ubc.cs304.controller.PageController3bb">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController3bb">
    <children>
       <Text layoutX="39.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="49.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental ID:">
+      <Text layoutX="49.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental fx:id:">
          <font>
             <Font size="14.0" />
          </font>
@@ -27,21 +26,26 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <TextField id="RentalIdTextField" layoutX="197.0" layoutY="96.0">
+      <TextField fx:id="rentalIdTextField" layoutX="197.0" layoutY="96.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField id="OdometerTextField" layoutX="197.0" layoutY="143.0">
+      <TextField fx:id="odometerTextField" layoutX="197.0" layoutY="143.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button id="ProceedButton" layoutX="393.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Proceed">
+      <Button onAction="#onClickProceedButton" layoutX="393.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Proceed">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <ChoiceBox id="GasTankFullChoiceBox" layoutX="197.0" layoutY="191.0" prefHeight="25.0" prefWidth="175.0" />
+      <ChoiceBox fx:id="gasTankFullChoiceBox" layoutX="197.0" layoutY="191.0" prefHeight="25.0" prefWidth="175.0" />
+      <Label fx:id="errorLabel" layoutX="49.0" layoutY="255.0" text="Error: Fill in all the information" textFill="RED" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

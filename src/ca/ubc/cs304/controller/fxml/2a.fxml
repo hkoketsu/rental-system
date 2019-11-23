@@ -9,22 +9,57 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Result">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Button id="ReserveButton" layoutX="184.0" layoutY="354.0" mnemonicParsing="false" text="Reserve" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </Button>
-            <ScrollPane id="SearchResultScrollPane" hbarPolicy="NEVER" layoutX="12.0" layoutY="47.0" prefHeight="296.0" prefWidth="243.0">
+            <Pane fx:id="resultPane" prefHeight="398.0" prefWidth="266.0" visible="false">
+               <children>
+                  <Text layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Result">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="8.0" layoutY="64.0" prefHeight="135.0" prefWidth="240.0">
+                     <children>
+                        <Text layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Type:" />
+                        <Text layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch: " />
+                        <Text layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup:" />
+                        <Text layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return:" />
+                        <Label fx:id="vehicleTypeLabel" layoutX="80.0" layoutY="-3.0" prefHeight="17.0" prefWidth="151.0" />
+                        <Label fx:id="branchLabel" layoutX="80.0" layoutY="17.0" prefHeight="17.0" prefWidth="151.0" />
+                        <Label fx:id="pickupLabel" layoutX="80.0" layoutY="38.0" prefHeight="17.0" prefWidth="151.0" />
+                        <Label fx:id="returnLabel" layoutX="80.0" layoutY="57.0" prefHeight="17.0" prefWidth="151.0" />
+                        <Label fx:id="resultLabel" layoutY="92.0" prefHeight="17.0" prefWidth="235.0" />
+                     </children>
+                  </Pane>
+                  <Button fx:id="reserveButton" onAction="#onClickReserveButton" layoutX="176.0" layoutY="360.0" mnemonicParsing="false" text="Reserve">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </Button>
+                  <ScrollPane id="SearchResultScrollPane" hbarPolicy="NEVER" layoutX="10.0" layoutY="200.0" prefHeight="150.0" prefWidth="235.0">
+                     <content>
+                      <AnchorPane>
+                           <children>
+                              <TableView fx:id="resultTable">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+            <ScrollPane fx:id="noConditionPane" hbarPolicy="NEVER" layoutX="14.0" layoutY="14.0" prefHeight="373.0" prefWidth="240.0" visible="false">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane prefHeight="380.0" prefWidth="245.0">
+                     <children>
+                        <Label fx:id="noConditionLabel" alignment="TOP_LEFT" layoutX="4.0" layoutY="10.0" prefHeight="351.0" prefWidth="219.0" />
+                     </children>
+                  </AnchorPane>
               </content>
             </ScrollPane>
          </children></AnchorPane>
@@ -55,13 +90,13 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <DatePicker id="PickupDatePicker" layoutX="12.0" layoutY="215.0" />
-            <ChoiceBox id="PickupTimeBox" layoutX="196.0" layoutY="215.0" prefHeight="25.0" prefWidth="106.0" />
-            <ChoiceBox id="VehicleTypeChoiceBox" layoutX="168.0" layoutY="74.0" prefHeight="25.0" prefWidth="140.0" />
-            <ChoiceBox id="BranchChoiceBox" layoutX="168.0" layoutY="132.0" prefHeight="25.0" prefWidth="140.0" />
-            <ChoiceBox id="ReturnTimeBox" layoutX="196.0" layoutY="284.0" prefHeight="25.0" prefWidth="106.0" />
-            <DatePicker id="ReturnDatePicker" layoutX="12.0" layoutY="284.0" />
-            <Button id="SearchButton" layoutX="81.0" layoutY="344.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="174.0" text="Search">
+            <DatePicker fx:id="pickupDatePicker" layoutX="12.0" layoutY="215.0" />
+            <ChoiceBox fx:id="pickupTimeChoices" layoutX="196.0" layoutY="215.0" prefHeight="25.0" prefWidth="106.0" />
+            <ChoiceBox fx:id="vehicleTypeChoices" layoutX="168.0" layoutY="74.0" prefHeight="25.0" prefWidth="140.0" />
+            <ChoiceBox fx:id="branchChoices" layoutX="168.0" layoutY="132.0" prefHeight="25.0" prefWidth="140.0" />
+            <ChoiceBox fx:id="returnTimeChoices" layoutX="196.0" layoutY="284.0" prefHeight="25.0" prefWidth="106.0" />
+            <DatePicker fx:id="returnDatePicker" layoutX="12.0" layoutY="284.0" />
+            <Button fx:id="searchButton" layoutX="81.0" layoutY="344.0" mnemonicParsing="false" onAction="#onClickSearchButton" prefHeight="30.0" prefWidth="174.0" text="Search">
                <font>
                   <Font size="14.0" />
                </font>

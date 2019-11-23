@@ -33,22 +33,22 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Label id="VehicleTypeLabel" layoutX="51.0" layoutY="99.0" prefHeight="20.0" prefWidth="147.0">
+            <Label fx:id="vehicleTypeLabel" layoutX="51.0" layoutY="99.0" prefHeight="20.0" prefWidth="147.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label id="BranchLabel" layoutX="51.0" layoutY="170.0" prefHeight="20.0" prefWidth="147.0">
+            <Label fx:id="branchLabel" layoutX="51.0" layoutY="170.0" prefHeight="20.0" prefWidth="147.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label id="PickupLabel" layoutX="51.0" layoutY="245.0" prefHeight="20.0" prefWidth="147.0">
+            <Label fx:id="pickupLabel" layoutX="51.0" layoutY="245.0" prefHeight="20.0" prefWidth="147.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label id="ReturnLabel" layoutX="51.0" layoutY="318.0" prefHeight="20.0" prefWidth="147.0">
+            <Label fx:id="returnLabel" layoutX="51.0" layoutY="318.0" prefHeight="20.0" prefWidth="147.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -76,15 +76,15 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Button id="ProceedButton" layoutX="105.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="137.0" text="Proceed">
+            <Button fx:id="proceedButton" onAction="#onClickProceed" layoutX="105.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="137.0" text="Proceed">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <TextField id="NameTextField" layoutX="31.0" layoutY="98.0" prefHeight="25.0" prefWidth="236.0" />
-            <TextField id="PhoneNumberTextField" layoutX="31.0" layoutY="174.0" prefHeight="25.0" prefWidth="236.0" />
-            <TextField id="DriverLicenseTextField" layoutX="31.0" layoutY="253.0" prefHeight="25.0" prefWidth="236.0" />
-            <Label id="ErrorLabel" layoutX="31.0" layoutY="294.0" text="Error: Please fill in all the information" textFill="RED" visible="false">
+            <TextField fx:id="nameTextField" layoutX="31.0" layoutY="98.0" prefHeight="25.0" prefWidth="236.0" />
+            <TextField fx:id="phoneNumberTextField" layoutX="31.0" layoutY="174.0" prefHeight="25.0" prefWidth="236.0" />
+            <TextField fx:id="driverLicenseTextField" layoutX="31.0" layoutY="253.0" prefHeight="25.0" prefWidth="236.0" />
+            <Label fx:id="errorLabel" layoutX="31.0" layoutY="294.0" text="Error: Please fill in all the information" textFill="RED" visible="false">
                <font>
                   <Font size="14.0" />
                </font>

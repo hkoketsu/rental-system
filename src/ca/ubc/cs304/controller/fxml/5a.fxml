@@ -16,12 +16,12 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Label id="ConfirmationNumberLabel" layoutX="250.0" layoutY="134.0" prefHeight="27.0" prefWidth="247.0">
+      <Label fx:id="ConfirmationNumberLabel" layoutX="250.0" layoutY="134.0" prefHeight="27.0" prefWidth="247.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button id="TopButton" layoutX="243.0" layoutY="327.0" mnemonicParsing="false" text="Go back to Top">
+      <Button fx:id="TopButton" onAction="#onClickTopButton" layoutX="243.0" layoutY="327.0" mnemonicParsing="false" text="Go back to Top">
          <font>
             <Font size="14.0" />
          </font>
