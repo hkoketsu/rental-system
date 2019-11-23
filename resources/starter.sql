@@ -11,6 +11,8 @@ CREATE TABLE branch
     city VARCHAR(20) NOT NULL,
     PRIMARY KEY (location, city));
 
+grant select on branch to public;
+
 CREATE TABLE vehicles
     (vlicense VARCHAR(10) NOT NULL,
     make VARCHAR(40) NOT NULL,
@@ -167,9 +169,9 @@ insert into rentals values ('r3t113b7', '2639756524', '604-738-7238', '31-JUL-20
 
 insert into customers (dlicense, cellphone, name, address) values ('QK06-N418Q', '778-256-2892', 'Marna', '1295 Calypso Center');
 insert into customers (dlicense, cellphone, name, address) values ('IN65-M688P', '604-862-3210', 'Nate', '80224 Messerschmidt Plaza');
-insert into customers (dlicense, cellphone, name, address) values ('RN63-T839y', '604-960-1292', 'Vivianne', '807 Debra Lane');
-insert into customers (dlicense, cellphone, name, address) values ('JT96-M354x', '604-473-6551', 'Abra', '15632 Harper Road');
-insert into customers (dlicense, cellphone, name, address) values ('UV31-M204p', '604-537-9772', 'Marget', '45925 Larry Hill');
+insert into customers (dlicense, cellphone, name, address) values ('RN63-T839Y', '604-960-1292', 'Vivianne', '807 Debra Lane');
+insert into customers (dlicense, cellphone, name, address) values ('JT96-M354X', '604-473-6551', 'Abra', '15632 Harper Road');
+insert into customers (dlicense, cellphone, name, address) values ('UV31-M204P', '604-537-9772', 'Marget', '45925 Larry Hill');
 insert into customers (dlicense, cellphone, name, address) values ('KO76-E138C', '778-069-9266', 'Jorie', '88 Claremont Junction');
 insert into customers (dlicense, cellphone, name, address) values ('FV09-Q094J', '604-024-5610', 'Yorgos', '475 Morrow Drive');
 insert into customers (dlicense, cellphone, name, address) values ('MF73-P436X', '778-103-3525', 'Brianna', '1 Sunfield Parkway');
@@ -177,14 +179,14 @@ insert into customers (dlicense, cellphone, name, address) values ('BS53-F417V',
 insert into customers (dlicense, cellphone, name, address) values ('PA54-X962R', '604-196-0247', 'Pepe', '47869 Fordem Avenue');
 insert into customers (dlicense, cellphone, name, address) values ('XD02-T391D', '604-121-0953', 'Dari', '56304 Service Terrace');
 insert into customers (dlicense, cellphone, name, address) values ('CP53-I288A', '604-281-3817', 'Miran', '0 Lerdahl Hill');
-insert into customers (dlicense, cellphone, name, address) values ('US32-B170g', '604-742-8883', 'Valentino', '88 Schurz Crossing');
-insert into customers (dlicense, cellphone, name, address) values ('HZ91-J502d', '778-466-4023', 'Vera', '60417 Colorado Plaza');
-insert into customers (dlicense, cellphone, name, address) values ('CA37-X440b', '604-738-7238', 'Vivien', '61 Eastlawn Way');
-insert into customers (dlicense, cellphone, name, address) values ('UB76-M784c', '604-676-2347', 'Clio', '6 Carey Circle');
-insert into customers (dlicense, cellphone, name, address) values ('OL07-P265m', '778-562-6633', 'Karolina', '710 Independence Circle');
+insert into customers (dlicense, cellphone, name, address) values ('US32-B170G', '604-742-8883', 'Valentino', '88 Schurz Crossing');
+insert into customers (dlicense, cellphone, name, address) values ('HZ91-J502D', '778-466-4023', 'Vera', '60417 Colorado Plaza');
+insert into customers (dlicense, cellphone, name, address) values ('CA37-X440B', '604-738-7238', 'Vivien', '61 Eastlawn Way');
+insert into customers (dlicense, cellphone, name, address) values ('UB76-M784C', '604-676-2347', 'Clio', '6 Carey Circle');
+insert into customers (dlicense, cellphone, name, address) values ('OL07-P265M', '778-562-6633', 'Karolina', '710 Independence Circle');
 insert into customers (dlicense, cellphone, name, address) values ('EL97-U110N', '604-114-6909', 'Allix', '4 Monterey Way');
 insert into customers (dlicense, cellphone, name, address) values ('ID06-O589S', '778-838-9345', 'Clair', '0 Drewry Lane');
-insert into customers (dlicense, cellphone, name, address) values ('XR88-F302p', '604-041-5530', 'Dar', '9 Ronald Regan Trail');
+insert into customers (dlicense, cellphone, name, address) values ('XR88-F302P', '604-041-5530', 'Dar', '9 Ronald Regan Trail');
 
 insert into returns values ('r8v372l6', '15-AUG-2019', '01:13', 15095, 'true', 700);
 insert into returns values ('r0o812v9', '20-NOV-2019', '12:14', 11902, 'true', 1000);
