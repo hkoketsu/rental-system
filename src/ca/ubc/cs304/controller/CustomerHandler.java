@@ -12,17 +12,17 @@ import java.util.Random;
 
 public class CustomerHandler {
 
-    private DatabaseConnectionHandler cdh;
+    private DatabaseConnectionHandler dbHandler;
 
-    public CustomerHandler (DatabaseConnectionHandler cdh) {
-        this.cdh = cdh;
+    public CustomerHandler (DatabaseConnectionHandler dbHandler) {
+        this.dbHandler = dbHandler;
     }
 
     // any of the arguments can be null
     public int viewNumberOfVehicles(String carType, String location, TimeInterval timeInterval) {
-        int numberOfVehicles = cdh.numberOfVehiclesNotRented(carType, location, timeInterval);
+        int numberOfVehicles = dbHandler.numberOfVehiclesNotRented(carType, location, timeInterval);
         if (timeInterval != null) {
-            int numberOfReservedVehicles = cdh.numberOfReservedVehicles(carType, timeInterval);
+            int numberOfReservedVehicles = dbHandler.numberOfReservedVehicles(carType, timeInterval);
             if (numberOfVehicles <= numberOfReservedVehicles) {
                 return 0;
             }
@@ -32,16 +32,16 @@ public class CustomerHandler {
 
     // any of the arguments can be null
     public VehicleModel[] viewVehicles(String carType, String location, TimeInterval timeInterval) {
-        return cdh.getVehicles(carType, location, timeInterval);
+        return dbHandler.getVehicles(carType, location, timeInterval);
     }
 
     public void addCustomerToDatabase(String dlicense, String cellphone, String name, String address) {
         CustomerModel model = new CustomerModel(dlicense, cellphone, name, address);
-        cdh.insertCustomer(model);
+        dbHandler.insertCustomer(model);
     }
 
-    public boolean isCustomerInDatabase() {
-        CustomerModel[] models = cdh.getCustomerInfo();
+    public boolean isCustomerInDatabase(String cellphone) {
+        CustomerModel[] models = dbHandler.getCustomerInfo(cellphone);
         if (models.length == 0) {
             return false;
         } else {
@@ -53,7 +53,7 @@ public class CustomerHandler {
     // Gets list of confNo's from database
     // Generates random confNo's until one is created that is not in the database
     public String makeReservation(String location, String carType, String name, String cellphone, TimeInterval timeInterval) {
-        String[] confNoArr = cdh.getReservationConfnoInfo();
+        String[] confNoArr = dbHandler.getReservationConfnoInfo();
         List<String> confNoList = Arrays.asList(confNoArr);
         String confNo;
         do {
@@ -71,7 +71,7 @@ public class CustomerHandler {
         ReservationModel model = new ReservationModel(confNo, carType, cellphone,
                 timeInterval.getFromDate(), timeInterval.getFromTime(),
                 timeInterval.getToDate(), timeInterval.getToTime());
-        cdh.insertReservation(model);
+        dbHandler.insertReservation(model);
 
         return confNo;
     }

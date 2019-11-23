@@ -167,12 +167,12 @@ public class DatabaseConnectionHandler {
         return result.toArray(new BranchModel[result.size()]);
     }
 
-    public CustomerModel[] getCustomerInfo() {
+    public CustomerModel[] getCustomerInfo(String cellphone) {
         ArrayList<CustomerModel> result = new ArrayList<CustomerModel>();
 
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM customer");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM customer c WHERE c.cellphone = " + cellphone);
 
 //    		// get info on ResultSet
 //    		ResultSetMetaData rsmd = rs.getMetaData();
