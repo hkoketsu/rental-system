@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController4bb">
+   <children>
+      <Text layoutX="40.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return Completed">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="40.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receipt:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="40.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental ID:" />
+      <Text layoutX="40.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Text layoutX="40.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price:" />
+      <Label id="RentalIdLabel" layoutX="158.0" layoutY="134.0" prefHeight="17.0" prefWidth="160.0" />
+      <Label id="DateLabel" layoutX="158.0" layoutY="171.0" prefHeight="17.0" prefWidth="160.0" />
+      <Label id="TotalPriceLabel" layoutX="158.0" layoutY="207.0" prefHeight="17.0" prefWidth="160.0" />
+   </children>
+</Pane>

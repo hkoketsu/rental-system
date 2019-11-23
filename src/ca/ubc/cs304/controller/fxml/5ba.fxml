@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController5ba">
+   <children>
+      <Text layoutX="37.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Completed">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="37.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="37.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Type:" />
+      <Label id="VehicleTypeLabel" layoutX="180.0" layoutY="167.0" prefHeight="17.0" prefWidth="193.0" text="a" />
+      <Label id="BranchLabel" layoutX="180.0" layoutY="190.0" prefHeight="17.0" prefWidth="193.0" text="a" />
+      <Text layoutX="37.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch Location:" />
+      <Label id="PickupLabel" layoutX="180.0" layoutY="212.0" prefHeight="17.0" prefWidth="193.0" text="a" />
+      <Text layoutX="37.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Date &amp; Time" />
+      <Label id="ReturnLabel" layoutX="180.0" layoutY="235.0" prefHeight="17.0" prefWidth="193.0" text="a" />
+      <Text layoutX="37.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return Date &amp; Time" />
+      <Label id="RentalIdLabel" layoutX="180.0" layoutY="129.0" prefHeight="17.0" prefWidth="193.0" text="a" />
+      <Text layoutX="37.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental ID:" />
+   </children>
+</Pane>
