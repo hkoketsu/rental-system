@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.CustomerModel;
 import ca.ubc.cs304.model.TimeInterval;
 import ca.ubc.cs304.model.VehicleModel;
 
@@ -83,6 +84,29 @@ public class DatabaseConnectionHandler {
 			rollbackConnection();
 		}
 	}
+
+	public void insertCustomer(CustomerModel model) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO customer VALUES (?,?,?,?)");
+			ps.setString(1, model.getDlicense());
+			ps.setString(2, model.getCellphone());
+			ps.setString(3, model.getName());
+			ps.setString(4, model.getAddress());
+//			if (model.getPhoneNumber() == 0) {
+//				ps.setNull(5, java.sql.Types.INTEGER);
+//			} else {
+//				ps.setInt(5, model.getPhoneNumber());
+//			}
+
+			ps.executeUpdate();
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
 	
 	public BranchModel[] getBranchInfo() {
 		ArrayList<BranchModel> result = new ArrayList<BranchModel>();
@@ -118,6 +142,40 @@ public class DatabaseConnectionHandler {
 		}	
 		
 		return result.toArray(new BranchModel[result.size()]);
+	}
+	public CustomerModel[] getCustomerInfo() {
+		ArrayList<CustomerModel> result = new ArrayList<CustomerModel>();
+
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM customer");
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+			while(rs.next()) {
+                CustomerModel model = new CustomerModel(rs.getString("dlicense"),
+													rs.getString("cellphone"),
+													rs.getString("name"),
+													rs.getString("address"));
+				result.add(model);
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+
+		return result.toArray(new CustomerModel[result.size()]);
 	}
 	
 	public void updateBranch(int id, String name) {
@@ -165,46 +223,52 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
+	private String getVehiclesHelper(String carType, String location, TimeInterval timeInterval) {
+	    String query = "";
+        if (carType != null && location != null && timeInterval != null) {
+            query += " WHERE  v.vtname = " + carType;
+            query += " AND v.location = " + location;
+            query += " AND v.vlicence NOT IN ( " +
+                    "SELECT r.vlicence " +
+                    "FROM rentals r " +
+                    "WHERE r.from >= " + timeInterval.getFromDate() +
+                    " OR r.to <= " + timeInterval.getToDate() + ")";
+        } else if (carType != null && location != null ) {
+            query += " WHERE  v.vtname = " + carType;
+            query += " AND v.location = " + location;
+        } else if (location != null && timeInterval != null) {
+            query += " WHERE v.location = " + location;
+            query += " AND v.vlicence NOT IN ( " +
+                    "SELECT r.vlicence " +
+                    "FROM rentals r " +
+                    "WHERE r.fromDate >= " + timeInterval.getFromDate() +
+                    " OR r.toDate <= " + timeInterval.getToDate() + ")";
+        } else if (carType != null && timeInterval != null) {
+            query += " WHERE  v.vtname = " + carType;
+            query += " AND v.vlicence NOT IN ( " +
+                    "SELECT r.vlicence " +
+                    "FROM rentals r " +
+                    "WHERE r.from >= " + timeInterval.getFromDate() +
+                    " OR r.to <= " + timeInterval.getToDate() + ")";
+        } else if (carType != null ) {
+            query += " WHERE  v.vtname = " + carType;
+        } else if (location != null ) {
+            query += " WHERE v.location = " + location;
+        } else if (timeInterval != null) {
+            query += " WHERE v.vlicence NOT IN ( " +
+                    "SELECT r.vlicence " +
+                    "FROM rentals r " +
+                    "WHERE r.fromDate >= " + timeInterval.getFromDate() +
+                    " OR r.toDate <= " + timeInterval.getToDate() + ")";
+        }
+        return query;
+    }
+
 	public VehicleModel[] getVehicles(String carType, String location, TimeInterval timeInterval) {
 		try {
 			ArrayList<VehicleModel> result = new ArrayList<VehicleModel>();
 			String query = "SELECT * FROM vehicles v";
-			if (carType != null && location != null && timeInterval != null) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-				query += " AND v.location = <locationInput>";
-				query += " AND v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.from >= <intpu.from>" + timeInterval.getFromDate() +
-						" OR r.to <= " + timeInterval.getToDate() + ")";
-			} else if (carType != null && location != null ) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-				query += " AND v.location = <locationInput>";
-			} else if (location != null && timeInterval != null) {
-				query += " WHERE v.location = <locationInput>";
-				query += " AND v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
-						" OR r.toDate <= " + timeInterval.getToDate() + ")";
-			} else if (carType != null && timeInterval != null) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-				query += " AND v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.from >= " + timeInterval.getFromDate() +
-						" OR r.to <= " + timeInterval.getToDate() + ")";
-			} else if (carType != null ) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-			} else if (location != null ) {
-				query += " WHERE v.location = <locationInput>";
-			} else if (timeInterval != null) {
-				query += " WHERE v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
-						" OR r.toDate <= " + timeInterval.getToDate() + ")";
-			}
+			query += this.getVehiclesHelper(carType, location, timeInterval);
 
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -239,42 +303,7 @@ public class DatabaseConnectionHandler {
 		try {
 			int result;
 			String query = "SELECT count(*) FROM vehicles v";
-			if (carType != null && location != null && timeInterval != null) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-				query += " AND v.location = <locationInput>";
-				query += " AND v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.from >= <intpu.from>" + timeInterval.getFromDate() +
-						" OR r.to <= " + timeInterval.getToDate() + ")";
-			} else if (carType != null && location != null ) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-				query += " AND v.location = <locationInput>";
-			} else if (location != null && timeInterval != null) {
-				query += " WHERE v.location = <locationInput>";
-				query += " AND v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
-						" OR r.toDate <= " + timeInterval.getToDate() + ")";
-			} else if (carType != null && timeInterval != null) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-				query += " AND v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.from >= " + timeInterval.getFromDate() +
-						" OR r.to <= " + timeInterval.getToDate() + ")";
-			} else if (carType != null ) {
-				query += " WHERE  v.vtname = <carTypeInput>";
-			} else if (location != null ) {
-				query += " WHERE v.location = <locationInput>";
-			} else if (timeInterval != null) {
-				query += " WHERE v.vlicence NOT IN ( " +
-						"SELECT r.vlicence " +
-						"FROM rentals r " +
-						"WHERE r.fromDate >= " + timeInterval.getFromDate() +
-						" OR r.toDate <= " + timeInterval.getToDate() + ")";
-			}
+            query += this.getVehiclesHelper(carType, location, timeInterval);
 
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
