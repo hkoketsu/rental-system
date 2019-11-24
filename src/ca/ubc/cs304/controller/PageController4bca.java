@@ -26,6 +26,6 @@ public class PageController4bca extends PageController implements Initializable 
     }
 
     public void onClickTopButton() {
-        setPage(PageController2b.class, "2b");
+        setPage(PageController1.class, "1");
     }
 }
