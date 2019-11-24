@@ -38,7 +38,7 @@ public class PageController3bb extends PageController implements Initializable {
         String odometer = odometerTextField.getText();
         boolean fullTank = gasTankFullChoiceBox.getValue();
 
-        if (rentalId == null || odometer == null) {
+        if (rentalId.equals("") || odometer.equals("")) {
             errorLabel.setVisible(true);
         } else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yy HH:mm:ss");

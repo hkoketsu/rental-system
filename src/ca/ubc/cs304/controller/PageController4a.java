@@ -55,7 +55,7 @@ public class PageController4a extends PageController implements Initializable {
         String phoneNumber = phoneNumberTextField.getText();
         String licenseNumber = driverLicenseTextField.getText();
 
-        if (name == null || phoneNumber == null || licenseNumber == null) {
+        if (name.equals("") || phoneNumber.equals("") || licenseNumber.equals("")) {
             errorLabel.setVisible(true);
         } else {
             setPage(PageController5a.class, "5a", new String[]{vehicleType, licenseNumber, pickupDateTime, returnDateTime});

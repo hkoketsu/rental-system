@@ -58,7 +58,7 @@ public class PageController4ba extends PageController implements Initializable {
 
         String odometer = odometerTextField.getText();
 
-        if (creditName == null || creditNumber == null || expDate == null || odometer == null) {
+        if (creditName.equals("")|| creditNumber.equals("") || expDate.equals("") || odometer.equals("")) {
             errorLabel.setVisible(true);
         } else {
 //          TODO: send put query to Rent
