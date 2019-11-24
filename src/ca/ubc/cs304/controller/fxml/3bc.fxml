@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
@@ -43,5 +44,10 @@
       </Button>
       <ChoiceBox fx:id="branchChoiceBox" layoutX="123.0" layoutY="213.0" prefHeight="25.0" prefWidth="190.0" />
       <Label fx:id="errorLabel" layoutX="333.0" layoutY="217.0" prefHeight="17.0" prefWidth="158.0" text="Error: Choose a branch" textFill="RED" visible="false" />
+      <Button layoutX="241.0" layoutY="338.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

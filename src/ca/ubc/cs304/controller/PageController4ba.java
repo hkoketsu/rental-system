@@ -72,4 +72,8 @@ public class PageController4ba extends PageController implements Initializable {
             confirmationNumber = params[0][0].toString();
         }
     }
+
+    public void onClickBackButton() {
+        setPage(PageController3ba.class, "3ba");
+    }
 }

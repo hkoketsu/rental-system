@@ -45,4 +45,8 @@ public class PageController5ba extends PageController implements Initializable {
             pickupDateTime = paramsStr[4];
         }
     }
+
+    public void onClickTopButton() {
+        setPage(PageController2b.class, "2b");
+    }
 }

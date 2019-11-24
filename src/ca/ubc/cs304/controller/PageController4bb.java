@@ -35,4 +35,8 @@ public class PageController4bb extends PageController implements Initializable {
             returnDateTime = paramsStr[1];
         }
     }
+
+    public void onClickTopButton() {
+        setPage(PageController2b.class, "2b");
+    }
 }

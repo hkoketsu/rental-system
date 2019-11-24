@@ -51,4 +51,8 @@ public class PageController3bc extends PageController implements Initializable {
                 break;
         }
     }
+
+    public void onClickBackButton() {
+        setPage(PageController3bb.class, "3bb");
+    }
 }

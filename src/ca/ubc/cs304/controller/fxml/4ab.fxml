@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -82,7 +83,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Button fx:id="proceedButton" layoutX="105.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickProceed" prefHeight="30.0" prefWidth="137.0" text="Proceed">
+            <Button fx:id="proceedButton" layoutX="214.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickProceed" prefHeight="30.0" prefWidth="101.0" text="Proceed">
                <font>
                   <Font size="14.0" />
                </font>
@@ -118,6 +119,11 @@
             </Text>
             <TextField fx:id="creditNumberTextField" layoutX="136.0" layoutY="228.0" prefHeight="25.0" prefWidth="205.0" />
             <TextField fx:id="expDateTextField" layoutX="136.0" layoutY="258.0" prefHeight="25.0" prefWidth="205.0" />
+            <Button layoutX="48.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
   </items>
 </SplitPane>

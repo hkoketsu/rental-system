@@ -26,4 +26,8 @@ public class PageController4bcb extends PageController implements Initializable 
             branch = paramsStr[1];
         }
     }
+
+    public void onClickTopButton() {
+        setPage(PageController2b.class, "2b");
+    }
 }

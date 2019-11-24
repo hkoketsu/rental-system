@@ -72,4 +72,8 @@ public class PageController4ab extends PageController implements Initializable {
             setPage(PageController5ba.class, "5ba", new String[] {name, vehicleType, branch, pickupDateTime, returnDateTime});
         }
     }
+
+    public void onClickBackButton() {
+        setPage(PageController2a.class, "2a");
+    }
 }

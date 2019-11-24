@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
@@ -36,7 +37,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button onAction="#onClickProceedButton" layoutX="393.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Proceed">
+      <Button layoutX="393.0" layoutY="308.0" mnemonicParsing="false" onAction="#onClickProceedButton" prefHeight="25.0" prefWidth="84.0" text="Proceed">
          <font>
             <Font size="14.0" />
          </font>
@@ -47,5 +48,10 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Button layoutX="113.0" layoutY="308.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

@@ -18,4 +18,8 @@ public class PageController3ba extends PageController {
         // TODO: if found, goto 4ba, else set error label visible
         setPage(PageController4ba.class, "4ba", new String[]{confirmationNumber});
     }
+
+    public void onClickBackButton() {
+        setPage(PageController2b.class, "2b");
+    }
 }

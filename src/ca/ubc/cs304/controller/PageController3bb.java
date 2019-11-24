@@ -54,4 +54,8 @@ public class PageController3bb extends PageController implements Initializable {
             setPage(PageController4bb.class, "4bb", new String[]{rentalId, dateTime});
         }
     }
+
+    public void onClickBackButton() {
+        setPage(PageController2b.class, "2b");
+    }
 }
