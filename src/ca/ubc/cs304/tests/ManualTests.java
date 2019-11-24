@@ -74,13 +74,18 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
 		}
 		t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
 		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
-		if (vCount != 35) { // 35 vehicles are not rented
+		if (vCount != 0) { // 35 vehicles are not rented
 			System.out.println("total should be 0 is: " + vCount);
 			System.exit(-1);
 		}
 
 		VehicleModel[] models = customerHandler.viewVehicles(null, null, null);
-
+		if (models.length != 50) {
+            System.out.println("total should be 50 is: " + models.length);
+            System.exit(-1);
+        }
+		customerHandler.addCustomerToDatabase("123", "250-", "Matt", "AAAAHHH");
+		String confNo = customerHandler.makeReservation( "Matt Car", "123", new TimeInterval(new Date(0), new Date(0), "", ""));
 		int stop;
 	}
 	

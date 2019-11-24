@@ -19,13 +19,15 @@ public class CustomerHandler {
     }
 
     // any of the arguments can be null
+    //
     public int viewNumberOfVehicles(String carType, String location, TimeInterval timeInterval) {
         int numberOfVehicles = dbHandler.numberOfVehiclesNotRented(carType, location, timeInterval);
-        if (timeInterval != null) {
-            int numberOfReservedVehicles = dbHandler.numberOfReservedVehicles(carType, timeInterval);
-            if (numberOfVehicles <= numberOfReservedVehicles) {
-                return 0;
-            }
+        //if (timeInterval != null) {
+        int numberOfVehiclesWithNoLocation = dbHandler.numberOfVehiclesNotRented(carType, null, timeInterval);
+        int numberOfReservedVehicles = dbHandler.numberOfReservedVehicles(carType, timeInterval);
+        if (numberOfVehiclesWithNoLocation <= numberOfReservedVehicles) {
+            return 0;
+           // }
         }
         return numberOfVehicles;
     }
@@ -52,7 +54,7 @@ public class CustomerHandler {
     // Returns the confno of the created reservation
     // Gets list of confNo's from database
     // Generates random confNo's until one is created that is not in the database
-    public String makeReservation(String location, String carType, String name, String cellphone, TimeInterval timeInterval) {
+    public String makeReservation(String carType, String driverLicense, TimeInterval timeInterval) {
         String[] confNoArr = dbHandler.getReservationConfnoInfo();
         List<String> confNoList = Arrays.asList(confNoArr);
         String confNo;
@@ -68,7 +70,7 @@ public class CustomerHandler {
             confNo += random.nextInt(10);
         } while (confNoList.contains(confNo));
 
-        ReservationModel model = new ReservationModel(confNo, carType, cellphone,
+        ReservationModel model = new ReservationModel(confNo, carType, driverLicense,
                 timeInterval.getFromDate(), timeInterval.getFromTime(),
                 timeInterval.getToDate(), timeInterval.getToTime());
         dbHandler.insertReservation(model);

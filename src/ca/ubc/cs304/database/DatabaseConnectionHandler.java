@@ -110,7 +110,7 @@ public class DatabaseConnectionHandler {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO reservations VALUES (?,?,?,?,?,?,?)");
             ps.setString(1, model.getConfNo());
             ps.setString(2, model.getVtname());
-            ps.setString(3, model.getCellphone());
+            ps.setString(3, model.getdlicense());
             ps.setDate(4, model.getFromDate());
             ps.setString(5, model.getFromTime());
             ps.setDate(6, model.getToDate());
