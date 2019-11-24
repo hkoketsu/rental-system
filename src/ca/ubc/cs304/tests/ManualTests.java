@@ -6,6 +6,7 @@ import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.model.TimeInterval;
+import ca.ubc.cs304.model.VehicleModel;
 import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
 
@@ -55,16 +56,31 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
 		}
 		TimeInterval t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
 		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
-		if (vCount != 0) {
+		if (vCount != 35) { // 35 vehicles are not rented
 			System.out.println("total should be 0 is: " + vCount);
 			System.exit(-1);
 		}
 		t = new TimeInterval(new Date(119, 9, 1), new Date(119, 9, 10), "a", "b");
 		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
+		if (vCount != 47) {
+			System.out.println("total should be 15 is: " + vCount);
+			System.exit(-1);
+		}
+		t = new TimeInterval(new Date(119, 9, 8), new Date(119, 9, 19), "a", "b");
+		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
 		if (vCount != 15) {
 			System.out.println("total should be 15 is: " + vCount);
 			System.exit(-1);
 		}
+		t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
+		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
+		if (vCount != 35) { // 35 vehicles are not rented
+			System.out.println("total should be 0 is: " + vCount);
+			System.exit(-1);
+		}
+
+		VehicleModel[] models = customerHandler.viewVehicles(null, null, null);
+
 		int stop;
 	}
 	
