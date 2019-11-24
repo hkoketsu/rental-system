@@ -1,12 +1,12 @@
-package ca.ubc.cs304.model;
+package ca.ubc.cs304.domain;
 
-public class CustomerModel {
+public class Customer {
     String dlicense;
     String cellphone;
     String name;
     String address;
 
-    public CustomerModel(String dlicense, String cellphone, String name, String address) {
+    public Customer(String dlicense, String cellphone, String name, String address) {
         this.dlicense = dlicense;
         this.cellphone = cellphone;
         this.name = name;

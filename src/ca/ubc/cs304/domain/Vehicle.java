@@ -1,6 +1,6 @@
-package ca.ubc.cs304.model;
+package ca.ubc.cs304.domain;
 
-public class VehicleModel {
+public class Vehicle {
     String vlicense;
     String make;
     String model;
@@ -12,7 +12,7 @@ public class VehicleModel {
     String city;
     String status;
 
-    public VehicleModel(String vlicense, String make, String model, String year, String color, String odometer, String vtname, String location, String city, String status) {
+    public Vehicle(String vlicense, String make, String model, String year, String color, String odometer, String vtname, String location, String city, String status) {
         this.vlicense = vlicense;
         this.make = make;
         this.model = model;
