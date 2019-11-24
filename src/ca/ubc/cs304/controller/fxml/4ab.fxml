@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController4ab">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Text layoutX="20.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Information">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="20.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="19.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="20.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="19.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Label fx:id="vehicleTypeLabel" layoutX="75.0" layoutY="64.0" prefHeight="20.0" prefWidth="147.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="branchLabel" layoutX="75.0" layoutY="111.0" prefHeight="20.0" prefWidth="147.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="pickupLabel" layoutX="75.0" layoutY="162.0" prefHeight="20.0" prefWidth="147.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="returnLabel" layoutX="75.0" layoutY="213.0" prefHeight="20.0" prefWidth="147.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Text layoutX="19.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Odometer:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="odometerTextField" layoutX="108.0" layoutY="257.0" prefHeight="25.0" prefWidth="114.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="363.0">
+         <children>
+            <Text layoutX="30.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Information">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="23.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="22.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone #:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="19.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Driver License #:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Button fx:id="proceedButton" layoutX="214.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickProceed" prefHeight="30.0" prefWidth="101.0" text="Proceed">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <TextField fx:id="nameTextField" layoutX="136.0" layoutY="66.0" prefHeight="25.0" prefWidth="205.0" />
+            <TextField fx:id="phoneNumberTextField" layoutX="136.0" layoutY="100.0" prefHeight="25.0" prefWidth="205.0" />
+            <TextField fx:id="creditNameTextField" layoutX="136.0" layoutY="197.0" prefHeight="25.0" prefWidth="205.0" />
+            <Label fx:id="errorLabel" layoutX="31.0" layoutY="294.0" text="Error: Please fill in all the information" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="driverLicenseTextField" layoutX="136.0" layoutY="131.0" prefHeight="25.0" prefWidth="205.0" />
+            <Text layoutX="16.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit Card ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="23.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="22.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="23.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exp. Date:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="creditNumberTextField" layoutX="136.0" layoutY="228.0" prefHeight="25.0" prefWidth="205.0" />
+            <TextField fx:id="expDateTextField" layoutX="136.0" layoutY="258.0" prefHeight="25.0" prefWidth="205.0" />
+            <Button layoutX="48.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

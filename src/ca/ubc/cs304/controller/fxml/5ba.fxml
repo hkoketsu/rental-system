@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController5ba">
+   <children>
+      <Text layoutX="37.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental Completed">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="37.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="37.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Type:" />
+      <Label fx:id="vehicleTypeLabel" layoutX="180.0" layoutY="205.0" prefHeight="17.0" prefWidth="193.0" />
+      <Label fx:id="branchLabel" layoutX="180.0" layoutY="228.0" prefHeight="17.0" prefWidth="193.0" />
+      <Text layoutX="37.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch Location:" />
+      <Label fx:id="pickupLabel" layoutX="180.0" layoutY="252.0" prefHeight="17.0" prefWidth="193.0" />
+      <Text layoutX="37.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup Date &amp; Time" />
+      <Label fx:id="returnLabel" layoutX="180.0" layoutY="273.0" prefHeight="17.0" prefWidth="193.0" />
+      <Text layoutX="37.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return Date &amp; Time" />
+      <Label fx:id="rentalIdLabel" layoutX="180.0" layoutY="167.0" prefHeight="17.0" prefWidth="193.0" />
+      <Text layoutX="37.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental ID:" />
+      <Text layoutX="36.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name:" />
+      <Label fx:id="customerNameLabel" layoutX="180.0" layoutY="129.0" prefHeight="17.0" prefWidth="193.0" />
+      <Button layoutX="237.0" layoutY="323.0" mnemonicParsing="false" onAction="#onClickTopButton" prefHeight="30.0" prefWidth="126.0" text="Go Back To Top">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
