@@ -21,8 +21,16 @@ public class TimeInterval {
         return fromDate;
     }
 
+    public String getFromDateFormated() {
+        return "to_date('" + fromDate.toString() + "', 'yyyy-mm-dd')";
+    }
+
     public Date getToDate() {
         return toDate;
+    }
+
+    public String getToDateFormated() {
+        return "to_date('" + toDate.toString() + "', 'yyyy-mm-dd')";
     }
 
     public String getFromTime() {

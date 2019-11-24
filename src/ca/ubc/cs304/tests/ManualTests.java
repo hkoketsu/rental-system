@@ -5,8 +5,11 @@ import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.TimeInterval;
 import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
+
+import java.sql.Date;
 
 /**
  * This is the main controller class that will orchestrate everything.
@@ -29,8 +32,39 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
             System.out.println("should have been false");
 		    System.exit(-1);
         }
-		customerHandler.addCustomerToDatabase("a", "b", "c", "d");
-		customerHandler.viewNumberOfVehicles(null, null, null);
+		// customerHandler.addCustomerToDatabase("a", "b", "c", "d");
+		int vCount = customerHandler.viewNumberOfVehicles(null, null, null);
+		if (vCount != 50) {
+			System.out.println("total should be 50 is: " + vCount);
+			System.exit(-1);
+		}
+		vCount = customerHandler.viewNumberOfVehicles("Truck", null, null);
+		if (vCount != 16) {
+			System.out.println("total should be 16 is: " + vCount);
+			System.exit(-1);
+		}
+		vCount = customerHandler.viewNumberOfVehicles(null, "5202 Union St", null);
+		if (vCount != 26) {
+			System.out.println("total should be 26 is: " + vCount);
+			System.exit(-1);
+		}
+		vCount = customerHandler.viewNumberOfVehicles("Truck", "5202 Union St", null);
+		if (vCount != 9) {
+			System.out.println("total should be 9 is: " + vCount);
+			System.exit(-1);
+		}
+		TimeInterval t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
+		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
+		if (vCount != 0) {
+			System.out.println("total should be 0 is: " + vCount);
+			System.exit(-1);
+		}
+		t = new TimeInterval(new Date(119, 9, 1), new Date(119, 9, 10), "a", "b");
+		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
+		if (vCount != 15) {
+			System.out.println("total should be 15 is: " + vCount);
+			System.exit(-1);
+		}
 		int stop;
 	}
 	

@@ -27,12 +27,12 @@ public class VehicleListerHelper {
         String rightCase = null;
         String centerCase = null;
         if (timeInterval != null) {
-            leftCase = "r.fromDate <= " + timeInterval.getFromDate() +
-                    " AND r.toDate >= " + timeInterval.getFromDate();
-            rightCase = "r.fromDate <= " + timeInterval.getToDate() +
-                    " AND r.toDate >= " + timeInterval.getToDate();
-            centerCase = "r.fromDate >= " + timeInterval.getFromDate() +
-                    " AND r.toDate <= " + timeInterval.getToDate();
+            leftCase = "r.fromDate <= " + timeInterval.getFromDateFormated() +
+                    " AND r.toDate >= " + timeInterval.getFromDateFormated();
+            rightCase = "r.fromDate <= " + timeInterval.getToDateFormated() +
+                    " AND r.toDate >= " + timeInterval.getToDateFormated();
+            centerCase = "r.fromDate >= " + timeInterval.getFromDateFormated() +
+                    " AND r.toDate <= " + timeInterval.getToDateFormated();
         }
         if (carType != null && location != null && timeInterval != null) {
             query += " WHERE  v.vtname = " + "'" + carType + "'";
@@ -40,7 +40,7 @@ public class VehicleListerHelper {
             query += " AND v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
                     "FROM rentals r " +
-                    "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " )";
+                    "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " ) )";
         } else if (carType != null && location != null ) {
             query += " WHERE  v.vtname = " + "'" +carType + "'";
             query += " AND v.location = " + "'" +location + "'";
@@ -49,14 +49,14 @@ public class VehicleListerHelper {
             query += " AND v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
                     "FROM rentals r " +
-                    "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " )";
+                    "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " ) )";
         } else if (carType != null && timeInterval != null) {
             query += " WHERE  v.vtname = " + "'" +carType + "'";
             query += " AND v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
                     "FROM rentals r " +
-                    "WHERE r.from >= " + timeInterval.getFromDate() +
-                    " OR r.to <= " + timeInterval.getToDate() + ")";
+                    "WHERE r.from >= " + timeInterval.getFromDateFormated() +
+                    " OR r.to <= " + timeInterval.getToDateFormated() + ")";
         } else if (carType != null ) {
             query += " WHERE  v.vtname = " + "'" + carType + "'";
         } else if (location != null ) {
@@ -65,7 +65,7 @@ public class VehicleListerHelper {
             query += " WHERE v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
                     "FROM rentals r " +
-                    "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " )";
+                    "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " ) )";
         }
         return query;
     }
@@ -129,7 +129,7 @@ public class VehicleListerHelper {
         This query is of the form:
 
         select count(*)
-        from vehicles v
+        from vehicles v 
         where
             v.vtname = <carType> AND
             v.location = <location> AND
@@ -154,7 +154,8 @@ public class VehicleListerHelper {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            result = rs.getInt("total");
+            rs.next();
+            result = rs.getInt(1);
 
             rs.close();
             stmt.close();
@@ -181,19 +182,20 @@ public class VehicleListerHelper {
             String query = "SELECT count(*) FROM reservations r";
             if (carType != null && timeInterval != null) {
                 query += " WHERE r.vtname = " + "'" + carType + "'";
-                query += " AND r.fromDate >= " + timeInterval.getFromDate();
-                query += " AND r.toDate <= " + timeInterval.getToDate();
+                query += " AND r.fromDate >= " + timeInterval.getFromDateFormated();
+                query += " AND r.toDate <= " + timeInterval.getToDateFormated();
             } else if (carType != null) {
                 query += " WHERE r.vtname = " + "'" +carType + "'";
             } else if (timeInterval != null) {
-                query += " WHERE r.fromDate >= " + timeInterval.getFromDate();
-                query += " AND r.toDate <= " + timeInterval.getToDate();
+                query += " WHERE r.fromDate >= " + timeInterval.getFromDateFormated();
+                query += " AND r.toDate <= " + timeInterval.getToDateFormated();
             }
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            result = rs.getInt("total");
+            rs.next();
+            result = rs.getInt(1);
 
             rs.close();
             stmt.close();
