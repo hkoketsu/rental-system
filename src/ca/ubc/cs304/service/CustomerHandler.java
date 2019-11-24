@@ -1,12 +1,11 @@
-package ca.ubc.cs304.database;
+package ca.ubc.cs304.service;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
-import ca.ubc.cs304.model.CustomerModel;
-import ca.ubc.cs304.model.ReservationModel;
-import ca.ubc.cs304.model.TimeInterval;
-import ca.ubc.cs304.model.VehicleModel;
+import ca.ubc.cs304.domain.Customer;
+import ca.ubc.cs304.domain.Reservation;
+import ca.ubc.cs304.domain.TimeInterval;
+import ca.ubc.cs304.domain.Vehicle;
 
-import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -22,19 +21,17 @@ public class CustomerHandler {
     // any of the arguments can be null
     //
     public int viewNumberOfVehicles(String carType, String location, TimeInterval timeInterval) {
-        int numberOfVehicles = dbHandler.numberOfVehiclesNotRented(carType, location, timeInterval);
-        //if (timeInterval != null) {
-        int numberOfVehiclesWithNoLocation = dbHandler.numberOfVehiclesNotRented(carType, null, timeInterval);
-        int numberOfReservedVehicles = dbHandler.numberOfReservedVehicles(carType, timeInterval);
+        int numberOfVehicles = dbHandler.getNumberOfVehiclesNotRented(carType, location, timeInterval);
+        int numberOfVehiclesWithNoLocation = dbHandler.getNumberOfVehiclesNotRented(carType, null, timeInterval);
+        int numberOfReservedVehicles = dbHandler.getNumberOfReservedVehicles(carType, timeInterval);
         if (numberOfVehiclesWithNoLocation <= numberOfReservedVehicles) {
             return 0;
-           // }
         }
         return numberOfVehicles;
     }
 
     public boolean isVehicleAvailable(String vehicleLicense, TimeInterval timeInterval) {
-        VehicleModel model = dbHandler.getRentedVehicle(vehicleLicense, timeInterval);
+        Vehicle model = dbHandler.getRentedVehicle(vehicleLicense, timeInterval);
         if (model != null) {
             return true;
         } else {
@@ -43,18 +40,18 @@ public class CustomerHandler {
     }
 
     // any of the arguments can be null
-    public VehicleModel[] viewVehicles(String carType, String location, TimeInterval timeInterval) {
+    public Vehicle[] viewVehicles(String carType, String location, TimeInterval timeInterval) {
         return dbHandler.getVehicles(carType, location, timeInterval);
     }
 
     public void addCustomerToDatabase(String dlicense, String cellphone, String name, String address) {
-        CustomerModel model = new CustomerModel(dlicense, cellphone, name, address);
-        dbHandler.insertCustomer(model);
+        Customer model = new Customer(dlicense, cellphone, name, address);
+        dbHandler.putCustomer(model);
     }
 
     public boolean isCustomerInDatabase(String dlicense) {
-        CustomerModel[] models = dbHandler.getCustomerInfo(dlicense);
-        if (models.length == 0) {
+        Customer[] customers = dbHandler.getCustomerInfo(dlicense);
+        if (customers.length == 0) {
             return false;
         } else {
             return true;
@@ -80,10 +77,8 @@ public class CustomerHandler {
             confNo += random.nextInt(10);
         } while (confNoList.contains(confNo));
 
-        ReservationModel model = new ReservationModel(confNo, carType, driverLicense,
-                timeInterval.getFromDate(), timeInterval.getFromTime(),
-                timeInterval.getToDate(), timeInterval.getToTime());
-        dbHandler.insertReservation(model);
+        Reservation model = new Reservation(confNo, carType, driverLicense, null, timeInterval);
+        dbHandler.putReservation(model);
 
         return confNo;
     }

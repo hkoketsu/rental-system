@@ -4,12 +4,12 @@ public final class Rental {
     private String id;
     private String vehicleId;
     private String customerId;
-    private TimePeriod duration;
+    private TimeInterval duration;
     private int odometer;
     private CreditCard creditCard;
     private String confirmationNumber;
 
-    public Rental(String id, String vehicleId, String customerId, TimePeriod duration, int odometer, CreditCard creditCard, String confirmationNumber) {
+    public Rental(String id, String vehicleId, String customerId, TimeInterval duration, int odometer, CreditCard creditCard, String confirmationNumber) {
         this.id = id;
         this.vehicleId = vehicleId;
         this.customerId = customerId;
@@ -31,7 +31,7 @@ public final class Rental {
         return customerId;
     }
 
-    public TimePeriod getDuration() {
+    public TimeInterval getDuration() {
         return duration;
     }
 

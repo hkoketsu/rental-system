@@ -1,14 +1,12 @@
-package ca.ubc.cs304.model;
+package ca.ubc.cs304.domain;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 
 public class TimeInterval {
-    Date fromDate;
-    Date toDate;
-    String fromTime;
-    String toTime;
+    private Date fromDate;
+    private Date toDate;
+    private String fromTime;
+    private String toTime;
 
     public TimeInterval(Date fromDate, Date toDate, String fromTime, String toTime) {
         this.fromDate = fromDate;
@@ -21,16 +19,8 @@ public class TimeInterval {
         return fromDate;
     }
 
-    public String getFromDateFormated() {
-        return "to_date('" + fromDate.toString() + "', 'yyyy-mm-dd')";
-    }
-
     public Date getToDate() {
         return toDate;
-    }
-
-    public String getToDateFormated() {
-        return "to_date('" + toDate.toString() + "', 'yyyy-mm-dd')";
     }
 
     public String getFromTime() {
@@ -39,5 +29,13 @@ public class TimeInterval {
 
     public String getToTime() {
         return toTime;
+    }
+
+    public String getFromDateFormatted() {
+        return "to_date('" + fromDate.toString() + "', 'yyyy-mm-dd')";
+    }
+
+    public String getToDateFormatted() {
+        return "to_date('" + toDate.toString() + "', 'yyyy-mm-dd')";
     }
 }

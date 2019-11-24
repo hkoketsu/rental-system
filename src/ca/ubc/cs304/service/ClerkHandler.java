@@ -1,12 +1,9 @@
-package ca.ubc.cs304.database;
+package ca.ubc.cs304.service;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
+import ca.ubc.cs304.domain.Return;
 import ca.ubc.cs304.model.RentalReceipt;
 import ca.ubc.cs304.model.RentalReport;
-import ca.ubc.cs304.model.ReturnReceipt;
-import ca.ubc.cs304.model.ReturnReport;
-
-import java.sql.Date;
 
 public class ClerkHandler {
 
@@ -24,7 +21,7 @@ public class ClerkHandler {
         return -1;
     }
 
-    public ReturnReceipt returnRental(String rid) {
+    public Return returnRental(String rid) {
         return null;
     }
 
@@ -36,11 +33,11 @@ public class ClerkHandler {
         return null;
     }
 
-    public ReturnReport generateReturnReport() {
+    public Return generateReturnReport() {
         return null;
     }
 
-    public ReturnReport generateBranchReturnReport(String branchLocation, String branchCity) {
+    public Return generateBranchReturnReport(String branchLocation, String branchCity) {
         return null;
     }
 
