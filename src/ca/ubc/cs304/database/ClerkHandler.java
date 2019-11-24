@@ -1,4 +1,4 @@
-package ca.ubc.cs304.controller;
+package ca.ubc.cs304.database;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.RentalReceipt;

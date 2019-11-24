@@ -1,6 +1,6 @@
 package ca.ubc.cs304.tests;
 
-import ca.ubc.cs304.controller.CustomerHandler;
+import ca.ubc.cs304.database.CustomerHandler;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
@@ -8,7 +8,6 @@ import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.model.TimeInterval;
 import ca.ubc.cs304.model.VehicleModel;
 import ca.ubc.cs304.ui.LoginWindow;
-import ca.ubc.cs304.ui.TerminalTransactions;
 
 import java.sql.Date;
 
@@ -26,7 +25,7 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
 	private void start() {
 		login("ora_gast300", "a47448337");  // dont hack me dude
 		CustomerHandler customerHandler = new CustomerHandler(dbHandler);
-		if ( !customerHandler.isCustomerInDatabase("778-256-2892")) {
+		if ( !customerHandler.isCustomerInDatabase("QK06-N418Q")) {
             System.out.println("should have been true");
             System.exit(-1);
         }else if (customerHandler.isCustomerInDatabase("AAAAHHHHH")) {
@@ -84,8 +83,12 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
             System.out.println("total should be 50 is: " + models.length);
             System.exit(-1);
         }
-		customerHandler.addCustomerToDatabase("123", "250-", "Matt", "AAAAHHH");
-		String confNo = customerHandler.makeReservation( "Matt Car", "123", new TimeInterval(new Date(0), new Date(0), "", ""));
+		if (!customerHandler.isVehicleAvailable("6666655133", null)) {
+			System.out.println("should be true");
+			System.exit(-1);
+		}
+//		customerHandler.addCustomerToDatabase("123", "250-", "Matt", "AAAAHHH");
+//		String confNo = customerHandler.makeReservation( "Matt Car", "123", new TimeInterval(new Date(0), new Date(0), "", ""));
 		int stop;
 	}
 	

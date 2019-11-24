@@ -204,4 +204,58 @@ public class VehicleListerHelper {
             return -1;
         }
     }
+
+    /*
+        This query is of the form:
+
+        select *
+        from vehicles v
+        where
+            v.vlicense = <vlicense> AND
+            v.vlicense not in (
+                select r.vlicense
+                from rentals r
+                where
+                ( r.fromDate <= <fromDate> AND
+                r.toDate >= <fromDate> ) OR
+                ( r.fromDate <= <toDate> AND
+                r.toDate >= <toDate ) OR
+                ( r.fromDate >= <fromDate> AND
+                r.toDate <= <toDate> )
+            )
+     */
+    // returns the vehicle with the given vlicense if it is not rented within the time interval
+    public VehicleModel getRentedVehicle(String vlicense, TimeInterval timeInterval) {
+        VehicleModel result = null;
+
+        try {
+            String query = "SELECT * FROM vehicles v WHERE v.vlicense = '" + vlicense + "'";
+            query += getVehiclesHelper(null, null, timeInterval);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+            VehicleModel model = new VehicleModel(rs.getString("vlicense"),
+                    rs.getString("make"),
+                    rs.getString("model"),
+                    rs.getString("year"),
+                    rs.getString("color"),
+                    rs.getString("odometer"),
+                    rs.getString("vtname"),
+                    rs.getString("location"),
+                    rs.getString("city"),
+                    rs.getString("status")
+            );
+            result = model;
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result;
+
+    }
 }

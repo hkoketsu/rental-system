@@ -1,4 +1,4 @@
-package ca.ubc.cs304.controller;
+package ca.ubc.cs304.database;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.CustomerModel;
@@ -6,6 +6,7 @@ import ca.ubc.cs304.model.ReservationModel;
 import ca.ubc.cs304.model.TimeInterval;
 import ca.ubc.cs304.model.VehicleModel;
 
+import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,15 @@ public class CustomerHandler {
         return numberOfVehicles;
     }
 
+    public boolean isVehicleAvailable(String vehicleLicense, TimeInterval timeInterval) {
+        VehicleModel model = dbHandler.getRentedVehicle(vehicleLicense, timeInterval);
+        if (model != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // any of the arguments can be null
     public VehicleModel[] viewVehicles(String carType, String location, TimeInterval timeInterval) {
         return dbHandler.getVehicles(carType, location, timeInterval);
@@ -42,8 +52,8 @@ public class CustomerHandler {
         dbHandler.insertCustomer(model);
     }
 
-    public boolean isCustomerInDatabase(String cellphone) {
-        CustomerModel[] models = dbHandler.getCustomerInfo(cellphone);
+    public boolean isCustomerInDatabase(String dlicense) {
+        CustomerModel[] models = dbHandler.getCustomerInfo(dlicense);
         if (models.length == 0) {
             return false;
         } else {
