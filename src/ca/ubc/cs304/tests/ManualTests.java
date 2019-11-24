@@ -20,10 +20,17 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
 	}
 	
 	private void start() {
-		loginWindow = new LoginWindow();
-		loginWindow.showFrame(this);
+		login("ora_gast300", "a47448337");  // dont hack me dude
 		CustomerHandler customerHandler = new CustomerHandler(dbHandler);
-		// customerHandler.
+		if ( !customerHandler.isCustomerInDatabase("778-256-2892")) {
+            System.out.println("should have been true");
+            System.exit(-1);
+        }else if (customerHandler.isCustomerInDatabase("AAAAHHHHH")) {
+            System.out.println("should have been false");
+		    System.exit(-1);
+        }
+
+		int stop;
 	}
 	
 	/**
@@ -36,18 +43,13 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
 
 		if (didConnect) {
 			// Once connected, remove login window and start text transaction flow
-			loginWindow.dispose();
+			// loginWindow.dispose();
 
-			TerminalTransactions transaction = new TerminalTransactions();
-			transaction.showMainMenu(this);
+			// TerminalTransactions transaction = new TerminalTransactions();
+			// transaction.showMainMenu(this);
 		} else {
-			loginWindow.handleLoginFailed();
-
-			if (loginWindow.hasReachedMaxLoginAttempts()) {
-				loginWindow.dispose();
-				System.out.println("You have exceeded your number of allowed attempts");
-				System.exit(-1);
-			}
+			// System.out.println("Failed to login");
+			System.exit(-1);
 		}
 	}
 	

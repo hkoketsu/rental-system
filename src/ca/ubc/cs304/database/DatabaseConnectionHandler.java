@@ -172,7 +172,7 @@ public class DatabaseConnectionHandler {
 
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM customer c WHERE c.cellphone = " + cellphone);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM customers c WHERE c.cellphone = '" + cellphone + "'");
 
 //    		// get info on ResultSet
 //    		ResultSetMetaData rsmd = rs.getMetaData();

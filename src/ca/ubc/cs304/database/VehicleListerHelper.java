@@ -23,10 +23,6 @@ public class VehicleListerHelper {
 
     private String getVehiclesHelper(String carType, String location, TimeInterval timeInterval) {
         String query = "";
-//	    String matchingFromDateCase = "r.fromDate = " + timeInterval.getFromDate() +
-//                " AND r.fromTime < " + timeInterval.getFromTime();
-//	    String matchingToDateCase = "r.toDate = " + timeInterval.getToDate() +
-//                " AND r.toTime > " + timeInterval.getToTime();
         String leftCase = "r.fromDate <= " + timeInterval.getFromDate() +
                 " AND r.toDate >= " + timeInterval.getFromDate();
         String rightCase = "r.fromDate <= " + timeInterval.getToDate() +
@@ -34,32 +30,32 @@ public class VehicleListerHelper {
         String centerCase = "r.fromDate >= " + timeInterval.getFromDate() +
                 " AND r.toDate <= " + timeInterval.getToDate();
         if (carType != null && location != null && timeInterval != null) {
-            query += " WHERE  v.vtname = " + carType;
-            query += " AND v.location = " + location;
+            query += " WHERE  v.vtname = " + "'" + carType + "'";
+            query += " AND v.location = " + "'" + location + "'";
             query += " AND v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
                     "FROM rentals r " +
                     "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " )";
         } else if (carType != null && location != null ) {
-            query += " WHERE  v.vtname = " + carType;
-            query += " AND v.location = " + location;
+            query += " WHERE  v.vtname = " + "'" +carType + "'";
+            query += " AND v.location = " + "'" +location + "'";
         } else if (location != null && timeInterval != null) {
-            query += " WHERE v.location = " + location;
+            query += " WHERE v.location = " + "'" +location + "'";
             query += " AND v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
                     "FROM rentals r " +
                     "WHERE ( " + leftCase + " ) OR ( " + rightCase + " ) OR ( " + centerCase + " )";
         } else if (carType != null && timeInterval != null) {
-            query += " WHERE  v.vtname = " + carType;
+            query += " WHERE  v.vtname = " + "'" +carType + "'";
             query += " AND v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
                     "FROM rentals r " +
                     "WHERE r.from >= " + timeInterval.getFromDate() +
                     " OR r.to <= " + timeInterval.getToDate() + ")";
         } else if (carType != null ) {
-            query += " WHERE  v.vtname = " + carType;
+            query += " WHERE  v.vtname = " + "'" + carType + "'";
         } else if (location != null ) {
-            query += " WHERE v.location = " + location;
+            query += " WHERE v.location = " + "'" + location + "'";
         } else if (timeInterval != null) {
             query += " WHERE v.vlicence NOT IN ( " +
                     "SELECT r.vlicence " +
@@ -69,6 +65,26 @@ public class VehicleListerHelper {
         return query;
     }
 
+    /*
+        This query is of the form:
+
+        select *
+        from vehicles v
+        where
+            v.vtname = <carType> AND
+            v.location = <location> AND
+            v.vlicense not in (
+                select r.vlicense
+                from rentals r
+                where
+                ( r.fromDate <= <fromDate> AND
+                r.toDate >= <fromDate> ) OR
+                ( r.fromDate <= <toDate> AND
+                r.toDate >= <toDate ) OR
+                ( r.fromDate >= <fromDate> AND
+                r.toDate <= <toDate> )
+            )
+     */
     public VehicleModel[] getVehicles(String carType, String location, TimeInterval timeInterval) {
         try {
             ArrayList<VehicleModel> result = new ArrayList<VehicleModel>();
@@ -104,6 +120,26 @@ public class VehicleListerHelper {
         }
     }
 
+    /*
+        This query is of the form:
+
+        select count(*)
+        from vehicles v
+        where
+            v.vtname = <carType> AND
+            v.location = <location> AND
+            v.vlicense not in (
+                select r.vlicense
+                from rentals r
+                where
+                ( r.fromDate <= <fromDate> AND
+                r.toDate >= <fromDate> ) OR
+                ( r.fromDate <= <toDate> AND
+                r.toDate >= <toDate ) OR
+                ( r.fromDate >= <fromDate> AND
+                r.toDate <= <toDate> )
+            )
+     */
     public int numberOfVehiclesNotRented(String carType, String location, TimeInterval timeInterval) {
         try {
             int result;
@@ -124,16 +160,26 @@ public class VehicleListerHelper {
         }
     }
 
+    /*
+            This query is of the form:
+
+            select *
+            from reservations r
+            where
+                r.vtname = <carType> AND
+                r.fromDate >= <fromDate> AND
+                r.toDate <= <toDate>
+         */
     public int numberOfReservedVehicles(String carType, TimeInterval timeInterval) {
         try {
             int result;
             String query = "SELECT count(*) FROM reservations r";
             if (carType != null && timeInterval != null) {
-                query += " WHERE r.vtname = " + carType;
+                query += " WHERE r.vtname = " + "'" + carType + "'";
                 query += " AND r.fromDate >= " + timeInterval.getFromDate();
                 query += " AND r.toDate <= " + timeInterval.getToDate();
             } else if (carType != null) {
-                query += " WHERE r.vtname = " + carType;
+                query += " WHERE r.vtname = " + "'" +carType + "'";
             } else if (timeInterval != null) {
                 query += " WHERE r.fromDate >= " + timeInterval.getFromDate();
                 query += " AND r.toDate <= " + timeInterval.getToDate();
