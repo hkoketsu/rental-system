@@ -29,7 +29,8 @@ public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDel
             System.out.println("should have been false");
 		    System.exit(-1);
         }
-
+		customerHandler.addCustomerToDatabase("a", "b", "c", "d");
+		customerHandler.viewNumberOfVehicles(null, null, null);
 		int stop;
 	}
 	

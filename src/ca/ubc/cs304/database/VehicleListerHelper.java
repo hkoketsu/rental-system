@@ -23,12 +23,17 @@ public class VehicleListerHelper {
 
     private String getVehiclesHelper(String carType, String location, TimeInterval timeInterval) {
         String query = "";
-        String leftCase = "r.fromDate <= " + timeInterval.getFromDate() +
-                " AND r.toDate >= " + timeInterval.getFromDate();
-        String rightCase = "r.fromDate <= " + timeInterval.getToDate() +
-                " AND r.toDate >= " + timeInterval.getToDate();
-        String centerCase = "r.fromDate >= " + timeInterval.getFromDate() +
-                " AND r.toDate <= " + timeInterval.getToDate();
+        String leftCase = null;
+        String rightCase = null;
+        String centerCase = null;
+        if (timeInterval != null) {
+            leftCase = "r.fromDate <= " + timeInterval.getFromDate() +
+                    " AND r.toDate >= " + timeInterval.getFromDate();
+            rightCase = "r.fromDate <= " + timeInterval.getToDate() +
+                    " AND r.toDate >= " + timeInterval.getToDate();
+            centerCase = "r.fromDate >= " + timeInterval.getFromDate() +
+                    " AND r.toDate <= " + timeInterval.getToDate();
+        }
         if (carType != null && location != null && timeInterval != null) {
             query += " WHERE  v.vtname = " + "'" + carType + "'";
             query += " AND v.location = " + "'" + location + "'";
