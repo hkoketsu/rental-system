@@ -1,11 +1,6 @@
 package ca.ubc.cs304.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import ca.ubc.cs304.model.*;
@@ -59,6 +54,10 @@ public class DatabaseConnectionHandler {
         }
     }
 
+    public VehicleModel getRentedVehicle(String vlicense, TimeInterval timeInterval) {
+        return new VehicleListerHelper(connection).getRentedVehicle(vlicense, timeInterval);
+    }
+
     public void insertBranch(BranchModel model) {
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?,?,?,?)");
@@ -110,7 +109,7 @@ public class DatabaseConnectionHandler {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO reservations VALUES (?,?,?,?,?,?,?)");
             ps.setString(1, model.getConfNo());
             ps.setString(2, model.getVtname());
-            ps.setString(3, model.getCellphone());
+            ps.setString(3, model.getdlicense());
             ps.setDate(4, model.getFromDate());
             ps.setString(5, model.getFromTime());
             ps.setDate(6, model.getToDate());
@@ -167,23 +166,12 @@ public class DatabaseConnectionHandler {
         return result.toArray(new BranchModel[result.size()]);
     }
 
-    public CustomerModel[] getCustomerInfo(String cellphone) {
+    public CustomerModel[] getCustomerInfo(String dlicense) {
         ArrayList<CustomerModel> result = new ArrayList<CustomerModel>();
 
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM customers c WHERE c.cellphone = '" + cellphone + "'");
-
-//    		// get info on ResultSet
-//    		ResultSetMetaData rsmd = rs.getMetaData();
-//
-//    		System.out.println(" ");
-//
-//    		// display column names;
-//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//    			// get column name and print it
-//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-//    		}
+            ResultSet rs = stmt.executeQuery("SELECT * FROM customers c WHERE c.dlicense = '" + dlicense + "'");
 
             while (rs.next()) {
                 CustomerModel model = new CustomerModel(rs.getString("dlicense"),
@@ -202,42 +190,6 @@ public class DatabaseConnectionHandler {
         return result.toArray(new CustomerModel[result.size()]);
     }
 
-//    public double[] getCustomerInfo() {
-//        ArrayList<CustomerModel> result = new ArrayList<CustomerModel>();
-//
-//        try {
-//            Statement stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM customer");
-//
-////    		// get info on ResultSet
-////    		ResultSetMetaData rsmd = rs.getMetaData();
-////
-////    		System.out.println(" ");
-////
-////    		// display column names;
-////    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-////    			// get column name and print it
-////    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-////    		}
-//
-//            while (rs.next()) {
-//                CustomerModel model = new CustomerModel(rs.getString("dlicense"),
-//                        rs.getString("cellphone"),
-//                        rs.getString("name"),
-//                        rs.getString("address"));
-//                result.add(model);
-//            }
-//
-//            rs.close();
-//            stmt.close();
-//        } catch (SQLException e) {
-//            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-//        }
-//
-//        return result.toArray(new CustomerModel[result.size()]);
-//    }
-
-
     public String[] getReservationConfnoInfo() {
         ArrayList<String> result = new ArrayList<String>();
 
@@ -245,18 +197,7 @@ public class DatabaseConnectionHandler {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT r.confNo FROM reservations r");
 
-//    		// get info on ResultSet
-//    		ResultSetMetaData rsmd = rs.getMetaData();
-//
-//    		System.out.println(" ");
-//
-//    		// display column names;
-//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//    			// get column name and print it
-//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-//    		}
-
-            while (rs.next()) {
+       while (rs.next()) {
                 String temp = rs.getString("confNo");
                 result.add(temp);
             }

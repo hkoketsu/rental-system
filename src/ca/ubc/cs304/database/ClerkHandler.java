@@ -1,5 +1,6 @@
 package ca.ubc.cs304.database;
 
+
 import ca.ubc.cs304.database.DatabaseConnectionClerkHandler;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.model.RentalReceipt;
@@ -8,8 +9,10 @@ import ca.ubc.cs304.model.ReturnReceipt;
 import ca.ubc.cs304.model.ReturnReport;
 
 import java.sql.Date;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 
 public class ClerkHandler {
 
@@ -34,6 +37,7 @@ public class ClerkHandler {
     }
 
     public RentalReport generateRentalReport() {
+
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 1);
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
