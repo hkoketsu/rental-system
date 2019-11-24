@@ -207,32 +207,32 @@ insert into returns values ('r3t113b7', '09-AUG-2019', '21:55', 11906, 'true', 7
 /*
 These is the current upcomming rerservations
 */
-insert into reservations values ('cf0n750q8', '4012940775', 'KO76-E138C', '26-NOV-2019', '12:45', '30-NOV-2019', '23:07');
-insert into reservations values ('cf1t478o7', '4767464854', 'HZ91-J502D', '28-NOV-2019', '13:40', '03-DEC-2019', '13:47');
-insert into reservations values ('cf8c946l1', '4480856757', 'XR88-F302P', '01-DEC-2019', '11:43', '10-DEC-2019', '19:16');
-insert into reservations values ('cf4o953e3', '4271321222', 'CP53-I288A', '02-DEC-2019', '12:26', '12-DEC-2019', '00:58');
-insert into reservations values ('cf3d219l5', '0294575243', 'BS53-F417V', '09-DEC-2019', '03:16', '13-DEC-2019', '00:29');
-insert into reservations values ('cf2u350k7', '3369038226', 'IN65-M688P', '25-NOV-2019', '16:00', '30-NOV-2019', '17:27');
-insert into reservations values ('cf5q827a2', '8834501322', 'MF73-P436X', '11-DEC-2019', '09:03', '16-DEC-2019', '07:42');
-insert into reservations values ('cf5x611s6', '5597872400', 'EL97-U110N', '08-DEC-2019', '07:45', '12-DEC-2019', '20:57');
-insert into reservations values ('cf0w812k5', '0027187292', 'JT96-M354X', '03-DEC-2019', '12:33', '09-DEC-2019', '00:24');
-insert into reservations values ('cf6w956f9', '1119112303', 'ID06-O589S', '05-DEC-2019', '22:05', '10-DEC-2019', '16:26');
+insert into reservations values ('cf0n750q8', 'SUV', 'KO76-E138C', '26-NOV-2019', '12:45', '30-NOV-2019', '23:07');
+insert into reservations values ('cf1t478o7', 'Truck', 'HZ91-J502D', '28-NOV-2019', '13:40', '03-DEC-2019', '13:47');
+insert into reservations values ('cf8c946l1', 'Minivan', 'XR88-F302P', '01-DEC-2019', '11:43', '10-DEC-2019', '19:16');
+insert into reservations values ('cf4o953e3', 'Minivan', 'CP53-I288A', '02-DEC-2019', '12:26', '12-DEC-2019', '00:58');
+insert into reservations values ('cf3d219l5', 'Sedan', 'BS53-F417V', '09-DEC-2019', '03:16', '13-DEC-2019', '00:29');
+insert into reservations values ('cf2u350k7', 'Truck', 'IN65-M688P', '25-NOV-2019', '16:00', '30-NOV-2019', '17:27');
+insert into reservations values ('cf5q827a2', 'Sedan', 'MF73-P436X', '11-DEC-2019', '09:03', '16-DEC-2019', '07:42');
+insert into reservations values ('cf5x611s6', 'Minivan', 'EL97-U110N', '08-DEC-2019', '07:45', '12-DEC-2019', '20:57');
+insert into reservations values ('cf0w812k5', 'Minivan', 'JT96-M354X', '03-DEC-2019', '12:33', '09-DEC-2019', '00:24');
+insert into reservations values ('cf6w956f9', 'Truck', 'ID06-O589S', '05-DEC-2019', '22:05', '10-DEC-2019', '16:26');
 
 /*
 These are the completed reservations, matched with the renatals and return 
 */
-insert into reservations values ('cf6x893s8', '4271321222', 'QK06-N418Q', '11-AUG-2019', '23:28', '15-AUG-2019', '01:13');
-insert into reservations values ('cf5e234d2', '1104921731', 'JT96-M354X', '17-NOV-2019', '08:10', '20-NOV-2019', '12:14');
-insert into reservations values ('cf1m652m8', '4794447892', 'RN63-T839Y', '08-AUG-2019', '19:35', '12-AUG-2019', '00:09');
-insert into reservations values ('cf9j621t1', '0294575243', 'IN65-M688P', '11-JUL-2019', '20:12', '19-JUL-2019', '12:49');
-insert into reservations values ('cf3u217b8', '6119151494', 'MF73-P436X', '22-OCT-2019', '09:53', '30-OCT-2019', '14:37');
-insert into reservations values ('cf4v458y6', '0639411266', 'US32-B170G', '10-OCT-2019', '17:38', '20-OCT-2019', '21:59');
-insert into reservations values ('cf3j004j9', '9190343093', 'OL07-P265M', '13-AUG-2019', '15:15', '13-AUG-2019', '02:31');
-insert into reservations values ('cf7q816u0', '3369038226', 'UB76-M784C', '01-OCT-2019', '05:35', '05-OCT-2019', '04:43');
-insert into reservations values ('cf2t251n8', '4176400110', 'EL97-U110N', '23-JUN-2019', '18:25', '25-JUN-2019', '16:58');
-insert into reservations values ('cf7a322m0', '4486041283', 'PA54-X962R', '29-JUN-2019', '05:21', '03-JUL-2019', '00:52');
-insert into reservations values ('cf9n063o9', '4686223474', 'UV31-M204P', '25-JUN-2019', '04:17', '30-JUN-2019', '03:36');
-insert into reservations values ('cf8s852w4', '9760323982', 'CP53-I288A', '26-JUN-2019', '14:52', '30-JUN-2019', '17:16');
-insert into reservations values ('cf5h884x0', '6325573757', 'KO76-E138C', '06-OCT-2019', '10:49', '12-OCT-2019', '15:26');
-insert into reservations values ('cf8q500t6', '7487186393', 'XR88-F302P', '11-MAY-2019', '03:38', '17-MAY-2019', '23:05');
-insert into reservations values ('cf6p446m1', '2639756524', 'CA37-X440B', '31-JUL-2019', '09:57', '09-AUG-2019', '21:55');
+insert into reservations values ('cf6x893s8', 'Minivan', 'QK06-N418Q', '11-AUG-2019', '23:28', '15-AUG-2019', '01:13');
+insert into reservations values ('cf5e234d2', 'Truck', 'JT96-M354X', '17-NOV-2019', '08:10', '20-NOV-2019', '12:14');
+insert into reservations values ('cf1m652m8', 'Truck', 'RN63-T839Y', '08-AUG-2019', '19:35', '12-AUG-2019', '00:09');
+insert into reservations values ('cf9j621t1', 'Sedan', 'IN65-M688P', '11-JUL-2019', '20:12', '19-JUL-2019', '12:49');
+insert into reservations values ('cf3u217b8', 'SUV', 'MF73-P436X', '22-OCT-2019', '09:53', '30-OCT-2019', '14:37');
+insert into reservations values ('cf4v458y6', 'Minivan', 'US32-B170G', '10-OCT-2019', '17:38', '20-OCT-2019', '21:59');
+insert into reservations values ('cf3j004j9', 'Sedan', 'OL07-P265M', '13-AUG-2019', '15:15', '13-AUG-2019', '02:31');
+insert into reservations values ('cf7q816u0', 'Truck', 'UB76-M784C', '01-OCT-2019', '05:35', '05-OCT-2019', '04:43');
+insert into reservations values ('cf2t251n8', 'SUV', 'EL97-U110N', '23-JUN-2019', '18:25', '25-JUN-2019', '16:58');
+insert into reservations values ('cf7a322m0', 'SUV', 'PA54-X962R', '29-JUN-2019', '05:21', '03-JUL-2019', '00:52');
+insert into reservations values ('cf9n063o9', 'Truck', 'UV31-M204P', '25-JUN-2019', '04:17', '30-JUN-2019', '03:36');
+insert into reservations values ('cf8s852w4', 'Minivan', 'CP53-I288A', '26-JUN-2019', '14:52', '30-JUN-2019', '17:16');
+insert into reservations values ('cf5h884x0', 'Truck', 'KO76-E138C', '06-OCT-2019', '10:49', '12-OCT-2019', '15:26');
+insert into reservations values ('cf8q500t6', 'Truck', 'XR88-F302P', '11-MAY-2019', '03:38', '17-MAY-2019', '23:05');
+insert into reservations values ('cf6p446m1', 'Truck', 'CA37-X440B', '31-JUL-2019', '09:57', '09-AUG-2019', '21:55');
