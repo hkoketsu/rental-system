@@ -1,4 +1,4 @@
-package ca.ubc.cs304.controller;
+package ca.ubc.cs304.database;
 
 import ca.ubc.cs304.database.DatabaseConnectionClerkHandler;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
@@ -9,7 +9,6 @@ import ca.ubc.cs304.model.ReturnReport;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ClerkHandler {
@@ -41,7 +40,7 @@ public class ClerkHandler {
         String formatted = format1.format(cal.getTime());
         Date curdate = java.sql.Date.valueOf(formatted);
 
-        RentalReport report = dcch.getReport(curdate);
+        RentalReport report = dcch.getRentalReport(curdate);
 
         return report;
     }
@@ -53,7 +52,7 @@ public class ClerkHandler {
         String formatted = format1.format(cal.getTime());
         Date curdate = java.sql.Date.valueOf(formatted);
 
-        RentalReport report = dcch.getBranchReport(curdate, branchLocation, branchCity);
+        RentalReport report = dcch.getBranchRentalReport(curdate, branchLocation, branchCity);
 
         return report;
     }

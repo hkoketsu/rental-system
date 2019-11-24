@@ -326,4 +326,6 @@ public class DatabaseConnectionHandler {
     public int numberOfReservedVehicles(String carType, TimeInterval timeInterval) {
         return new VehicleListerHelper(connection).numberOfReservedVehicles(carType,timeInterval);
     }
+    
+    
 }
