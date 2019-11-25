@@ -2,10 +2,10 @@ package ca.ubc.cs304.service;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.domain.Return;
+import ca.ubc.cs304.domain.receipt.RentalReceipt;
 import ca.ubc.cs304.domain.reports.RentalBranchReport;
 import ca.ubc.cs304.domain.reports.ReturnBranchReport;
 import ca.ubc.cs304.domain.reports.ReturnReport;
-import ca.ubc.cs304.model.RentalReceipt;
 import ca.ubc.cs304.domain.reports.RentalReport;
 
 import java.sql.Date;

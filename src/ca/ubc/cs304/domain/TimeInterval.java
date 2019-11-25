@@ -38,4 +38,13 @@ public class TimeInterval {
     public String getToDateFormatted() {
         return "to_date('" + toDate.toString() + "', 'yyyy-mm-dd')";
     }
+
+    public int getDateDifference() {
+        return (int) ((toDate.getTime() - fromDate.getTime()) / 86400000);
+    }
+
+    public int getHourDifference() {
+        int hourDiff = Integer.parseInt(toTime.split(":")[0]) - Integer.parseInt(fromTime.split(":")[0]);
+        return hourDiff >= 0 ?  hourDiff : -hourDiff;
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -21,10 +22,5 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="TopButton" onAction="#onClickTopButton" layoutX="243.0" layoutY="327.0" mnemonicParsing="false" text="Go back to Top">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
    </children>
 </Pane>

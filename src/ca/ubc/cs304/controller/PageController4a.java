@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 /***
  * Page for adding customer information for reservation
  */
-public class PageController4a extends PageController implements Initializable {
+public class PageController4a extends PageController {
     @FXML Label vehicleTypeLabel;
     @FXML Label branchLabel;
     @FXML Label pickupLabel;
@@ -30,30 +30,21 @@ public class PageController4a extends PageController implements Initializable {
     @FXML Label errorLabel;
 
     private String vehicleType;
-    private String branch;
     private String pickupDateTime;
     private String returnDateTime;
+    private String branchLocation;
 
     @Override
     public void loadParameter(Object[]...params) {
         if (params != null && params[0].length == 4) {
             String[] paramsStr = (String[]) params[0];
             vehicleType = paramsStr[0];
-            branch = paramsStr[1];
+            branchLocation = paramsStr[1];
             pickupDateTime = paramsStr[2];
             returnDateTime = paramsStr[3];
-
-            vehicleTypeLabel.setText(vehicleType);
-            branchLabel.setText(branch);
-            pickupLabel.setText(pickupDateTime);
-            returnLabel.setText(returnDateTime);
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
         vehicleTypeLabel.setText(vehicleType);
-        branchLabel.setText(branch);
+        branchLabel.setText(branchLocation);
         pickupLabel.setText(pickupDateTime);
         returnLabel.setText(returnDateTime);
     }

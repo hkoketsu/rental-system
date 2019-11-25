@@ -7,87 +7,87 @@ DROP TABLE branch;
 DROP TABLE returns;
 
 CREATE TABLE branch
-    (location VARCHAR(50) NOT NULL,
-    city VARCHAR(20) NOT NULL,
-    PRIMARY KEY (location, city));
+(location VARCHAR(50) NOT NULL,
+ city VARCHAR(20) NOT NULL,
+ PRIMARY KEY (location, city));
 
 grant select on branch to public;
 
 CREATE TABLE vehicles
-    (vlicense VARCHAR(10) NOT NULL,
-    make VARCHAR(40) NOT NULL,
-    model VARCHAR(40) NOT NULL,
-    year INT NOT NULL,
-    color VARCHAR(20) NOT NULL,
-    odometer INT NOT NULL,
-    vtname VARCHAR(40) NOT NULL,
-    location VARCHAR(50) NOT NULL,
-    city VARCHAR(20) NOT NULL,
-    status VARCHAR(15) NOT NULL,
-    PRIMARY KEY (vlicense));
+(vlicense VARCHAR(10) NOT NULL,
+ make VARCHAR(40) NOT NULL,
+ model VARCHAR(40) NOT NULL,
+ year INT NOT NULL,
+ color VARCHAR(20) NOT NULL,
+ odometer INT NOT NULL,
+ vtname VARCHAR(40) NOT NULL,
+ location VARCHAR(50) NOT NULL,
+ city VARCHAR(20) NOT NULL,
+ status VARCHAR(15) NOT NULL,
+ PRIMARY KEY (vlicense));
 
 grant select on vehicles to public;
 
 CREATE TABLE vehicleTypes
-    (vtname VARCHAR(20) NOT NULL,
-    features VARCHAR(30) NOT NULL,
-    wrate INT NOT NULL,
-    drate INT NOT NULL,
-    hrate INT NOT NULL,
-    wirate INT NOT NULL,
-    dirate INT NOT NULL,
-    hirate INT NOT NULL,
-    krate INT NOT NULL,
-    PRIMARY KEY (vtname));
+(vtname VARCHAR(20) NOT NULL,
+ features VARCHAR(30) NOT NULL,
+ wrate INT NOT NULL,
+ drate INT NOT NULL,
+ hrate INT NOT NULL,
+ wirate INT NOT NULL,
+ dirate INT NOT NULL,
+ hirate INT NOT NULL,
+ krate INT NOT NULL,
+ PRIMARY KEY (vtname));
 
 GRANT SELECT ON vehicleTypes TO PUBLIC;
 
 CREATE TABLE customers
-    (dlicense VARCHAR(10) NOT NULL,
-    cellphone VARCHAR(12) NOT NULL,
-    name VARCHAR(30) NOT NULL,
-    address VARCHAR(50) NOT NULL,
-    PRIMARY KEY (dlicense));
+(dlicense VARCHAR(10) NOT NULL,
+ cellphone VARCHAR(12) NOT NULL,
+ name VARCHAR(30) NOT NULL,
+ address VARCHAR(50) NOT NULL,
+ PRIMARY KEY (dlicense));
 
 GRANT SELECT ON customers TO PUBLIC;
 
 CREATE TABLE reservations
-    (confNo VARCHAR(20) NOT NULL,
-    vtname VARCHAR(40) NOT NULL,
-    dlicense VARCHAR(10) NOT NULL,
-    fromDate DATE NOT NULL,
-    fromTime VARCHAR(15) NOT NULL,
-    toDate DATE NOT NULL,
-    toTime VARCHAR(15) NOT NULL,
-    PRIMARY KEY (confNo));
+(confNo VARCHAR(20) NOT NULL,
+ vtname VARCHAR(40) NOT NULL,
+ dlicense VARCHAR(10) NOT NULL,
+ fromDate DATE NOT NULL,
+ fromTime VARCHAR(15) NOT NULL,
+ toDate DATE NOT NULL,
+ toTime VARCHAR(15) NOT NULL,
+ PRIMARY KEY (confNo));
 
 GRANT SELECT ON reservations TO PUBLIC;
 
 CREATE TABLE rentals
-    (rid VARCHAR(20) NOT NULL,
-    vlicense VARCHAR(10) NOT NULL,
-    dlicense VARCHAR(10) NOT NULL,
-    fromDate DATE NOT NULL,
-    fromTime VARCHAR(15) NOT NULL,
-    toDate DATE NOT NULL,
-    toTime VARCHAR(15) NOT NULL,
-    odometer INT NOT NULL,
-    cardName VARCHAR(20) NOT NULL,
-    cardNo VARCHAR(20) NOT NULL,
-    expDate DATE NOT NULL,
-    confNo VARCHAR(20) NOT NULL,
-    PRIMARY KEY (rid));
+(rid VARCHAR(20) NOT NULL,
+ vlicense VARCHAR(10) NOT NULL,
+ dlicense VARCHAR(10) NOT NULL,
+ fromDate DATE NOT NULL,
+ fromTime VARCHAR(15) NOT NULL,
+ toDate DATE NOT NULL,
+ toTime VARCHAR(15) NOT NULL,
+ odometer INT NOT NULL,
+ cardName VARCHAR(20) NOT NULL,
+ cardNo VARCHAR(20) NOT NULL,
+ expDate VARCHAR(10) NOT NULL,
+ confNo VARCHAR(20),
+ PRIMARY KEY (rid));
 
 GRANT SELECT ON rentals TO PUBLIC;
 
 CREATE TABLE returns
-    (rid VARCHAR(20) NOT NULL,
-    rdate DATE NOT NULL,
-    rtime VARCHAR(15) NOT NULL,
-    odometer INT NOT NULL,
-    fulltank VARCHAR(5) NOT NULL,
-    value INT NOT NULL,
-    PRIMARY KEY (rid));
+(rid VARCHAR(20) NOT NULL,
+ rdate DATE NOT NULL,
+ rtime VARCHAR(15) NOT NULL,
+ odometer INT NOT NULL,
+ fulltank VARCHAR(5) NOT NULL,
+ value INT NOT NULL,
+ PRIMARY KEY (rid));
 
 GRANT SELECT ON returns TO PUBLIC;
 
@@ -151,21 +151,21 @@ insert into vehicles values ('4176400110', 'Toyota', 'Z3', 2000, 'Blue', 14870, 
 insert into vehicles values ('3814568885', 'Toyota', 'Mazda5', 2010, 'White', 11793, 'SUV', '5202 Union St', 'Burnaby', 'rented');
 
 
-insert into rentals values ('r8v372l6', '4271321222', 'QK06-N418Q', '11-AUG-2019', '23:28', '15-AUG-2019', '01:13', 14495, 'master', '561467482879', '10-SEP-2020', 'cf6x893s8');
-insert into rentals values ('r0o812v9', '1104921731', 'JT96-M354X', '17-NOV-2019', '08:10', '20-NOV-2019', '12:14', 11602, 'visa', '845684737557', '23-SEP-2020', 'cf5e234d2');
-insert into rentals values ('r1w648t9', '4794447892', 'RN63-T839Y', '08-AUG-2019', '19:35', '12-AUG-2019', '00:09', 11800, 'master', '656972259298', '26-AUG-2020', 'cf1m652m8');
-insert into rentals values ('r9d935o3', '0294575243', 'IN65-M688P', '11-JUL-2019', '20:12', '19-JUL-2019', '12:49', 12252, 'master', '826407514208', '01-SEP-2020', 'cf9j621t1');
-insert into rentals values ('r3l102d9', '6119151494', 'MF73-P436X', '22-OCT-2019', '09:53', '30-OCT-2019', '14:37', 12070, 'visa', '561303488148', '17-SEP-2020', 'cf3u217b8');
-insert into rentals values ('r0n899a2', '0639411266', 'US32-B170G', '10-OCT-2019', '17:38', '20-OCT-2019', '21:59', 12909, 'master', '439700026507', '12-SEP-2020', 'cf4v458y6');
-insert into rentals values ('r1z430k5', '9190343093', 'OL07-P265M', '13-AUG-2019', '15:15', '13-AUG-2019', '02:31', 14223, 'visa', '511282634366', '30-AUG-2020', 'cf3j004j9');
-insert into rentals values ('r5e531m7', '3369038226', 'UB76-M784C', '01-OCT-2019', '05:35', '05-OCT-2019', '04:43', 13627, 'visa', '526178712056', '21-AUG-2020', 'cf7q816u0');
-insert into rentals values ('r9j121g2', '4176400110', 'EL97-U110N', '23-JUN-2019', '18:25', '25-JUN-2019', '16:58', 13385, 'master', '853208021451', '21-SEP-2020', 'cf2t251n8');
-insert into rentals values ('r3f894d3', '4486041283', 'PA54-X962R', '29-JUN-2019', '05:21', '03-JUL-2019', '00:52', 13588, 'master', '284747763035', '22-SEP-2020', 'cf7a322m0');
-insert into rentals values ('r0y670o2', '4686223474', 'UV31-M204P', '25-JUN-2019', '04:17', '30-JUN-2019', '03:36', 11445, 'master', '402220901598', '17-SEP-2020', 'cf9n063o9');
-insert into rentals values ('r9g441f8', '9760323982', 'CP53-I288A', '26-JUN-2019', '14:52', '30-JUN-2019', '17:16', 13589, 'master', '898358901022', '04-AUG-2020', 'cf8s852w4');
-insert into rentals values ('r0m516t2', '6325573757', 'KO76-E138C', '06-OCT-2019', '10:49', '12-OCT-2019', '15:26', 12347, 'visa', '850817006249', '09-AUG-2020', 'cf5h884x0');
-insert into rentals values ('r7z848s1', '7487186393', 'XR88-F302P', '11-MAY-2019', '03:38', '17-MAY-2019', '23:05', 14736, 'master', '215794843698', '16-AUG-2020', 'cf8q500t6');
-insert into rentals values ('r3t113b7', '2639756524', 'CA37-X440B', '31-JUL-2019', '09:57', '09-AUG-2019', '21:55', 11506, 'visa', '668731776494', '07-SEP-2020', 'cf6p446m1');
+insert into rentals values ('r8v372l6', '4271321222', 'QK06-N418Q', '11-AUG-2019', '23:28', '15-AUG-2019', '01:13', 14495, 'master', '561467482879', '09/20', 'cf6x893s8');
+insert into rentals values ('r0o812v9', '1104921731', 'JT96-M354X', '17-NOV-2019', '08:10', '20-NOV-2019', '12:14', 11602, 'visa', '845684737557', '09/20', 'cf5e234d2');
+insert into rentals values ('r1w648t9', '4794447892', 'RN63-T839Y', '08-AUG-2019', '19:35', '12-AUG-2019', '00:09', 11800, 'master', '656972259298', '08/20', 'cf1m652m8');
+insert into rentals values ('r9d935o3', '0294575243', 'IN65-M688P', '11-JUL-2019', '20:12', '19-JUL-2019', '12:49', 12252, 'master', '826407514208', '09/20', 'cf9j621t1');
+insert into rentals values ('r3l102d9', '6119151494', 'MF73-P436X', '22-OCT-2019', '09:53', '30-OCT-2019', '14:37', 12070, 'visa', '561303488148', '09/20', 'cf3u217b8');
+insert into rentals values ('r0n899a2', '0639411266', 'US32-B170G', '10-OCT-2019', '17:38', '20-OCT-2019', '21:59', 12909, 'master', '439700026507', '09/20', 'cf4v458y6');
+insert into rentals values ('r1z430k5', '9190343093', 'OL07-P265M', '13-AUG-2019', '15:15', '13-AUG-2019', '02:31', 14223, 'visa', '511282634366', '08/20', 'cf3j004j9');
+insert into rentals values ('r5e531m7', '3369038226', 'UB76-M784C', '01-OCT-2019', '05:35', '05-OCT-2019', '04:43', 13627, 'visa', '526178712056', '08/20', 'cf7q816u0');
+insert into rentals values ('r9j121g2', '4176400110', 'EL97-U110N', '23-JUN-2019', '18:25', '25-JUN-2019', '16:58', 13385, 'master', '853208021451', '09/200', 'cf2t251n8');
+insert into rentals values ('r3f894d3', '4486041283', 'PA54-X962R', '29-JUN-2019', '05:21', '03-JUL-2019', '00:52', 13588, 'master', '284747763035', '09/20', 'cf7a322m0');
+insert into rentals values ('r0y670o2', '4686223474', 'UV31-M204P', '25-JUN-2019', '04:17', '30-JUN-2019', '03:36', 11445, 'master', '402220901598', '09/20', 'cf9n063o9');
+insert into rentals values ('r9g441f8', '9760323982', 'CP53-I288A', '26-JUN-2019', '14:52', '30-JUN-2019', '17:16', 13589, 'master', '898358901022', '09/20', 'cf8s852w4');
+insert into rentals values ('r0m516t2', '6325573757', 'KO76-E138C', '06-OCT-2019', '10:49', '12-OCT-2019', '15:26', 12347, 'visa', '850817006249', '08/20', 'cf5h884x0');
+insert into rentals values ('r7z848s1', '7487186393', 'XR88-F302P', '11-MAY-2019', '03:38', '17-MAY-2019', '23:05', 14736, 'master', '215794843698', '08/20', 'cf8q500t6');
+insert into rentals values ('r3t113b7', '2639756524', 'CA37-X440B', '31-JUL-2019', '09:57', '09-AUG-2019', '21:55', 11506, 'visa', '668731776494', '08/20', 'cf6p446m1');
 
 insert into customers values ('QK06-N418Q', '778-256-2892', 'Marna', '1295 Calypso Center');
 insert into customers values ('IN65-M688P', '604-862-3210', 'Nate', '80224 Messerschmidt Plaza');
@@ -219,7 +219,7 @@ insert into reservations values ('cf0w812k5', 'Minivan', 'JT96-M354X', '03-DEC-2
 insert into reservations values ('cf6w956f9', 'Truck', 'ID06-O589S', '05-DEC-2019', '22:05', '10-DEC-2019', '16:26');
 
 /*
-These are the completed reservations, matched with the renatals and return 
+These are the completed reservations, matched with the renatals and return
 */
 insert into reservations values ('cf6x893s8', 'Minivan', 'QK06-N418Q', '11-AUG-2019', '23:28', '15-AUG-2019', '01:13');
 insert into reservations values ('cf5e234d2', 'Truck', 'JT96-M354X', '17-NOV-2019', '08:10', '20-NOV-2019', '12:14');

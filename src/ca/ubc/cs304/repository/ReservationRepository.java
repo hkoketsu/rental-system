@@ -44,11 +44,7 @@ public class ReservationRepository {
             e.printStackTrace();
             DatabaseConnectionHandler.rollbackConnection();
         }
-        if (reservationList.size() == 0) {
-            return null;
-        } else {
-            return reservationList.get(0);
-        }
+        return reservationList.isEmpty() ? null : reservationList.get(0);
     }
 
     public String[] getReservationConfnoInfo() {

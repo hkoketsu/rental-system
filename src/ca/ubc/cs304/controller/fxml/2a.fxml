@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
@@ -29,7 +30,7 @@
                         <Label fx:id="resultLabel" layoutY="92.0" prefHeight="17.0" prefWidth="235.0" />
                      </children>
                   </Pane>
-                  <Button fx:id="reserveButton" onAction="#onClickReserveButton" layoutX="176.0" layoutY="360.0" mnemonicParsing="false" text="Reserve">
+                  <Button fx:id="reserveButton" layoutX="176.0" layoutY="360.0" mnemonicParsing="false" onAction="#onClickReserveButton" text="Reserve">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -37,7 +38,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </Button>
-                  <ScrollPane id="SearchResultScrollPane" hbarPolicy="NEVER" layoutX="10.0" layoutY="200.0" prefHeight="150.0" prefWidth="235.0">
+                  <ScrollPane id="SearchResultScrollPane" layoutX="10.0" layoutY="200.0" prefHeight="150.0" prefWidth="235.0">
                      <content>
                       <AnchorPane>
                            <children>

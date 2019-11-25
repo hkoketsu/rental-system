@@ -15,7 +15,7 @@ public class CustomerRepository {
 
     public void insertCustomer(Customer model) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO customers VALUES (?,?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO customers (dlicense, cellphone, name, address) VALUES (?,?,?,?)");
             ps.setString(1, model.getDlicense());
             ps.setString(2, model.getCellphone());
             ps.setString(3, model.getName());
@@ -34,7 +34,7 @@ public class CustomerRepository {
 
 
 
-    public Customer[] getCustomerInfo(String dlicense) {
+    public Customer getCustomer(String dlicense) {
         ArrayList<Customer> result = new ArrayList<Customer>();
 
         try {
@@ -55,8 +55,6 @@ public class CustomerRepository {
             e.printStackTrace();
         }
 
-        return result.toArray(new Customer[result.size()]);
+        return result.isEmpty() ? null : result.get(0);
     }
-
-
 }

@@ -20,7 +20,7 @@ public class RentalRepository {
         List<Rental> rentals = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(
-                    "SELECT * FROM RENTALS WHERE CONFNO = ?"
+                    "SELECT * FROM RENTALS WHERE rid = ?"
             );
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
@@ -50,13 +50,14 @@ public class RentalRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rentals.get(0);
+        return rentals.isEmpty() ? null : rentals.get(0);
     }
 
     public void rentVehicle(Rental rental) {
         try {
             PreparedStatement ps = connection.prepareStatement(
-                    "INSERT INTO rentals VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                    "INSERT INTO rentals (rid, vlicense, dlicense, fromdate, fromtime, todate, totime, odometer, cardname, cardno, expdate, confno)" +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
             CreditCard card = rental.getCreditCard();
             TimeInterval duration = rental.getDuration();
@@ -83,8 +84,6 @@ public class RentalRepository {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DatabaseConnectionHandler.rollbackConnection();
         }
-
     }
 }

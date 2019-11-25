@@ -90,11 +90,6 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="36.0" layoutY="332.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="30.0" prefWidth="137.0" text="Back">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
             <Text layoutX="30.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Driver License Number:">
                <font>
                   <Font size="14.0" />

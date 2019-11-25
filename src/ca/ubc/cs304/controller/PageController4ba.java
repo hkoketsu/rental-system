@@ -1,12 +1,19 @@
 package ca.ubc.cs304.controller;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
+import ca.ubc.cs304.domain.*;
+import ca.ubc.cs304.domain.receipt.RentalReceipt;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /***
@@ -18,6 +25,7 @@ public class PageController4ba extends PageController implements Initializable {
     @FXML Label pickupLabel;
     @FXML Label returnLabel;
     @FXML TextField odometerTextField;
+    @FXML ChoiceBox vehicleIdChoiceBox;
 
     @FXML Label nameLabel;
     @FXML Label phoneNumberLabel;
@@ -35,41 +43,69 @@ public class PageController4ba extends PageController implements Initializable {
     private String pickupDateTime;
     private String returnDateTime;
 
-    private String name;
-    private String phoneNumber;
-    private String driverLicenseNumber;
+    private Customer customer;
+    private Reservation reservation;
 
-    private String confirmationNumber;
-
+    private DatabaseConnectionHandler dbHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO: get reservation with the confirmation number
+        dbHandler = new DatabaseConnectionHandler();
+    }
+
+    @Override
+    public void loadParameter(Object[]...params) {
+        if (params != null && params[0].length == 2) {
+            reservation = (Reservation) params[0][0];
+            branch = params[0][1].toString();
+        }
+
+        vehicleType = reservation.getVehicleType();
+        TimeInterval duration = reservation.getDuration();
+        pickupDateTime = duration.getFromDate().toString() + " " + duration.getFromTime();
+        returnDateTime = duration.getToDate().toString() + " " + duration.getToTime();
+
+        customer = dbHandler.getCustomer(reservation.getCustomerId());
+
         vehicleTypeLabel.setText(vehicleType);
         branchLabel.setText(branch);
         pickupLabel.setText(pickupDateTime);
         returnLabel.setText(returnDateTime);
+
+        List<String> vehicleIds = dbHandler.getAvailableVehicleIds(
+                vehicleType,
+                branch,
+                duration
+        );
+        ObservableList<String> vehicleIdItems = FXCollections.observableArrayList(vehicleIds);
+        vehicleIdChoiceBox.setItems(vehicleIdItems);
     }
 
     public void onClickProceed() {
         String creditName = creditNameTextField.getText();
         String creditNumber = creditNumberTextField.getText();
         String expDate = expDateTextField.getText();
-
+        CreditCard creditCard = new CreditCard(creditName, creditNumber, expDate);
         String odometer = odometerTextField.getText();
+        Object vehicleId = vehicleIdChoiceBox.getValue();
 
-        if (creditName.equals("")|| creditNumber.equals("") || expDate.equals("") || odometer.equals("")) {
+        if (creditName.equals("")|| creditNumber.equals("") || expDate.equals("") || odometer.equals("") || vehicleId == null) {
             errorLabel.setVisible(true);
         } else {
-//          TODO: send put query to Rent
-            setPage(PageController5ba.class, "5ba", new String[] {name, vehicleType, branch, pickupDateTime, returnDateTime});
-        }
-    }
-
-    @Override
-    public void loadParameter(Object[]...params) {
-        if (params != null && params[0].length == 1) {
-            confirmationNumber = params[0][0].toString();
+            String rentalId = new Util(dbHandler).generateRentalId();
+            Rental rental = new Rental(
+                    rentalId,
+                    vehicleId.toString(),
+                    reservation.getCustomerId(),
+                    reservation.getDuration(),
+                    Integer.parseInt(odometer),
+                    creditCard,
+                    reservation.getId()
+            );
+            dbHandler.putRental(rental);
+            String customerName = dbHandler.getCustomer(reservation.getCustomerId()).getName();
+            RentalReceipt receipt = new RentalReceipt(rentalId, reservation.getId(), customerName, pickupDateTime, returnDateTime, vehicleType, branch);
+            setPage(PageController5ba.class, "5ba", new RentalReceipt[]{receipt});
         }
     }
 

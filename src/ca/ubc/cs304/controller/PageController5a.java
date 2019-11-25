@@ -30,15 +30,12 @@ public class PageController5a extends PageController implements Initializable {
     private Date returnDate;
     private String returnTime;
 
+    private DatabaseConnectionHandler dbHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // confirmationNumber = Util.generateConfirmationNumber();
-
-        // this is handled within CustomerHandler
-
-        // TODO: check whether it is already in rental table,
-        //  and if so, get another number, else use the number to send the query
+        dbHandler = new DatabaseConnectionHandler();
+        confirmationNumber = new Util(dbHandler).generateConfirmationNumber();
     }
 
     @Override
