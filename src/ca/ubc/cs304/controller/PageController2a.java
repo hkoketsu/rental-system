@@ -1,13 +1,19 @@
 package ca.ubc.cs304.controller;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
+import ca.ubc.cs304.domain.TimeInterval;
+import ca.ubc.cs304.domain.Vehicle;
+import ca.ubc.cs304.service.CustomerHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -92,6 +98,38 @@ public class PageController2a extends PageController implements Initializable {
         } else {
             reserveButton.setVisible(false);
         }
+
+        TimeInterval timeInterval;
+        if (pickUpDate != null && returnDate != null && pickupTime != null && returnTime != null) {
+            timeInterval = new TimeInterval(Date.valueOf(pickUpDate), Date.valueOf(returnDate), pickupTime, returnTime);
+        } else {
+            timeInterval = null;
+        }
+        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
+        CustomerHandler customerHandler = new CustomerHandler(dbHandler);
+        int numberOfVehicles = customerHandler.viewNumberOfVehicles(vehicleType, branch, timeInterval);
+        Vehicle[] vehicles = customerHandler.viewVehicles(vehicleType, branch, timeInterval);
+
+        if (vehicleType != null) {
+            resultLabel.setText(vehicleType + " Vehicles's Available: " + numberOfVehicles);
+        } else {
+            resultLabel.setText("Vehicles's Available: " + numberOfVehicles);
+
+        }
+
+        TableColumn vlicenseCol = new TableColumn("License");
+        vlicenseCol.setCellValueFactory(new PropertyValueFactory<>("vlicense"));
+        TableColumn makeCol = new TableColumn("Make");
+        TableColumn modelCol = new TableColumn("Model");
+        TableColumn yearCol = new TableColumn("Year");
+        TableColumn colorCol = new TableColumn("Color");
+        TableColumn odometerCol = new TableColumn("Odometer");
+        TableColumn locationCol = new TableColumn("Location");
+        TableColumn cityCol = new TableColumn("City");
+        TableColumn statusCol = new TableColumn("Status");
+
+
+        dbHandler.close();
 
         // TODO: get search result, put the result on resultLabel and resultTable
         // TODO: and depending on the result, change the page contents

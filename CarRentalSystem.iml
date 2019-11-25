@@ -24,5 +24,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="ojdbc8" level="project" />
+    <orderEntry type="library" name="jfxrt" level="project" />
   </component>
 </module>
