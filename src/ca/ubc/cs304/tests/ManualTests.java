@@ -1,93 +1,102 @@
-package ca.ubc.cs304.tests;
-
-import ca.ubc.cs304.database.DatabaseConnectionHandler;
-import ca.ubc.cs304.domain.TimeInterval;
-import ca.ubc.cs304.domain.Vehicle;
-import ca.ubc.cs304.service.CustomerHandler;
-
-import java.sql.Date;
-
-/**
- * This is the main controller class that will orchestrate everything.
- */
-public class ManualTests {
-	private DatabaseConnectionHandler dbHandler = null;
-
-	public ManualTests() {
-		dbHandler = new DatabaseConnectionHandler();
-	}
-
-	private void start() {
-		// login("ora_gast300", "a47448337");  // dont hack me dude
-		CustomerHandler customerHandler = new CustomerHandler(dbHandler);
-		if ( !customerHandler.isCustomerInDatabase("QK06-N418Q")) {
-            System.out.println("1: should have been true");
-        }else if (customerHandler.isCustomerInDatabase("AAAAHHHHH")) {
-            System.out.println("2: should have been false");
-        }
-		// customerHandler.addCustomerToDatabase("a", "b", "c", "d");
-		int vCount = customerHandler.viewNumberOfVehicles(null, null, null);
-		if (vCount != 50) {
-			System.out.println("3: total should be 50 is: " + vCount);
-		}
-		vCount = customerHandler.viewNumberOfVehicles("Truck", null, null);
-		if (vCount != 16) {
-			System.out.println("4: total should be 16 is: " + vCount);
-		}
-		vCount = customerHandler.viewNumberOfVehicles(null, "5202 Union St", null);
-		if (vCount != 26) {
-			System.out.println("5: total should be 26 is: " + vCount);
-
-		}
-		vCount = customerHandler.viewNumberOfVehicles("Truck", "5202 Union St", null);
-		if (vCount != 9) {
-			System.out.println("6: total should be 9 is: " + vCount);
-
-		}
-		TimeInterval t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
-		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
-		if (vCount != 35) { // 35 vehicles are not rented
-			System.out.println("7: total should be 0 is: " + vCount);
-
-		}
-		t = new TimeInterval(new Date(119, 9, 1), new Date(119, 9, 10), "a", "b");
-		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
-		if (vCount != 47) {
-			System.out.println("8: total should be 15 is: " + vCount);
-
-		}
-		t = new TimeInterval(new Date(119, 9, 8), new Date(119, 9, 19), "a", "b");
-		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
-		if (vCount != 15) {
-			System.out.println("9: total should be 15 is: " + vCount);
-
-		}
-		t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
-		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
-		if (vCount != 0) { // 35 vehicles are not rented
-			System.out.println("10: total should be 0 is: " + vCount);
-
-		}
-
-		Vehicle[] models = customerHandler.viewVehicles(null, null, null);
-		if (models.length != 50) {
-            System.out.println("11: total should be 50 is: " + models.length);
-
-        }
-		if (!customerHandler.isVehicleAvailable("6666655133", null)) {
-			System.out.println("12: should be true");
-
-		}
-//		customerHandler.addCustomerToDatabase("123", "250-", "Matt", "AAAAHHH");
-//		String confNo = customerHandler.makeReservation( "Matt Car", "123", new TimeInterval(new Date(0), new Date(0), "", ""));
-		int stop;
-	}
-
-	/**
-	 * LoginWindowDelegate Implementation
-	 *
-     * connects to Oracle database with supplied username and password
-     */
+//package ca.ubc.cs304.tests;
+//
+//import ca.ubc.cs304.database.CustomerHandler;
+//import ca.ubc.cs304.database.DatabaseConnectionHandler;
+//import ca.ubc.cs304.delegates.LoginWindowDelegate;
+//import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
+//import ca.ubc.cs304.model.BranchModel;
+//import ca.ubc.cs304.model.TimeInterval;
+//import ca.ubc.cs304.model.VehicleModel;
+//import ca.ubc.cs304.ui.LoginWindow;
+//
+//import java.sql.Date;
+//
+///**
+// * This is the main controller class that will orchestrate everything.
+// */
+//public class ManualTests implements LoginWindowDelegate, TerminalTransactionsDelegate {
+//	private DatabaseConnectionHandler dbHandler = null;
+//	private LoginWindow loginWindow = null;
+//
+//	public ManualTests() {
+//		dbHandler = new DatabaseConnectionHandler();
+//	}
+//
+//	private void start() {
+//		login("ora_gast300", "a47448337");  // dont hack me dude
+//		CustomerHandler customerHandler = new CustomerHandler(dbHandler);
+//		if ( !customerHandler.isCustomerInDatabase("QK06-N418Q")) {
+//            System.out.println("should have been true");
+//            System.exit(-1);
+//        }else if (customerHandler.isCustomerInDatabase("AAAAHHHHH")) {
+//            System.out.println("should have been false");
+//		    System.exit(-1);
+//        }
+//		// customerHandler.addCustomerToDatabase("a", "b", "c", "d");
+//		int vCount = customerHandler.viewNumberOfVehicles(null, null, null);
+//		if (vCount != 50) {
+//			System.out.println("total should be 50 is: " + vCount);
+//			System.exit(-1);
+//		}
+//		vCount = customerHandler.viewNumberOfVehicles("Truck", null, null);
+//		if (vCount != 16) {
+//			System.out.println("total should be 16 is: " + vCount);
+//			System.exit(-1);
+//		}
+//		vCount = customerHandler.viewNumberOfVehicles(null, "5202 Union St", null);
+//		if (vCount != 26) {
+//			System.out.println("total should be 26 is: " + vCount);
+//			System.exit(-1);
+//		}
+//		vCount = customerHandler.viewNumberOfVehicles("Truck", "5202 Union St", null);
+//		if (vCount != 9) {
+//			System.out.println("total should be 9 is: " + vCount);
+//			System.exit(-1);
+//		}
+//		TimeInterval t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
+//		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
+//		if (vCount != 35) { // 35 vehicles are not rented
+//			System.out.println("total should be 0 is: " + vCount);
+//			System.exit(-1);
+//		}
+//		t = new TimeInterval(new Date(119, 9, 1), new Date(119, 9, 10), "a", "b");
+//		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
+//		if (vCount != 47) {
+//			System.out.println("total should be 15 is: " + vCount);
+//			System.exit(-1);
+//		}
+//		t = new TimeInterval(new Date(119, 9, 8), new Date(119, 9, 19), "a", "b");
+//		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
+//		if (vCount != 15) {
+//			System.out.println("total should be 15 is: " + vCount);
+//			System.exit(-1);
+//		}
+//		t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
+//		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
+//		if (vCount != 0) { // 35 vehicles are not rented
+//			System.out.println("total should be 0 is: " + vCount);
+//			System.exit(-1);
+//		}
+//
+//		VehicleModel[] models = customerHandler.viewVehicles(null, null, null);
+//		if (models.length != 50) {
+//            System.out.println("total should be 50 is: " + models.length);
+//            System.exit(-1);
+//        }
+//		if (!customerHandler.isVehicleAvailable("6666655133", null)) {
+//			System.out.println("should be true");
+//			System.exit(-1);
+//		}
+////		customerHandler.addCustomerToDatabase("123", "250-", "Matt", "AAAAHHH");
+////		String confNo = customerHandler.makeReservation( "Matt Car", "123", new TimeInterval(new Date(0), new Date(0), "", ""));
+//		int stop;
+//	}
+//
+//	/**
+//	 * LoginWindowDelegate Implementation
+//	 *
+//     * connects to Oracle database with supplied username and password
+//     */
 //	public void login(String username, String password) {
 //		boolean didConnect = dbHandler.login(username, password);
 //
@@ -102,7 +111,7 @@ public class ManualTests {
 //			System.exit(-1);
 //		}
 //	}
-
+//
 //	/**
 //	 * TermainalTransactionsDelegate Implementation
 //	 *
@@ -161,24 +170,24 @@ public class ManualTests {
 //    	}
 //    }
 //
-    /**
-	 * TerminalTransactionsDelegate Implementation
-	 *
-     * The TerminalTransaction instance tells us that it is done with what it's
-     * doing so we are cleaning up the connection since it's no longer needed.
-     */
-    public void terminalTransactionsFinished() {
-    	dbHandler.close();
-    	dbHandler = null;
-
-    	System.exit(0);
-    }
-
-	/**
-	 * Main method called at launch time
-	 */
-	public static void main(String args[]) {
-		ManualTests bank = new ManualTests();
-		bank.start();
-	}
-}
+//    /**
+//	 * TerminalTransactionsDelegate Implementation
+//	 *
+//     * The TerminalTransaction instance tells us that it is done with what it's
+//     * doing so we are cleaning up the connection since it's no longer needed.
+//     */
+//    public void terminalTransactionsFinished() {
+//    	dbHandler.close();
+//    	dbHandler = null;
+//
+//    	System.exit(0);
+//    }
+//
+//	/**
+//	 * Main method called at launch time
+//	 */
+//	public static void main(String args[]) {
+//		ManualTests bank = new ManualTests();
+//		bank.start();
+//	}
+//}

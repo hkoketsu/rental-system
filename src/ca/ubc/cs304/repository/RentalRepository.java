@@ -85,6 +85,5 @@ public class RentalRepository {
             e.printStackTrace();
             DatabaseConnectionHandler.rollbackConnection();
         }
-
     }
 }

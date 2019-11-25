@@ -34,7 +34,7 @@ public class CustomerRepository {
 
 
 
-    public Customer[] getCustomerInfo(String dlicense) {
+    public Customer getCustomer(String dlicense) {
         ArrayList<Customer> result = new ArrayList<Customer>();
 
         try {
@@ -55,8 +55,6 @@ public class CustomerRepository {
             e.printStackTrace();
         }
 
-        return result.toArray(new Customer[result.size()]);
+        return result.get(0);
     }
-
-
 }

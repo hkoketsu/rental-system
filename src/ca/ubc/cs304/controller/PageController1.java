@@ -10,6 +10,6 @@ public class PageController1 extends PageController {
     }
 
     public void onClerkButtonClick() {
-        setPage(PageController2b.class, "2b");
+        setPage(PageController1_1b.class, "1_1b");
     }
 }

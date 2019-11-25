@@ -49,6 +49,7 @@ public class PageController2a extends PageController implements Initializable {
     private String returnDateTime;
 
     private boolean byClerk;
+    private String branchLocation;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -183,17 +184,18 @@ public class PageController2a extends PageController implements Initializable {
 
     public void onClickReserveButton() {
         if (byClerk) {
-            setPage(PageController4ab.class, "4ab", new String[]{vehicleType, branch, pickupDateTime, returnDateTime});
+            setPage(PageController4ab.class, "4ab", new String[]{vehicleType, branch, pickupDateTime, returnDateTime, branchLocation});
         }
         else {
-            setPage(PageController4a.class, "4a", new String[]{vehicleType, branch, pickupDateTime, returnDateTime});
+            setPage(PageController4a.class, "4a", new String[]{vehicleType, branch, pickupDateTime, returnDateTime, branchLocation});
         }
     }
 
     @Override
     public void loadParameter(Object[]...params) {
-        if (params[0] != null) {
-            byClerk = (boolean) params[0][0];
+        if (params[0] != null && params[0].length == 2) {
+            branchLocation = params[0][0].toString();
+            byClerk = (boolean) params[0][1];
         }
     }
 }

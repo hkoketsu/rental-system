@@ -1,5 +1,8 @@
 package ca.ubc.cs304.controller;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
+import ca.ubc.cs304.domain.Rental;
+import ca.ubc.cs304.domain.Return;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,11 +29,15 @@ public class PageController3bb extends PageController implements Initializable {
     @FXML ChoiceBox<Boolean> gasTankFullChoiceBox;
 
     @FXML Label errorLabel;
+    @FXML Label errorNotFoundLabel;
+
+    private DatabaseConnectionHandler dbHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<Boolean> booleans = FXCollections.observableArrayList(true, false);
         gasTankFullChoiceBox.setItems(booleans);
+        dbHandler = new DatabaseConnectionHandler();
     }
 
     public void onClickProceedButton() {
@@ -38,19 +45,30 @@ public class PageController3bb extends PageController implements Initializable {
         String odometer = odometerTextField.getText();
         boolean fullTank = gasTankFullChoiceBox.getValue();
 
+//        Rental rental = dbHandler.getRentalInfo(rentalId);
+
         if (rentalId.equals("") || odometer.equals("")) {
             errorLabel.setVisible(true);
-        } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yy HH:mm:ss");
+            errorNotFoundLabel.setVisible(false);
+//        } else if (rental == null) {
+//            errorLabel.setVisible(false);
+//            errorNotFoundLabel.setVisible(true);
+        }
+        else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yy HH:mm");
             String dateTime = LocalDateTime.now().format(formatter);
+            Date date;
             try {
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = new Date(df.parse(dateTime.split(" ")[0]).getTime());
+                DateFormat df = new SimpleDateFormat("dd-MMM-yy");
+                date = new Date(df.parse(dateTime.split(" ")[0]).getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             String time = dateTime.split(" ")[1];
-            // TODO: send query to add to return
+//            dbHandler.putReturn(new Return(
+//                    rentalId, date, time, odometer, fullTank,
+//            ));
+
             setPage(PageController4bb.class, "4bb", new String[]{rentalId, dateTime});
         }
     }

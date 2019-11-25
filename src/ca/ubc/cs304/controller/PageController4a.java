@@ -30,22 +30,7 @@ public class PageController4a extends PageController implements Initializable {
     private String branch;
     private String pickupDateTime;
     private String returnDateTime;
-
-    @Override
-    public void loadParameter(Object[]...params) {
-        if (params != null && params[0].length == 4) {
-            String[] paramsStr = (String[]) params[0];
-            vehicleType = paramsStr[0];
-            branch = paramsStr[1];
-            pickupDateTime = paramsStr[2];
-            returnDateTime = paramsStr[3];
-
-            vehicleTypeLabel.setText(vehicleType);
-            branchLabel.setText(branch);
-            pickupLabel.setText(pickupDateTime);
-            returnLabel.setText(returnDateTime);
-        }
-    }
+    private String branchLocation;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 import ca.ubc.cs304.domain.*;
 import ca.ubc.cs304.domain.reports.RentalBranchReport;
@@ -44,6 +45,10 @@ public class DatabaseConnectionHandler {
 		returnReportRepository = new ReturnReportRepository(connection);
 	}
 
+	public List<String> getBranchLocations(String city) { return branchRepository.getBranchLocations(city); }
+
+	public List<String> getCityInfo() { return branchRepository.getCityInfo(); }
+
     public Vehicle getRentedVehicle(String vlicense, TimeInterval timeInterval) { return vehicleRepository.getRentedVehicle(vlicense, timeInterval); }
 
 	public Reservation getReservation(String cfNumber) {
@@ -64,8 +69,8 @@ public class DatabaseConnectionHandler {
         reservationRepository.insertReservation(reservation);
     }
 
-    public Customer[] getCustomerInfo(String dlicense) {
-        return customerRepository.getCustomerInfo(dlicense);
+    public Customer getCustomer(String dlicense) {
+        return customerRepository.getCustomer(dlicense);
     }
 
     public String[] getReservationConfnoInfo() {
@@ -73,6 +78,8 @@ public class DatabaseConnectionHandler {
     }
 
     public Vehicle[] getVehicles(String carType, String location, TimeInterval timeInterval) { return vehicleRepository.getVehicles(carType, location, timeInterval); }
+
+    public List<String> getAvailableVehicleIds(String carType, String location, TimeInterval timeInterval) { return vehicleRepository.getAvailableVehicleIds(carType, location, timeInterval); }
 
     public int getNumberOfVehiclesNotRented(String carType, String location, TimeInterval timeInterval) { return vehicleRepository.numberOfVehiclesNotRented(carType, location, timeInterval); }
 

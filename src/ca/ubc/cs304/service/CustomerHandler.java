@@ -50,12 +50,8 @@ public class CustomerHandler {
     }
 
     public boolean isCustomerInDatabase(String dlicense) {
-        Customer[] customers = dbHandler.getCustomerInfo(dlicense);
-        if (customers.length == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        Customer customer = dbHandler.getCustomer(dlicense);
+        return customer != null;
     }
 
     // Returns the confno of the created reservation

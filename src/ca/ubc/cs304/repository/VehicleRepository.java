@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleRepository {
     private Connection connection;
@@ -146,5 +147,25 @@ public class VehicleRepository {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<String> getAvailableVehicleIds(String carType, String location, TimeInterval timeInterval) {
+        List<String> ids = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM vehicles v";
+            query += helper.getVehiclesHelper(carType, location, timeInterval);
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while(rs.next()) {
+                ids.add(rs.getString("vlicense"));
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 }
