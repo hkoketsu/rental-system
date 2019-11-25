@@ -137,9 +137,9 @@ public class PageController2a extends PageController implements Initializable {
 
         }
         if (vehicleType != null && branch != null && pickUpDate != null && pickupTime != null && returnDate != null && returnTime != null) {
-            reserveButton.setVisible(true);
+            reserveButton.setDisable(false);
         } else {
-            reserveButton.setVisible(false);
+            reserveButton.setDisable(true);
         }
 
         TimeInterval timeInterval;
@@ -166,10 +166,8 @@ public class PageController2a extends PageController implements Initializable {
         }
 
         reserveButton.setVisible(true);
-        if (vehicles.length == 0) {
+        if (vehicles.length == 0 || pickUpDate.compareTo(returnDate) > 0 || (pickUpDate.getYear() > 1970 || returnDate.getYear() > 1970)) {
             reserveButton.setDisable(true);
-        } else {
-            reserveButton.setDisable(false);
         }
         dbHandler.close();
 
