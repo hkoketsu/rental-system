@@ -114,18 +114,27 @@ public class PageController2a extends PageController implements Initializable {
         if (vehicleType != null) {
             this.vehicleType = vehicleType;
             vehicleTypeLabel.setText(vehicleType);
+        } else {
+            vehicleTypeLabel.setText("Any");
         }
         if (branch != null) {
             this.branch = branch;
             branchLabel.setText(branch);
+        } else {
+            branchLabel.setText("Any");
         }
         if (pickUpDate != null && pickupTime != null) {
             pickupDateTime = pickUpDate.toString() + " " + pickupTime;
             pickupLabel.setText(pickupDateTime);
+        } else {
+            pickupLabel.setText("Any");
         }
         if (returnDate != null && returnTime != null) {
             returnDateTime = returnDate.toString() + " " + returnTime;
             returnLabel.setText(returnDateTime);
+        } else {
+            returnLabel.setText("Any");
+
         }
         if (vehicleType != null && branch != null && pickUpDate != null && pickupTime != null && returnDate != null && returnTime != null) {
             reserveButton.setVisible(true);
@@ -159,6 +168,8 @@ public class PageController2a extends PageController implements Initializable {
         reserveButton.setVisible(true);
         if (vehicles.length == 0) {
             reserveButton.setDisable(true);
+        } else {
+            reserveButton.setDisable(false);
         }
         dbHandler.close();
 
