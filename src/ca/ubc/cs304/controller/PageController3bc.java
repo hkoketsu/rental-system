@@ -1,5 +1,6 @@
 package ca.ubc.cs304.controller;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,21 +11,24 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /***
  * Page for selecting a report type
  */
 public class PageController3bc extends PageController implements Initializable {
-    @FXML ChoiceBox branchChoiceBox;
+    @FXML ChoiceBox<String> branchChoiceBox;
     @FXML Label errorLabel;
+
+    private DatabaseConnectionHandler dbHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // String[] branches = TODO: get all the branch by query
-        // branchChoiceBox.setItems(branches);
-        ObservableList<String> branches = FXCollections.observableArrayList("Vancouver", "Burnaby");
-        branchChoiceBox.setItems(branches);
+        dbHandler = new DatabaseConnectionHandler();
+        List<String> branchLocations = dbHandler.getBranchLocations();
+        ObservableList<String> branchItems = FXCollections.observableArrayList(branchLocations);
+        branchChoiceBox.setItems(branchItems);
     }
 
     public void onClick(ActionEvent e) {
