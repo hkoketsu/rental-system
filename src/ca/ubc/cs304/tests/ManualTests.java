@@ -21,66 +21,62 @@ public class ManualTests {
 		// login("ora_gast300", "a47448337");  // dont hack me dude
 		CustomerHandler customerHandler = new CustomerHandler(dbHandler);
 		if ( !customerHandler.isCustomerInDatabase("QK06-N418Q")) {
-            System.out.println("should have been true");
-            System.exit(-1);
+            System.out.println("1: should have been true");
         }else if (customerHandler.isCustomerInDatabase("AAAAHHHHH")) {
-            System.out.println("should have been false");
-		    System.exit(-1);
+            System.out.println("2: should have been false");
         }
 		// customerHandler.addCustomerToDatabase("a", "b", "c", "d");
 		int vCount = customerHandler.viewNumberOfVehicles(null, null, null);
 		if (vCount != 50) {
-			System.out.println("total should be 50 is: " + vCount);
-			System.exit(-1);
+			System.out.println("3: total should be 50 is: " + vCount);
 		}
 		vCount = customerHandler.viewNumberOfVehicles("Truck", null, null);
 		if (vCount != 16) {
-			System.out.println("total should be 16 is: " + vCount);
-			System.exit(-1);
+			System.out.println("4: total should be 16 is: " + vCount);
 		}
 		vCount = customerHandler.viewNumberOfVehicles(null, "5202 Union St", null);
 		if (vCount != 26) {
-			System.out.println("total should be 26 is: " + vCount);
-			System.exit(-1);
+			System.out.println("5: total should be 26 is: " + vCount);
+
 		}
 		vCount = customerHandler.viewNumberOfVehicles("Truck", "5202 Union St", null);
 		if (vCount != 9) {
-			System.out.println("total should be 9 is: " + vCount);
-			System.exit(-1);
+			System.out.println("6: total should be 9 is: " + vCount);
+
 		}
 		TimeInterval t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
 		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
 		if (vCount != 35) { // 35 vehicles are not rented
-			System.out.println("total should be 0 is: " + vCount);
-			System.exit(-1);
+			System.out.println("7: total should be 0 is: " + vCount);
+
 		}
 		t = new TimeInterval(new Date(119, 9, 1), new Date(119, 9, 10), "a", "b");
 		vCount = customerHandler.viewNumberOfVehicles(null, null, t);
 		if (vCount != 47) {
-			System.out.println("total should be 15 is: " + vCount);
-			System.exit(-1);
+			System.out.println("8: total should be 15 is: " + vCount);
+
 		}
 		t = new TimeInterval(new Date(119, 9, 8), new Date(119, 9, 19), "a", "b");
 		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
 		if (vCount != 15) {
-			System.out.println("total should be 15 is: " + vCount);
-			System.exit(-1);
+			System.out.println("9: total should be 15 is: " + vCount);
+
 		}
 		t = new TimeInterval(new Date(0, 0, 1), new Date(8000, 0, 1), "a", "b");
 		vCount = customerHandler.viewNumberOfVehicles("Truck", null, t);
 		if (vCount != 0) { // 35 vehicles are not rented
-			System.out.println("total should be 0 is: " + vCount);
-			System.exit(-1);
+			System.out.println("10: total should be 0 is: " + vCount);
+
 		}
 
 		Vehicle[] models = customerHandler.viewVehicles(null, null, null);
 		if (models.length != 50) {
-            System.out.println("total should be 50 is: " + models.length);
-            System.exit(-1);
+            System.out.println("11: total should be 50 is: " + models.length);
+
         }
 		if (!customerHandler.isVehicleAvailable("6666655133", null)) {
-			System.out.println("should be true");
-			System.exit(-1);
+			System.out.println("12: should be true");
+
 		}
 //		customerHandler.addCustomerToDatabase("123", "250-", "Matt", "AAAAHHH");
 //		String confNo = customerHandler.makeReservation( "Matt Car", "123", new TimeInterval(new Date(0), new Date(0), "", ""));
