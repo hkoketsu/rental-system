@@ -1,33 +1,34 @@
 package ca.ubc.cs304.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ReturnReport {
 
     private ArrayList<VehicleModel> vehicleList;
-    private ArrayList<String> typeSum;
-    private List<String> branchSum;
+    private ArrayList<ReturnReportBranchSummary> breports;
+    private ArrayList<String> branchSum;
     private String total;
 
 
-    public ReturnReport(ArrayList<VehicleModel> vehicleList, ArrayList<String> typeSum, ArrayList<String> rest) {
+    public ReturnReport(ArrayList<VehicleModel> vehicleList, ArrayList<ReturnReportBranchSummary> breports, ArrayList<String> rest, String total) {
         this.vehicleList = vehicleList;
-        this.typeSum = typeSum;
-        if(rest.size() > 1) {
-            this.branchSum = rest.subList(0,rest.size()-1);
-            this.total = rest.get(rest.size()-1);
-        }
-        else this.total = rest.get(0);
+        this.breports = breports;
+        this.branchSum = rest;
+        this.total = total;
     }
-
-    public ArrayList<VehicleModel>  getVehicleList() {
-        return vehicleList;
-    }
-
-    public ArrayList<String> getTypeSum() {return typeSum;}
-
-    public List<String> getBranchSum() {return branchSum;}
-
+    //This is just a list of vehicle models
+    public ArrayList<VehicleModel>  getVehicleList() { return vehicleList; }
+    //This is a list of ReturnReportBranchSummary, please check the spec for that
+    public ArrayList<ReturnReportBranchSummary> getBreports() {return breports;}
+    /*
+    This list of Strings is formatted like:
+    "Vancouver returns: 3(number of returned vehicles) revenue: 800(revenue for the branch)"
+    As in the spec, displaying total number of returns and the revenue for a branch
+     */
+    public ArrayList<String> getBranchSum() {return branchSum;}
+    /*
+    This String is formatted like:
+    "total return: 3 (total number of returned vehicles for entire company) revenue: 1000 (total revenue for entire company)"
+     */
     public String getTotal() {return total;}
 }

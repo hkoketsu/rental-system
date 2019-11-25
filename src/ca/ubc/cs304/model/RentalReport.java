@@ -1,8 +1,5 @@
 package ca.ubc.cs304.model;
 
-import sun.net.sdp.SdpProvider;
-
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,24 +10,25 @@ public class RentalReport {
     private String total;
 
 
-    public RentalReport(ArrayList<VehicleModel> vehicleList, ArrayList<String> typeSum, ArrayList<String> rest) {
+    public RentalReport(ArrayList<VehicleModel> vehicleList, ArrayList<String> typeSum, ArrayList<String> rest, String total) {
         this.vehicleList = vehicleList;
         this.typeSum = typeSum;
-        if(rest.size() > 1) {
-            this.branchSum = rest.subList(0,rest.size()-1);
-            this.total = rest.get(rest.size()-1);
-        }
-        else this.total = rest.get(0);
+        this.branchSum = rest;
+        this.total = total;
     }
-
-    public ArrayList<VehicleModel>  getVehicleList() {
-        return vehicleList;
-    }
-
+    //This is just a list of vehicle models
+    public ArrayList<VehicleModel>  getVehicleList() { return vehicleList; }
+    /*
+    This list of Strings is formatted like "SUV: 3(number of rented SUV)"
+    As in the spec, only displaying total number of rentals for specific type for entire company
+     */
     public ArrayList<String> getTypeSum() {return typeSum;}
-
+    /*
+    This list of Strings is formatted like "Vancouver: 3(number of rented vehicles)"
+    As in the spec, displaying total number of rentals for each branch
+     */
     public List<String> getBranchSum() {return branchSum;}
-
+    //This String is formatted like "total: 3(total number of rented vehicles for entire company)"
     public String getTotal() {return total;}
 
 

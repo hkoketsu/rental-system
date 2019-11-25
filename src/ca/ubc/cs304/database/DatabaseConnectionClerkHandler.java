@@ -28,23 +28,24 @@ public class DatabaseConnectionClerkHandler {
     public RentalReport getRentalReport(Date date) {
         String dateString = "to_date('" + date.toString() + "', 'yyyy-mm-dd')";
         return new RentalReport(getVehicleList(dateString, null, null),
-                getTypeSum(dateString, null, null), getReportSum(dateString, null, null));
+                getTypeSum(dateString, null, null), getRentalReportSubBranchSum(dateString),getRentalReportSum(dateString));
     }
 
-    public RentalReport getBranchRentalReport(Date date, String location, String city) {
+    public RentalBranchReport getBranchRentalReport(Date date, String location, String city) {
         String dateString = "to_date('" + date.toString() + "', 'yyyy-mm-dd')";
-        return new RentalReport(getVehicleList(dateString, location, city), getTypeSum(dateString, location, city), getReportSum(dateString, location, city));
+        return new RentalBranchReport(getVehicleList(dateString, location, city), getTypeSum(dateString, location, city), getRentalReportBranchSum(dateString, location, city));
     }
 
-    public RentalReport getReturnReport(Date date) {
+    public ReturnReport getReturnReport(Date date) {
         String dateString = "to_date('" + date.toString() + "', 'yyyy-mm-dd')";
-        return new RentalReport(getVehicleList(dateString, null, null),
-                getTypeSum(dateString, null, null), getReportSum(dateString, null, null));
+        return new ReturnReport(getReturnVehicleList(dateString, null, null),
+                getBranchReturnReport(dateString, null, null),
+                getReturnReportSubBranchSum(dateString), getReturnReportSum(dateString));
     }
 
-    public RentalReport getBranchReturnReport(Date date, String location, String city) {
+    public ReturnBranchReport getBranchReturnReport(Date date, String location, String city) {
         String dateString = "to_date('" + date.toString() + "', 'yyyy-mm-dd')";
-        return new RentalReport(getVehicleList(dateString, location, city), getTypeSum(dateString, location, city), getReportSum(dateString, location, city));
+        return new ReturnBranchReport(getReturnVehicleList(dateString, location, city), getBranchReturnReport(dateString, location, city), getRentalReportBranchSum(dateString, location, city));
     }
 
     private ArrayList<String> getTypeSum(String dateString, String location, String city) {
@@ -74,27 +75,55 @@ public class DatabaseConnectionClerkHandler {
         return vtype;
     }
 
-    private ArrayList<String> getReportSum(String dateString, String location, String city) {
+    //Get the branch sub sum of rentals for entire company
+    private ArrayList<String> getRentalReportSubBranchSum(String dateString) {
         ArrayList<String> result = new ArrayList();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs;
-            if(location == null || city == null) {
-                rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +" GROUP BY v.location, v.city ORDER BY v.location");
-                Integer total = 0;
-                while (rs.next()) {
-                    String model = rs.getString("city")+": "+rs.getString("vehicles");
-                    total += rs.getInt("vlicense");
-                    result.add(model);
-                }
-                result.add("total: " + total.toString());
+            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
+                    "fromDate = "+ dateString +" GROUP BY v.location, v.city ORDER BY v.location");
+            while (rs.next()) {
+                String model = rs.getString("city")+": "+rs.getString("vehicles");
+                result.add(model);
             }
-            else {
-                rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city);
-                result.add("total: " + rs.getString("vehicles"));
-            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return result;
+    }
+    // Get the sum of total rentals in a branch
+    private String getRentalReportBranchSum(String dateString, String location, String city) {
+        String result ="";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
+                    "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY fromDate");
+            result = rs.getString("city") + ": " + rs.getString("vehicles");
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return result;
+    }
+
+    // Get the sum of total rentals in a the company
+    private String getRentalReportSum(String dateString) {
+        String result ="";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
+                    "fromDate = "+ dateString +" GROUP BY fromDate");
+            result = "total: " + rs.getString("vehicles");
 
             rs.close();
             stmt.close();
@@ -146,8 +175,8 @@ public class DatabaseConnectionClerkHandler {
         return vehicles;
     }
 
-    private ArrayList<ReturnReportBranch> getBranchReturnReport(String dateString, String location, String city) {
-        ArrayList<ReturnReportBranch> branches = new ArrayList<>();
+    private ArrayList<ReturnReportBranchSummary> getBranchReturnReport(String dateString, String location, String city) {
+        ArrayList<ReturnReportBranchSummary> branches = new ArrayList<>();
 
         try {
             Statement stmt = connection.createStatement();
@@ -155,16 +184,16 @@ public class DatabaseConnectionClerkHandler {
             if(location == null || city == null){
                 rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.vtname, SUM(r.value) AS revenue, v.city FROM" +
                         " ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
-                        "fromDate = "+ dateString +" GROUP BY v.vtname, v.location, v.city ORDER BY v.location, v.vtname");
+                        "r.rdate = "+ dateString +" GROUP BY v.vtname, v.location, v.city ORDER BY v.location, v.vtname");
             }
             else {
                 rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.vtname, SUM(r.value) AS revenue, v.city FROM" +
                         " ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
-                        "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY v.vtname ORDER BY v.vtname");
+                        "r.rdate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY v.vtname ORDER BY v.vtname");
             }
 
             while (rs.next()) {
-                ReturnReportBranch model = new ReturnReportBranch(rs.getString("city"),
+                ReturnReportBranchSummary model = new ReturnReportBranchSummary(rs.getString("city"),
                         rs.getString("vehicles"),
                         rs.getString("vtname"),
                         rs.getDouble("value")
@@ -190,13 +219,13 @@ public class DatabaseConnectionClerkHandler {
                 rs = stmt.executeQuery("SELECT " +
                         "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city " +
                         "FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +"ORDER BY v.location, r.fromTime");
+                        "r.rdate = "+ dateString +"ORDER BY v.location, r.fromTime");
             }
             else {
                 rs = stmt.executeQuery("SELECT " +
                         "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city " +
-                        "FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city + " ORDER BY v.location, r.fromTime");
+                        "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
+                        "r.rdate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city + " ORDER BY v.location, r.rtime");
             }
 
             while (rs.next()) {
@@ -221,8 +250,74 @@ public class DatabaseConnectionClerkHandler {
         return vehicles;
     }
 
+    //Get the branch sub sum of rentals for entire company
+    private ArrayList<String> getReturnReportSubBranchSum(String dateString) {
+        ArrayList<String> result = new ArrayList();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs;
+            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city , SUM(r.value) AS revenue " +
+                    "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid)  WHERE " +
+                    "r.rdate = "+ dateString +" GROUP BY v.location, v.city ORDER BY v.location");
+            while (rs.next()) {
+                String model = rs.getString("city")+" returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return result;
+    }
+    // Get the sum of total rentals in a branch
+    private String getReturnReportBranchSum(String dateString, String location, String city) {
+        String result ="";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city , SUM(r.value) AS revenue " +
+                    " FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid)  WHERE " +
+                    "r.rdate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city);
+            result = rs.getString("city")+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return result;
+    }
+
+    // Get the sum of total rentals in a the company
+    private String getReturnReportSum(String dateString) {
+        String result ="";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, SUM(r.value) AS revenue " +
+                    "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
+                    "r.rdate = "+ dateString +" GROUP BY r.rdate");
+            result = "total "+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+        return result;
+    }
+
+
+
+
+
 
 }
+
 
 //            while (rs.next()) {
 //                RentalsModel model = new RentalsModel(rs.getString("rid"),
