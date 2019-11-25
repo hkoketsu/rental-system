@@ -1,5 +1,7 @@
 package ca.ubc.cs304.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,8 @@ public class PageController3bc extends PageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // String[] branches = TODO: get all the branch by query
         // branchChoiceBox.setItems(branches);
+        ObservableList<String> branches = FXCollections.observableArrayList("Vancouver", "Burnaby");
+        branchChoiceBox.setItems(branches);
     }
 
     public void onClick(ActionEvent e) {
@@ -53,6 +57,6 @@ public class PageController3bc extends PageController implements Initializable {
     }
 
     public void onClickBackButton() {
-        setPage(PageController3bb.class, "3bb");
+        setPage(PageController3bb.class, "2b");
     }
 }

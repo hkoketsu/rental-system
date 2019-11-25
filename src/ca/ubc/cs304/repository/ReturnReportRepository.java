@@ -91,7 +91,7 @@ public class ReturnReportRepository {
                         rs.getString("vtname"),
                         rs.getString("location"),
                         rs.getString("city"),
-                        null);
+                        rs.getString("status"));
                 vehicles.add(model);
             }
 
@@ -154,7 +154,7 @@ public class ReturnReportRepository {
             rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, SUM(r.value) AS revenue " +
                     "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
                     "r.rdate = "+ dateString +" GROUP BY r.rdate");
-            result = "total "+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
+            result = "Total "+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
 
             rs.close();
             stmt.close();

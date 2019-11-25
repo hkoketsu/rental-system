@@ -16,7 +16,7 @@ public class ReservationRepository {
     }
 
     public Reservation getReservation(String confirmationNumber) {
-        List<Reservation> reservationList = new ArrayList<>();
+        List<Reservation> reservationList = new ArrayList<>(0);
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM RESERVATIONS WHERE confNo = ?");
             ps.setString(1, confirmationNumber);

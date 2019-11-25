@@ -20,8 +20,8 @@ public class DatabaseConnectionHandler {
 	private static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1522:stu";
 	private static final String EXCEPTION_TAG = "[EXCEPTION]";
 	private static final String WARNING_TAG = "[WARNING]";
-	private static final String username = "ora_hkoketsu";
-	private static final String password = "a93547966";
+	private static final String username = "ora_abramwwy";
+	private static final String password = "a46086161";
 
 	private static Connection connection;
 	private BranchRepository branchRepository;
@@ -35,7 +35,7 @@ public class DatabaseConnectionHandler {
 	private ReturnReportRepository returnReportRepository;
 
 	public DatabaseConnectionHandler() {
-		connection = getConnection();
+		getConnection();
 		branchRepository = new BranchRepository(connection);
 		customerRepository = new CustomerRepository(connection);
 		rentalRepository = new RentalRepository(connection);
@@ -121,8 +121,10 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
-	private Connection getConnection() {
-		Connection connection = null;
+	private void getConnection() {
+		if (connection != null) {
+			return;
+		}
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			connection = DriverManager.getConnection(ORACLE_URL, username, password);
@@ -130,6 +132,5 @@ public class DatabaseConnectionHandler {
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
-		return connection;
 	}
 }

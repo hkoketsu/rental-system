@@ -1,5 +1,7 @@
 package ca.ubc.cs304.controller;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
+import ca.ubc.cs304.service.CustomerHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,6 +23,7 @@ public class PageController4a extends PageController {
     @FXML TextField nameTextField;
     @FXML TextField phoneNumberTextField;
     @FXML TextField driverLicenseTextField;
+    @FXML TextField addressTextField;
 
     @FXML Button proceedButton;
 
@@ -50,10 +53,20 @@ public class PageController4a extends PageController {
         String name = nameTextField.getText();
         String phoneNumber = phoneNumberTextField.getText();
         String licenseNumber = driverLicenseTextField.getText();
+        String address  = addressTextField.getText();
 
-        if (name.equals("") || phoneNumber.equals("") || licenseNumber.equals("")) {
+        if (name.equals("") || phoneNumber.equals("") || licenseNumber.equals("") || address.equals("")) {
             errorLabel.setVisible(true);
         } else {
+
+            // TODO: consider moving this somewhere better
+            DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
+            CustomerHandler customerHandler = new CustomerHandler(dbHandler);
+            if ( ! customerHandler.isCustomerInDatabase(licenseNumber) ) {
+                customerHandler.addCustomerToDatabase(licenseNumber, phoneNumber, name, address);
+            }
+            dbHandler.close();
+
             setPage(PageController5a.class, "5a", new String[]{vehicleType, licenseNumber, pickupDateTime, returnDateTime});
         }
     }
