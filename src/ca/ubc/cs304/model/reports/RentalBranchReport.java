@@ -1,4 +1,6 @@
-package ca.ubc.cs304.model;
+package ca.ubc.cs304.model.reports;
+
+import ca.ubc.cs304.model.VehicleModel;
 
 import java.util.ArrayList;
 import java.util.List;

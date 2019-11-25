@@ -2,6 +2,10 @@ package ca.ubc.cs304.database;
 
 
 import ca.ubc.cs304.model.*;
+import ca.ubc.cs304.model.reports.RentalBranchReport;
+import ca.ubc.cs304.model.reports.RentalReport;
+import ca.ubc.cs304.model.reports.ReturnBranchReport;
+import ca.ubc.cs304.model.reports.ReturnReport;
 
 import java.sql.Date;
 

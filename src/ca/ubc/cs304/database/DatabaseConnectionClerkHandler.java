@@ -1,6 +1,7 @@
 package ca.ubc.cs304.database;
 
 import ca.ubc.cs304.model.*;
+import ca.ubc.cs304.model.reports.*;
 
 import java.sql.*;
 import java.util.ArrayList;

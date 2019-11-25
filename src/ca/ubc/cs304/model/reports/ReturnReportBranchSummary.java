@@ -1,4 +1,4 @@
-package ca.ubc.cs304.model;
+package ca.ubc.cs304.model.reports;
 
 import java.util.ArrayList;
 
