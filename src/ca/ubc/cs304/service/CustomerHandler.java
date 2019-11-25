@@ -1,10 +1,7 @@
 package ca.ubc.cs304.service;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
-import ca.ubc.cs304.domain.Customer;
-import ca.ubc.cs304.domain.Reservation;
-import ca.ubc.cs304.domain.TimeInterval;
-import ca.ubc.cs304.domain.Vehicle;
+import ca.ubc.cs304.domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -66,15 +63,16 @@ public class CustomerHandler {
         List<String> confNoList = Arrays.asList(confNoArr);
         String confNo;
         do {
-            confNo = "cf";
-            Random random = new Random();
-            confNo += random.nextInt(10);
-            confNo += this.getRandomLetter();
-            confNo += random.nextInt(10);
-            confNo += random.nextInt(10);
-            confNo += random.nextInt(10);
-            confNo += this.getRandomLetter();
-            confNo += random.nextInt(10);
+            confNo = Util.generateConfirmationNumber();
+//            confNo = "cf";
+//            Random random = new Random();
+//            confNo += random.nextInt(10);
+//            confNo += this.getRandomLetter();
+//            confNo += random.nextInt(10);
+//            confNo += random.nextInt(10);
+//            confNo += random.nextInt(10);
+//            confNo += this.getRandomLetter();
+//            confNo += random.nextInt(10);
         } while (confNoList.contains(confNo));
 
         Reservation model = new Reservation(confNo, carType, driverLicense, null, timeInterval);
