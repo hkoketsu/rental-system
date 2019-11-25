@@ -66,6 +66,8 @@ public class PageController5a extends PageController implements Initializable {
         confirmationNumber = customerHandler.makeReservation(vehicleType, licenseNumber, timeInterval);
         ConfirmationNumberLabel.setText(confirmationNumber);
 
+        dbHandler.close();
+
     }
 
     public void onClickTopButton() {

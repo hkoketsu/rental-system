@@ -74,6 +74,7 @@ public class PageController4a extends PageController implements Initializable {
             if ( ! customerHandler.isCustomerInDatabase(licenseNumber) ) {
                 customerHandler.addCustomerToDatabase(licenseNumber, phoneNumber, name, address);
             }
+            dbHandler.close();
 
             setPage(PageController5a.class, "5a", new String[]{vehicleType, licenseNumber, pickupDateTime, returnDateTime});
         }
