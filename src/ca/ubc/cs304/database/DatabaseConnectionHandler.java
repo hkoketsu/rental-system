@@ -1,10 +1,15 @@
 package ca.ubc.cs304.database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import ca.ubc.cs304.domain.*;
+import ca.ubc.cs304.domain.reports.RentalBranchReport;
+import ca.ubc.cs304.domain.reports.RentalReport;
+import ca.ubc.cs304.domain.reports.ReturnBranchReport;
+import ca.ubc.cs304.domain.reports.ReturnReport;
 import ca.ubc.cs304.repository.*;
 
 /**
@@ -24,6 +29,8 @@ public class DatabaseConnectionHandler {
 	private ReservationRepository reservationRepository;
 	private ReturnRepository returnRepository;
 	private VehicleRepository vehicleRepository;
+	private RentalReportRepository rentalReportRepository;
+	private ReturnReportRepository returnReportRepository;
 
 	public DatabaseConnectionHandler() {
 		connection = getConnection();
@@ -33,6 +40,8 @@ public class DatabaseConnectionHandler {
 		reservationRepository = new ReservationRepository(connection);
 		returnRepository = new ReturnRepository(connection);
 		vehicleRepository = new VehicleRepository(connection);
+		rentalReportRepository = new RentalReportRepository(connection);
+		returnReportRepository = new ReturnReportRepository(connection);
 	}
 
     public Vehicle getRentedVehicle(String vlicense, TimeInterval timeInterval) { return vehicleRepository.getRentedVehicle(vlicense, timeInterval); }
@@ -68,6 +77,14 @@ public class DatabaseConnectionHandler {
     public int getNumberOfVehiclesNotRented(String carType, String location, TimeInterval timeInterval) { return vehicleRepository.numberOfVehiclesNotRented(carType, location, timeInterval); }
 
     public int getNumberOfReservedVehicles(String carType, TimeInterval timeInterval) { return vehicleRepository.numberOfReservedVehicles(carType,timeInterval); }
+
+    public RentalReport getRentalReport(Date date) { return rentalReportRepository.getRentalReport(date); }
+
+    public RentalBranchReport getRentalBranchReport(Date date, String location, String city) {return rentalReportRepository.getBranchRentalReport(date, location, city);}
+
+    public ReturnReport getReturnReport(Date date) {return returnReportRepository.getReturnReport(date);}
+
+	public ReturnBranchReport getReturnBranchReport(Date date, String location, String city) {return returnReportRepository.getBranchReturnReport(date, location, city);}
 
     public static void rollbackConnection() {
         try  {
