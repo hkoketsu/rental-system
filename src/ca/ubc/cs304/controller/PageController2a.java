@@ -157,6 +157,9 @@ public class PageController2a extends PageController implements Initializable {
         }
 
         reserveButton.setVisible(true);
+        if (vehicles.length == 0) {
+            reserveButton.setDisable(true);
+        }
         dbHandler.close();
 
         // TODO: get search result, put the result on resultLabel and resultTable
