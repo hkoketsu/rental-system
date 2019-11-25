@@ -4,7 +4,9 @@ import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.domain.TimeInterval;
 import ca.ubc.cs304.domain.Util;
 import ca.ubc.cs304.service.CustomerHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.sql.Date;
@@ -17,6 +19,8 @@ import java.util.ResourceBundle;
  * Page for displaying reservation completion
  */
 public class PageController5a extends PageController implements Initializable {
+
+    @FXML Label ConfirmationNumberLabel;
     private String confirmationNumber;
 
     private String vehicleType;
@@ -60,6 +64,8 @@ public class PageController5a extends PageController implements Initializable {
         DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
         CustomerHandler customerHandler = new CustomerHandler(dbHandler);
         confirmationNumber = customerHandler.makeReservation(vehicleType, licenseNumber, timeInterval);
+        ConfirmationNumberLabel.setText(confirmationNumber);
+
     }
 
     public void onClickTopButton() {
