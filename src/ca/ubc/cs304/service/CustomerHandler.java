@@ -18,13 +18,7 @@ public class CustomerHandler {
     // any of the arguments can be null
     //
     public int viewNumberOfVehicles(String carType, String location, TimeInterval timeInterval) {
-        int numberOfVehicles = dbHandler.getNumberOfVehiclesNotRented(carType, location, timeInterval);
-        int numberOfVehiclesWithNoLocation = dbHandler.getNumberOfVehiclesNotRented(carType, null, timeInterval);
-        int numberOfReservedVehicles = dbHandler.getNumberOfReservedVehicles(carType, timeInterval);
-        if (numberOfVehiclesWithNoLocation <= numberOfReservedVehicles) {
-            return 0;
-        }
-        return numberOfVehicles;
+        return dbHandler.getNumberOfVehiclesNotRented(carType, location, timeInterval);
     }
 
     public boolean isVehicleAvailable(String vehicleLicense, TimeInterval timeInterval) {
@@ -47,25 +41,8 @@ public class CustomerHandler {
         return customer != null;
     }
 
-    // Returns the confno of the created reservation
-    // Gets list of confNo's from database
-    // Generates random confNo's until one is created that is not in the database
     public void makeReservation(String confNo, String carType, String driverLicense, TimeInterval timeInterval) {
         Reservation model = new Reservation(confNo, carType, driverLicense, timeInterval);
         dbHandler.putReservation(model);
-    }
-
-
-    // from: https://stackoverflow.com/questions/20536566/creating-a-random-string-with-a-z-and-0-9-in-java
-    private String getRandomLetter() {
-        String SALTCHARS = "abcdefghijklmnopqrstuvwxyz";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 1) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-        return salt.toString();
-
     }
 }
