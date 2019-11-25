@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
@@ -16,12 +17,20 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="40.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental ID:" />
-      <Text layoutX="40.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Text layoutX="39.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rental ID:" />
+      <Label fx:id="rentalIdLabel" layoutX="158.0" layoutY="126.0" prefHeight="17.0" prefWidth="160.0" />
+      <Text layoutX="39.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation #:" />
+      <Label fx:id="confNoLabel" layoutX="158.0" layoutY="151.0" prefHeight="17.0" prefWidth="160.0" />
+      <Text layoutX="40.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Label fx:id="dateLabel" layoutX="158.0" layoutY="179.0" prefHeight="17.0" prefWidth="160.0" />
       <Text layoutX="40.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price:" />
-      <Label fx:id="rentalIdLabel" layoutX="158.0" layoutY="134.0" prefHeight="17.0" prefWidth="160.0" />
-      <Label fx:id="dateLabel" layoutX="158.0" layoutY="171.0" prefHeight="17.0" prefWidth="160.0" />
       <Label fx:id="totalPriceLabel" layoutX="158.0" layoutY="207.0" prefHeight="17.0" prefWidth="160.0" />
+      <Text layoutX="69.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Rate:" />
+      <Label fx:id="vehicleRateLabel" layoutX="187.0" layoutY="231.0" prefHeight="17.0" prefWidth="160.0" />
+      <Text layoutX="69.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insurance Rate:" />
+      <Label fx:id="insuranceRateLabel" layoutX="187.0" layoutY="248.0" prefHeight="17.0" prefWidth="160.0" />
+      <Text layoutX="69.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance Rate:" />
+      <Label fx:id="distanceRateLabel" layoutX="187.0" layoutY="265.0" prefHeight="17.0" prefWidth="160.0" />
       <Button layoutX="233.0" layoutY="325.0" mnemonicParsing="false" onAction="#onClickTopButton" prefHeight="30.0" prefWidth="134.0" text="Go Back To Top">
          <font>
             <Font size="14.0" />

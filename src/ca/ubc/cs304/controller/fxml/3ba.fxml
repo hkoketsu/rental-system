@@ -22,7 +22,7 @@
             <Font size="18.0" />
          </font>
       </TextField>
-      <Button fx:id="nextButton" onAction="#onClickNextButton"  layoutX="345.0" layoutY="270.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Next">
+      <Button fx:id="nextButton" layoutX="437.0" layoutY="303.0" mnemonicParsing="false" onAction="#onClickNextButton" prefHeight="30.0" prefWidth="95.0" text="Next">
          <font>
             <Font size="14.0" />
          </font>
@@ -32,10 +32,5 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" onAction="#onClickBackButton" layoutX="166.0" layoutY="270.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Back">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
    </children>
 </Pane>

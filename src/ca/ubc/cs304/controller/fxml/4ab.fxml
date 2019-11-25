@@ -54,12 +54,18 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Text layoutX="19.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Odometer:">
+            <Text layoutX="15.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Odometer:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="odometerTextField" layoutX="108.0" layoutY="257.0" prefHeight="25.0" prefWidth="114.0" />
+            <TextField fx:id="odometerTextField" layoutX="98.0" layoutY="308.0" prefHeight="25.0" prefWidth="114.0" />
+            <ChoiceBox fx:id="vehicleIdChoiceBox" layoutX="98.0" layoutY="264.0" prefHeight="25.0" prefWidth="135.0" />
+            <Text layoutX="16.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle ID:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="363.0">
          <children>
@@ -73,29 +79,18 @@
                   <Font size="14.0" />
                </font>
             </Text>
+            <TextField fx:id="nameTextField" layoutX="136.0" layoutY="66.0" prefHeight="25.0" prefWidth="205.0" />
             <Text layoutX="22.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone #:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
+            <TextField fx:id="phoneNumberTextField" layoutX="136.0" layoutY="100.0" prefHeight="25.0" prefWidth="205.0" />
             <Text layoutX="19.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Driver License #:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Button fx:id="proceedButton" layoutX="214.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickProceed" prefHeight="30.0" prefWidth="101.0" text="Proceed">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <TextField fx:id="nameTextField" layoutX="136.0" layoutY="66.0" prefHeight="25.0" prefWidth="205.0" />
-            <TextField fx:id="phoneNumberTextField" layoutX="136.0" layoutY="100.0" prefHeight="25.0" prefWidth="205.0" />
-            <TextField fx:id="creditNameTextField" layoutX="136.0" layoutY="197.0" prefHeight="25.0" prefWidth="205.0" />
-            <Label fx:id="errorLabel" layoutX="31.0" layoutY="294.0" text="Error: Please fill in all the information" textFill="RED" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
             <TextField fx:id="driverLicenseTextField" layoutX="136.0" layoutY="131.0" prefHeight="25.0" prefWidth="205.0" />
             <Text layoutX="16.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit Card ">
                <font>
@@ -107,19 +102,25 @@
                   <Font size="14.0" />
                </font>
             </Text>
+            <TextField fx:id="creditNameTextField" layoutX="136.0" layoutY="197.0" prefHeight="25.0" prefWidth="205.0" />
+            <Label fx:id="errorLabel" layoutX="31.0" layoutY="294.0" text="Error: Please fill in all the information" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             <Text layoutX="22.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
+            <TextField fx:id="creditNumberTextField" layoutX="136.0" layoutY="228.0" prefHeight="25.0" prefWidth="205.0" />
             <Text layoutX="23.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exp. Date:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="creditNumberTextField" layoutX="136.0" layoutY="228.0" prefHeight="25.0" prefWidth="205.0" />
             <TextField fx:id="expDateTextField" layoutX="136.0" layoutY="258.0" prefHeight="25.0" prefWidth="205.0" />
-            <Button layoutX="48.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
+            <Button fx:id="proceedButton" layoutX="214.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickProceed" prefHeight="30.0" prefWidth="101.0" text="Proceed">
                <font>
                   <Font size="14.0" />
                </font>

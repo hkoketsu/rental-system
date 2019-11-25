@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /***
@@ -48,18 +49,24 @@ public class PageController2a extends PageController implements Initializable {
     private String pickupDateTime;
     private String returnDateTime;
 
-    private boolean byClerk;
+    private boolean byClerk = false;
     private String branchLocation;
+
+    private DatabaseConnectionHandler dbHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dbHandler = new DatabaseConnectionHandler();
+
         ObservableList<String> vehicleTypes = FXCollections.observableArrayList(
-        "Economy", "Compact", "Mid-size", "Standard", "Fullsize", "SUV", "Truck"
+        "Sedan", "SUV", "Minivan", "Truck"
         );
         vehicleTypeChoices.setItems(vehicleTypes);
-//        ObservableList<String> branches = TODO: get all branches by SQL
-        ObservableList<String> branches = FXCollections.observableArrayList("test branch");
-        branchChoices.setItems(branches);
+
+        List<String> branchLocations = dbHandler.getBranchLocations();
+        ObservableList<String> branchItems = FXCollections.observableArrayList(branchLocations);
+        branchChoices.setItems(branchItems);
+
         ObservableList<String> hours = FXCollections.observableArrayList(
                 "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00",
                     "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
@@ -102,6 +109,16 @@ public class PageController2a extends PageController implements Initializable {
                 odometerCol, vtnameCol, locationCol, cityCol, statusCol);
     }
 
+    @Override
+    public void loadParameter(Object[]...params) {
+        if (params[0] != null && params[0].length == 2) {
+            branchLocation = params[0][0].toString();
+            byClerk = (boolean) params[0][1];
+            ObservableList<String> branchItems = FXCollections.observableArrayList(branchLocation);
+            branchChoices.setItems(branchItems);
+        }
+    }
+
     public void onClickSearchButton() {
         String vehicleType = vehicleTypeChoices.getValue();
         String branch = branchChoices.getValue();
@@ -119,7 +136,6 @@ public class PageController2a extends PageController implements Initializable {
             vehicleTypeLabel.setText("Any");
         }
         if (branch != null) {
-            branch = "122 Walter Hardwick Ave 305"; // TODO: Remove --------------------------------------------------------------------------------------------------------------------
             this.branch = branch;
             branchLabel.setText(branch);
         } else {
@@ -154,7 +170,6 @@ public class PageController2a extends PageController implements Initializable {
         } else {
             timeInterval = null;
         }
-        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
         CustomerHandler customerHandler = new CustomerHandler(dbHandler);
         int numberOfVehicles = customerHandler.viewNumberOfVehicles(vehicleType, branch, timeInterval);
         Vehicle[] vehicles = customerHandler.viewVehicles(vehicleType, branch, timeInterval);
@@ -184,18 +199,10 @@ public class PageController2a extends PageController implements Initializable {
 
     public void onClickReserveButton() {
         if (byClerk) {
-            setPage(PageController4ab.class, "4ab", new String[]{vehicleType, branch, pickupDateTime, returnDateTime, branchLocation});
+            setPage(PageController4ab.class, "4ab", new String[]{vehicleType, branch, pickupDateTime, returnDateTime});
         }
         else {
-            setPage(PageController4a.class, "4a", new String[]{vehicleType, branch, pickupDateTime, returnDateTime, branchLocation});
-        }
-    }
-
-    @Override
-    public void loadParameter(Object[]...params) {
-        if (params[0] != null && params[0].length == 2) {
-            branchLocation = params[0][0].toString();
-            byClerk = (boolean) params[0][1];
+            setPage(PageController4a.class, "4a", new String[]{vehicleType, branch, pickupDateTime, returnDateTime});
         }
     }
 }

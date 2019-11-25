@@ -32,10 +32,10 @@
             <Label fx:id="branchLabel" layoutX="64.0" layoutY="50.0" prefHeight="17.0" prefWidth="133.0" />
             <Label fx:id="pickupLabel" layoutX="64.0" layoutY="69.0" prefHeight="17.0" prefWidth="133.0" />
             <Label fx:id="returnLabel" layoutX="64.0" layoutY="87.0" prefHeight="17.0" prefWidth="133.0" />
-            <Text layoutX="4.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Odometer:" />
-            <TextField fx:id="odometerTextField" layoutX="82.0" layoutY="173.0" prefHeight="25.0" prefWidth="125.0" />
             <Text layoutX="4.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle ID:" />
             <ChoiceBox fx:id="vehicleIdChoiceBox" layoutX="70.0" layoutY="132.0" prefWidth="150.0" />
+            <Text layoutX="4.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Odometer:" />
+            <TextField fx:id="odometerTextField" layoutX="82.0" layoutY="173.0" prefHeight="25.0" prefWidth="125.0" />
          </children>
       </Pane>
       <Pane layoutX="273.0" layoutY="99.0" prefHeight="246.0" prefWidth="259.0">
@@ -56,11 +56,11 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="4.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number: " />
-            <Text layoutX="4.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " />
+            <Text layoutX="3.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " />
+            <Text layoutX="4.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number: " />
             <Text layoutX="4.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exp. Date:" />
-            <TextField fx:id="creditNumberTextField" layoutX="67.0" layoutY="131.0" />
-            <TextField fx:id="creditNameTextField" layoutX="67.0" layoutY="163.0" />
+            <TextField fx:id="creditNameTextField" layoutX="66.0" layoutY="129.0" />
+            <TextField fx:id="creditNumberTextField" layoutX="67.0" layoutY="163.0" />
             <TextField fx:id="expDateTextField" layoutX="67.0" layoutY="195.0" />
          </children>
       </Pane>
@@ -69,10 +69,5 @@
             <Font size="14.0" />
          </font></Button>
       <Label fx:id="errorLabel" layoutX="326.0" layoutY="68.0" prefHeight="25.0" prefWidth="200.0" text="Error: Please fill in all the information" textFill="RED" visible="false" />
-      <Button layoutX="64.0" layoutY="334.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
    </children>
 </Pane>

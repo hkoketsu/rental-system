@@ -17,7 +17,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="37.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Branch">
+      <Text layoutX="36.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Branch">
          <font>
             <Font size="14.0" />
          </font>
@@ -32,22 +32,17 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button id="BranchRental" layoutX="96.0" layoutY="261.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="166.0" text="Daily Rental Report">
+      <Button id="BranchRental" layoutX="97.0" layoutY="289.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="166.0" text="Daily Rental Report">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button id="BranchReturn" layoutX="294.0" layoutY="261.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="182.0" text="Daily Return Report">
+      <Button id="BranchReturn" layoutX="294.0" layoutY="289.0" mnemonicParsing="false" onAction="#onClick" prefHeight="43.0" prefWidth="182.0" text="Daily Return Report">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <ChoiceBox fx:id="branchChoiceBox" layoutX="123.0" layoutY="213.0" prefHeight="25.0" prefWidth="190.0" />
+      <ChoiceBox fx:id="branchChoiceBox" layoutX="123.0" layoutY="235.0" prefHeight="25.0" prefWidth="190.0" />
       <Label fx:id="errorLabel" layoutX="333.0" layoutY="217.0" prefHeight="17.0" prefWidth="158.0" text="Error: Choose a branch" textFill="RED" visible="false" />
-      <Button layoutX="241.0" layoutY="338.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
    </children>
 </Pane>

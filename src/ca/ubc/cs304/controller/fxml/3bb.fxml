@@ -48,11 +48,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="113.0" layoutY="308.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="25.0" prefWidth="84.0" text="Back">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
       <Label fx:id="errorNotFoundLabel" layoutX="197.0" layoutY="62.0" text="Error: Rental Information Not Found with the Rental ID" textFill="RED" visible="false">
          <font>
             <Font size="14.0" />

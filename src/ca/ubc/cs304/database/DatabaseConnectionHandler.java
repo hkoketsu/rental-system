@@ -30,6 +30,7 @@ public class DatabaseConnectionHandler {
 	private ReservationRepository reservationRepository;
 	private ReturnRepository returnRepository;
 	private VehicleRepository vehicleRepository;
+	private VehicleTypeRepository vehicleTypeRepository;
 	private RentalReportRepository rentalReportRepository;
 	private ReturnReportRepository returnReportRepository;
 
@@ -41,11 +42,14 @@ public class DatabaseConnectionHandler {
 		reservationRepository = new ReservationRepository(connection);
 		returnRepository = new ReturnRepository(connection);
 		vehicleRepository = new VehicleRepository(connection);
+		vehicleTypeRepository = new VehicleTypeRepository(connection);
 		rentalReportRepository = new RentalReportRepository(connection);
 		returnReportRepository = new ReturnReportRepository(connection);
 	}
 
 	public List<String> getBranchLocations(String city) { return branchRepository.getBranchLocations(city); }
+
+    public List<String> getBranchLocations() { return branchRepository.getBranchLocations(); }
 
 	public List<String> getCityInfo() { return branchRepository.getCityInfo(); }
 
@@ -56,6 +60,8 @@ public class DatabaseConnectionHandler {
 	}
 
 	public Rental getRentalInfo(String id) { return rentalRepository.getRentalInfo(id); }
+
+	public boolean checkReturn(String id) { return returnRepository.checkReturnEntry(id); }
 
 	public void putRental(Rental rental) { rentalRepository.rentVehicle(rental); }
 
@@ -77,6 +83,8 @@ public class DatabaseConnectionHandler {
         return reservationRepository.getReservationConfnoInfo();
     }
 
+    public Vehicle getVehicle(String id) { return vehicleRepository.getVehicle(id); }
+
     public Vehicle[] getVehicles(String carType, String location, TimeInterval timeInterval) { return vehicleRepository.getVehicles(carType, location, timeInterval); }
 
     public List<String> getAvailableVehicleIds(String carType, String location, TimeInterval timeInterval) { return vehicleRepository.getAvailableVehicleIds(carType, location, timeInterval); }
@@ -84,6 +92,8 @@ public class DatabaseConnectionHandler {
     public int getNumberOfVehiclesNotRented(String carType, String location, TimeInterval timeInterval) { return vehicleRepository.numberOfVehiclesNotRented(carType, location, timeInterval); }
 
     public int getNumberOfReservedVehicles(String carType, TimeInterval timeInterval) { return vehicleRepository.numberOfReservedVehicles(carType,timeInterval); }
+
+    public VehicleType getVehicleTypeObj(String id) { return vehicleTypeRepository.getVehicleTypeObj(id); }
 
     public RentalReport getRentalReport(Date date) { return rentalReportRepository.getRentalReport(date); }
 

@@ -6,26 +6,31 @@ import java.util.Random;
 
 public class Util {
     private static Random r = new Random();
+    private DatabaseConnectionHandler dbHandler;
 
-    public static String generateConfirmationNumber() {
+    public Util(DatabaseConnectionHandler dbHandler) {
+        this.dbHandler = dbHandler;
+    }
+
+    public String generateConfirmationNumber() {
         String confNo;
         DatabaseConnectionHandler handler = new DatabaseConnectionHandler();
         while (true) {
             confNo = "cf" + randomDigit() + randomLowercaseLetter() + randomDigit() +
                     randomDigit() + randomDigit() + randomLowercaseLetter() + randomDigit();
-            Reservation reservation = handler.getReservation(confNo);
+            Reservation reservation = dbHandler.getReservation(confNo);
             if (reservation == null) break;
         }
         return confNo;
     }
 
-    public static String generateRentalId() {
+    public String generateRentalId() {
         String rentalId;
         DatabaseConnectionHandler handler = new DatabaseConnectionHandler();
         while (true) {
             rentalId = "r" + randomDigit() + randomLowercaseLetter() + randomDigit() + randomDigit()
                     + randomDigit() + randomLowercaseLetter() + randomDigit();
-            Rental rental = handler.getRentalInfo(rentalId);
+            Rental rental = dbHandler.getRentalInfo(rentalId);
             if (rental == null) break;
         }
         return rentalId;

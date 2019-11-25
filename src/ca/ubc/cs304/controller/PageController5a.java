@@ -1,5 +1,6 @@
 package ca.ubc.cs304.controller;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.domain.Util;
 import javafx.fxml.Initializable;
 
@@ -23,10 +24,12 @@ public class PageController5a extends PageController implements Initializable {
     private Date returnDate;
     private String returnTime;
 
+    private DatabaseConnectionHandler dbHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        confirmationNumber = Util.generateConfirmationNumber();
+        dbHandler = new DatabaseConnectionHandler();
+        confirmationNumber = new Util(dbHandler).generateConfirmationNumber();
         // TODO: check whether it is already in rental table,
         //  and if so, get another number, else use the number to send the query
     }

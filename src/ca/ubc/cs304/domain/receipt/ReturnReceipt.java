@@ -1,19 +1,23 @@
-package ca.ubc.cs304.model;
+package ca.ubc.cs304.domain.receipt;
+
+import java.sql.Date;
 
 public class ReturnReceipt {
     private String rentalId;
     private String confNo;
-    private String date;
+    private Date date;
     private int vehicleRate;
     private int insuranceRate;
+    private int distanceRate;
     private int totalPrice;
 
-    public ReturnReceipt(String rentalId, String confNo, String date, int vehicleRate, int insuranceRate, int totalPrice) {
+    public ReturnReceipt(String rentalId, String confNo, Date date, int vehicleRate, int insuranceRate, int distanceRate, int totalPrice) {
         this.rentalId = rentalId;
         this.confNo = confNo;
         this.date = date;
         this.vehicleRate = vehicleRate;
         this.insuranceRate = insuranceRate;
+        this.distanceRate = distanceRate;
         this.totalPrice = totalPrice;
     }
 
@@ -25,7 +29,7 @@ public class ReturnReceipt {
         return confNo;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -36,6 +40,8 @@ public class ReturnReceipt {
     public int getInsuranceRate() {
         return insuranceRate;
     }
+
+    public int getDistanceRate() { return distanceRate; }
 
     public int getTotalPrice() {
         return totalPrice;

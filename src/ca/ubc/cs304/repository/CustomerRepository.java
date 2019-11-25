@@ -15,7 +15,7 @@ public class CustomerRepository {
 
     public void insertCustomer(Customer model) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO customers VALUES (?,?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO customers (dlicense, cellphone, name, address) VALUES (?,?,?,?)");
             ps.setString(1, model.getDlicense());
             ps.setString(2, model.getCellphone());
             ps.setString(3, model.getName());
@@ -55,6 +55,6 @@ public class CustomerRepository {
             e.printStackTrace();
         }
 
-        return result.get(0);
+        return result.isEmpty() ? null : result.get(0);
     }
 }

@@ -50,4 +50,22 @@ public class BranchRepository {
         }
         return branchLocations;
     }
+
+    public List<String> getBranchLocations() {
+        List<String> branchLocations = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT BRANCH.LOCATION FROM BRANCH");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                branchLocations.add(rs.getString("location"));
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return branchLocations;
+    }
 }

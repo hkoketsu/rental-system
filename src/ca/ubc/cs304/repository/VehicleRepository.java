@@ -1,13 +1,11 @@
 package ca.ubc.cs304.repository;
 
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.database.VehicleListerHelper;
 import ca.ubc.cs304.domain.TimeInterval;
 import ca.ubc.cs304.domain.Vehicle;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +16,40 @@ public class VehicleRepository {
     public VehicleRepository(Connection connection) {
         this.connection = connection;
         helper = new VehicleListerHelper();
+    }
+
+    public Vehicle getVehicle(String id) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "SELECT * FROM VEHICLES WHERE VLICENSE = ?"
+            );
+            ps.setString(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                vehicles.add(new Vehicle(
+                        rs.getString("vlicense"),
+                        rs.getString("make"),
+                        rs.getString("model"),
+                        rs.getString("year"),
+                        rs.getString("color"),
+                        rs.getString("odometer"),
+                        rs.getString("vtname"),
+                        rs.getString("location"),
+                        rs.getString("city"),
+                        rs.getString("status")
+                ));
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DatabaseConnectionHandler.rollbackConnection();
+        }
+        return vehicles.isEmpty() ? null : vehicles.get(0);
     }
 
     public Vehicle getRentedVehicle(String vlicense, TimeInterval timeInterval) {
@@ -31,7 +63,8 @@ public class VehicleRepository {
             ResultSet rs = stmt.executeQuery(query);
 
             rs.next();
-            Vehicle model = new Vehicle(rs.getString("vlicense"),
+            result = new Vehicle(
+                    rs.getString("vlicense"),
                     rs.getString("make"),
                     rs.getString("model"),
                     rs.getString("year"),
@@ -42,7 +75,6 @@ public class VehicleRepository {
                     rs.getString("city"),
                     rs.getString("status")
             );
-            result = model;
 
             rs.close();
             stmt.close();

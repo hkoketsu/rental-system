@@ -44,7 +44,7 @@ public class ReservationRepository {
             e.printStackTrace();
             DatabaseConnectionHandler.rollbackConnection();
         }
-        return reservationList.get(0);
+        return reservationList.isEmpty() ? null : reservationList.get(0);
     }
 
     public String[] getReservationConfnoInfo() {

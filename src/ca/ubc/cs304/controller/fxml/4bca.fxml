@@ -48,10 +48,5 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="76.0" layoutY="567.0" mnemonicParsing="false" onAction="#onClickTopButton" prefHeight="30.0" prefWidth="128.0" text="Go Back To Top">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
    </children>
 </Pane>
