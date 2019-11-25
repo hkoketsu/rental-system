@@ -53,6 +53,6 @@ public class PageController3bc extends PageController implements Initializable {
     }
 
     public void onClickBackButton() {
-        setPage(PageController3bb.class, "3bb");
+        setPage(PageController3bb.class, "2b");
     }
 }
