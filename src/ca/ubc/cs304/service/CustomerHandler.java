@@ -29,11 +29,7 @@ public class CustomerHandler {
 
     public boolean isVehicleAvailable(String vehicleLicense, TimeInterval timeInterval) {
         Vehicle model = dbHandler.getRentedVehicle(vehicleLicense, timeInterval);
-        if (model != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return model != null;
     }
 
     // any of the arguments can be null
@@ -59,7 +55,7 @@ public class CustomerHandler {
         List<String> confNoList = Arrays.asList(confNoArr);
         String confNo;
         do {
-            confNo = Util.generateConfirmationNumber();
+            confNo = new Util(dbHandler).generateConfirmationNumber();
 //            confNo = "cf";
 //            Random random = new Random();
 //            confNo += random.nextInt(10);
@@ -87,8 +83,7 @@ public class CustomerHandler {
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
-        String saltStr = salt.toString();
-        return saltStr;
+        return salt.toString();
 
     }
 }
