@@ -118,6 +118,7 @@ public class PageController2a extends PageController implements Initializable {
             vehicleTypeLabel.setText("Any");
         }
         if (branch != null) {
+            branch = "122 Walter Hardwick Ave 305"; // TODO: Remove --------------------------------------------------------------------------------------------------------------------
             this.branch = branch;
             branchLabel.setText(branch);
         } else {
@@ -137,7 +138,11 @@ public class PageController2a extends PageController implements Initializable {
 
         }
         if (vehicleType != null && branch != null && pickUpDate != null && pickupTime != null && returnDate != null && returnTime != null) {
-            reserveButton.setDisable(false);
+            if ( pickUpDate.compareTo(returnDate) > 0 || pickUpDate.getYear() < 1970 || returnDate.getYear() < 1970) {
+                reserveButton.setDisable(true);
+            } else {
+                reserveButton.setDisable(false);
+            }
         } else {
             reserveButton.setDisable(true);
         }
@@ -166,9 +171,10 @@ public class PageController2a extends PageController implements Initializable {
         }
 
         reserveButton.setVisible(true);
-        if (vehicles.length == 0 || pickUpDate.compareTo(returnDate) > 0 || (pickUpDate.getYear() > 1970 || returnDate.getYear() > 1970)) {
+        if (vehicles.length == 0) {
             reserveButton.setDisable(true);
         }
+
         dbHandler.close();
 
         // TODO: get search result, put the result on resultLabel and resultTable

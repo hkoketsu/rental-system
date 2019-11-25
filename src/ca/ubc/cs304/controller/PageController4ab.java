@@ -44,6 +44,11 @@ public class PageController4ab extends PageController implements Initializable {
             branch = paramsStr[1];
             pickupDateTime = paramsStr[2];
             returnDateTime = paramsStr[3];
+
+            vehicleTypeLabel.setText(vehicleType);
+            branchLabel.setText(branch);
+            pickupLabel.setText(pickupDateTime);
+            returnLabel.setText(returnDateTime);
         }
     }
 

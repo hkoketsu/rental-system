@@ -40,28 +40,10 @@ public class PageController4a extends PageController implements Initializable {
             pickupDateTime = paramsStr[2];
             returnDateTime = paramsStr[3];
 
-//            // TODO: consider moving this somewhere else
-//            if (vehicleType != null) {
-//                vehicleTypeLabel.setText(vehicleType);
-//            } else {
-//                vehicleTypeLabel.setText("Any");
-//            }
-//            if (branch != null) {
-//                branchLabel.setText(branch);
-//            } else {
-//                branchLabel.setText("Any");
-//            }
-//            if (pickupDateTime != null) {
-//                pickupLabel.setText(pickupDateTime);
-//            } else {
-//                pickupLabel.setText("Any");
-//            }
-//            if (returnDateTime != null) {
-//                returnLabel.setText(returnDateTime);
-//            } else {
-//                returnLabel.setText("Any");
-//            }
-
+            vehicleTypeLabel.setText(vehicleType);
+            branchLabel.setText(branch);
+            pickupLabel.setText(pickupDateTime);
+            returnLabel.setText(returnDateTime);
         }
     }
 
