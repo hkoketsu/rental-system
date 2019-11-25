@@ -33,7 +33,7 @@ public class CustomerHandler {
     }
 
     // any of the arguments can be null
-    public Vehicle[] viewVehicles(String carType, String location, TimeInterval timeInterval) {
+    public List<Vehicle> viewVehicles(String carType, String location, TimeInterval timeInterval) {
         return dbHandler.getVehicles(carType, location, timeInterval);
     }
 
@@ -50,27 +50,9 @@ public class CustomerHandler {
     // Returns the confno of the created reservation
     // Gets list of confNo's from database
     // Generates random confNo's until one is created that is not in the database
-    public String makeReservation(String carType, String driverLicense, TimeInterval timeInterval) {
-        String[] confNoArr = dbHandler.getReservationConfnoInfo();
-        List<String> confNoList = Arrays.asList(confNoArr);
-        String confNo;
-        do {
-            confNo = new Util(dbHandler).generateConfirmationNumber();
-//            confNo = "cf";
-//            Random random = new Random();
-//            confNo += random.nextInt(10);
-//            confNo += this.getRandomLetter();
-//            confNo += random.nextInt(10);
-//            confNo += random.nextInt(10);
-//            confNo += random.nextInt(10);
-//            confNo += this.getRandomLetter();
-//            confNo += random.nextInt(10);
-        } while (confNoList.contains(confNo));
-
-        Reservation model = new Reservation(confNo, carType, driverLicense, null, timeInterval);
+    public void makeReservation(String confNo, String carType, String driverLicense, TimeInterval timeInterval) {
+        Reservation model = new Reservation(confNo, carType, driverLicense, timeInterval);
         dbHandler.putReservation(model);
-
-        return confNo;
     }
 
 

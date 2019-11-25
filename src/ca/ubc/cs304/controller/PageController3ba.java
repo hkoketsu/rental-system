@@ -36,7 +36,7 @@ public class PageController3ba extends PageController implements Initializable {
     public void onClickNextButton() {
         String confirmationNumber = confirmationNumberTextField.getText();
         Reservation reservation = dbHandler.getReservation(confirmationNumber);
-        dbHandler.close();
+//        dbHandler.close();
         if (reservation != null) {
             setPage(PageController4ba.class, "4ba", new Object[]{reservation, branchLocation});
         } else {

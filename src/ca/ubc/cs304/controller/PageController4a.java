@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 /***
  * Page for adding customer information for reservation
  */
-public class PageController4a extends PageController {
+public class PageController4a extends PageController implements Initializable {
     @FXML Label vehicleTypeLabel;
     @FXML Label branchLabel;
     @FXML Label pickupLabel;
@@ -33,6 +33,15 @@ public class PageController4a extends PageController {
     private String pickupDateTime;
     private String returnDateTime;
     private String branchLocation;
+
+    private DatabaseConnectionHandler dbHandler;
+    private CustomerHandler customerHandler;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        dbHandler = new DatabaseConnectionHandler();
+        customerHandler = new CustomerHandler(dbHandler);
+    }
 
     @Override
     public void loadParameter(Object[]...params) {
@@ -60,12 +69,10 @@ public class PageController4a extends PageController {
         } else {
 
             // TODO: consider moving this somewhere better
-            DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
-            CustomerHandler customerHandler = new CustomerHandler(dbHandler);
             if ( ! customerHandler.isCustomerInDatabase(licenseNumber) ) {
                 customerHandler.addCustomerToDatabase(licenseNumber, phoneNumber, name, address);
             }
-            dbHandler.close();
+//            dbHandler.close();
 
             setPage(PageController5a.class, "5a", new String[]{vehicleType, licenseNumber, pickupDateTime, returnDateTime});
         }

@@ -34,7 +34,6 @@ public class ReservationRepository {
                         rs.getString("confNo"),
                         rs.getString("vtname"),
                         rs.getString("dlicense"),
-                        null,
                         duration
                 ));
             }

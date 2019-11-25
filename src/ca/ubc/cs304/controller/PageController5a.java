@@ -31,10 +31,12 @@ public class PageController5a extends PageController implements Initializable {
     private String returnTime;
 
     private DatabaseConnectionHandler dbHandler;
+    private CustomerHandler customerHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbHandler = new DatabaseConnectionHandler();
+        customerHandler = new CustomerHandler(dbHandler);
         confirmationNumber = new Util(dbHandler).generateConfirmationNumber();
     }
 
@@ -58,16 +60,9 @@ public class PageController5a extends PageController implements Initializable {
 
 
         TimeInterval timeInterval = new TimeInterval(pickupDate, returnDate, pickupTime, returnTime);
-        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
-        CustomerHandler customerHandler = new CustomerHandler(dbHandler);
-        confirmationNumber = customerHandler.makeReservation(vehicleType, licenseNumber, timeInterval);
+        customerHandler.makeReservation(confirmationNumber, vehicleType, licenseNumber, timeInterval);
         ConfirmationNumberLabel.setText(confirmationNumber);
 
-        dbHandler.close();
-
-    }
-
-    public void onClickTopButton() {
-        setPage(PageController1.class, "1");
+//        dbHandler.close();
     }
 }

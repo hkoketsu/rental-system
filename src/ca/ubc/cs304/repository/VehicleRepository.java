@@ -146,9 +146,9 @@ public class VehicleRepository {
         }
     }
 
-    public Vehicle[] getVehicles(String carType, String location, TimeInterval timeInterval) {
+    public List<Vehicle> getVehicles(String carType, String location, TimeInterval timeInterval) {
+        List<Vehicle> result = new ArrayList<>();
         try {
-            ArrayList<Vehicle> result = new ArrayList<Vehicle>();
             String query = "SELECT * FROM vehicles v";
             query += helper.getVehiclesHelper(carType, location, timeInterval);
 
@@ -170,15 +170,13 @@ public class VehicleRepository {
                 );
                 result.add(model);
             }
+
             rs.close();
             stmt.close();
-
-            return result.toArray(new Vehicle[result.size()]);
-
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return result;
     }
 
     public List<String> getAvailableVehicleIds(String carType, String location, TimeInterval timeInterval) {

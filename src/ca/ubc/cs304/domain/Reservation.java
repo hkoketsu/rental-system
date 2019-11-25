@@ -1,18 +1,15 @@
 package ca.ubc.cs304.domain;
 
-import java.sql.Date;
-
 public class Reservation {
     private String id;
     private String vehicleType;
     private String customerId;
     private TimeInterval duration;
 
-    public Reservation(String id, String vehicleType, String customerId, String branchId, TimeInterval duration) {
+    public Reservation(String id, String vehicleType, String customerId, TimeInterval duration) {
         this.id = id;
         this.vehicleType = vehicleType;
         this.customerId = customerId;
-
         this.duration = duration;
     }
 

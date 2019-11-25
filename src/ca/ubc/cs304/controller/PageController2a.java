@@ -172,7 +172,7 @@ public class PageController2a extends PageController implements Initializable {
         }
         CustomerHandler customerHandler = new CustomerHandler(dbHandler);
         int numberOfVehicles = customerHandler.viewNumberOfVehicles(vehicleType, branch, timeInterval);
-        Vehicle[] vehicles = customerHandler.viewVehicles(vehicleType, branch, timeInterval);
+        List<Vehicle> vehicles = customerHandler.viewVehicles(vehicleType, branch, timeInterval);
 
         if (vehicleType != null) {
             resultLabel.setText(vehicleType + " Vehicles's Available: " + numberOfVehicles);
@@ -182,16 +182,15 @@ public class PageController2a extends PageController implements Initializable {
         }
 
         resultTable.getItems().clear();
-        for (Vehicle v : vehicles) {
-            resultTable.getItems().add(v);
-        }
+        ObservableList<Vehicle> vehicleItems = FXCollections.observableArrayList(vehicles);
+        resultTable.setItems(vehicleItems);
 
         reserveButton.setVisible(true);
-        if (vehicles.length == 0) {
+        if (vehicleItems.size() == 0) {
             reserveButton.setDisable(true);
         }
 
-        dbHandler.close();
+//        dbHandler.close();
 
         // TODO: get search result, put the result on resultLabel and resultTable
         // TODO: and depending on the result, change the page contents
