@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
@@ -37,9 +36,7 @@ public class PageController4bca extends PageController implements Initializable 
         // TODO: send query to get data based on branch and category
         // ToDO: send query to get total number or revenue based on forRent
 
-        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
 
-        ClerkHandler clerkHandler = new ClerkHandler(dbHandler);
 
         TableColumn vlicenseCol = new TableColumn("License");
         vlicenseCol.setCellValueFactory(new PropertyValueFactory<>("vlicense"));
@@ -73,6 +70,26 @@ public class PageController4bca extends PageController implements Initializable 
 
         vehicleTable.getColumns().addAll(vlicenseCol, makeCol, modelCol, yearCol, colorCol,
                 odometerCol, vtnameCol, locationCol, cityCol, statusCol);
+
+
+
+
+
+    }
+
+    @Override
+    public void loadParameter(Object[]...params) {
+        if (params != null && params[0].length == 1) {
+            String[] paramsStr = (String[]) params[0];
+            forRent = paramsStr[0].equals("rental");
+            this.forRent = forRent;
+            if(forRent)
+                SubTitleText.setText("Daily Rental");
+            else SubTitleText.setText("Daily Return");
+        }
+        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
+
+        ClerkHandler clerkHandler = new ClerkHandler(dbHandler);
 
         if(this.forRent) {
             RentalReport rentalReport = clerkHandler.generateRentalReport();
@@ -145,21 +162,8 @@ public class PageController4bca extends PageController implements Initializable 
                 BurTag.setText(BurSum);
             }
 
-        }
+            dbHandler.close();
 
-
-
-    }
-
-    @Override
-    public void loadParameter(Object[]...params) {
-        if (params != null && params[0].length == 1) {
-            String[] paramsStr = (String[]) params[0];
-            forRent = paramsStr[0].equals("rental");
-            this.forRent = forRent;
-            if(forRent)
-                SubTitleText.setText("Daily Rental");
-            else SubTitleText.setText("Daily Return");
         }
     }
 

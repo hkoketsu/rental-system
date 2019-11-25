@@ -69,14 +69,15 @@ public class ReturnReportRepository {
             Statement stmt = connection.createStatement();
             ResultSet rs;
             if (location == null || city == null){
-                rs = stmt.executeQuery("SELECT " +
-                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city " +
-                        "FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "r.rdate = "+ dateString +"ORDER BY v.location, r.fromTime");
+                String query = "SELECT " +
+                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city, v.status " +
+                        "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
+                        "r.rdate = "+ dateString +"ORDER BY v.location, r.rtime";
+                rs = stmt.executeQuery(query);
             }
             else {
                 rs = stmt.executeQuery("SELECT " +
-                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city " +
+                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city, v.status " +
                         "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
                         "r.rdate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city + " ORDER BY v.location, r.rtime");
             }

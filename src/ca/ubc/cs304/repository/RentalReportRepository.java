@@ -31,12 +31,14 @@ public class RentalReportRepository {
             Statement stmt = connection.createStatement();
             ResultSet rs;
             if(location == null || city == null){
-                rs = stmt.executeQuery("SELECT COUNT(*) AS typeSum, v.vtname FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +" GROUP BY v.vtname ORDER BY v.vtname");
+                String query = "SELECT COUNT(*) AS typeSum, v.vtname FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
+                        "fromDate = "+ dateString +" GROUP BY v.vtname ORDER BY v.vtname";
+                rs = stmt.executeQuery(query);
             }
             else {
-                rs = stmt.executeQuery("SELECT COUNT(*) AS typeSum, v.vtname FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY v.vtname ORDER BY v.vtname");
+                String query = "SELECT COUNT(*) AS typeSum, v.vtname FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
+                        "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY v.vtname ORDER BY v.vtname";
+                rs = stmt.executeQuery(query);
             }
 
             while (rs.next()) {
@@ -118,16 +120,18 @@ public class RentalReportRepository {
             Statement stmt = connection.createStatement();
             ResultSet rs;
             if (location == null || city == null){
-                rs = stmt.executeQuery("SELECT " +
-                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city " +
+                String query = "SELECT " +
+                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city, v.status " +
                         "FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +"ORDER BY v.location, r.fromTime");
+                        "fromDate = "+ dateString +"ORDER BY v.location, r.fromTime";
+                rs = stmt.executeQuery(query);
             }
             else {
-                rs = stmt.executeQuery("SELECT " +
-                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city " +
+                String query = "SELECT " +
+                        "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city, v.status " +
                         "FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city + " ORDER BY v.location, r.fromTime");
+                        "fromDate = "+ dateString +" AND v.location = '"+ location +"' AND v.city = '"+ city + "' ORDER BY v.location, r.fromTime";
+                rs = stmt.executeQuery(query);
             }
 
             while (rs.next()) {
@@ -152,3 +156,4 @@ public class RentalReportRepository {
         return vehicles;
     }
 }
+

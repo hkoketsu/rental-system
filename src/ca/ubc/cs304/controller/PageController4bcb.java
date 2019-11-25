@@ -3,7 +3,6 @@ package ca.ubc.cs304.controller;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.domain.Vehicle;
 import ca.ubc.cs304.domain.reports.RentalBranchReport;
-import ca.ubc.cs304.domain.reports.RentalReport;
 import ca.ubc.cs304.domain.reports.ReturnBranchReport;
 import ca.ubc.cs304.domain.reports.ReturnReportBranchSummary;
 import ca.ubc.cs304.service.ClerkHandler;
@@ -11,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
@@ -39,13 +37,7 @@ public class PageController4bcb extends PageController implements Initializable 
         // TODO: send query to get data based on category
         // ToDO: send query to get total number or revenue based on forRent
 
-        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
 
-        ClerkHandler clerkHandler = new ClerkHandler(dbHandler);
-        String blocation = "";
-        if(this.branch == "Vancouver")
-            blocation = "122 Walter Hardwick Ave 305";
-        else blocation = "5202 Union St";
 
 
         TableColumn vlicenseCol = new TableColumn("License");
@@ -81,8 +73,37 @@ public class PageController4bcb extends PageController implements Initializable 
         vehicleTable.getColumns().addAll(vlicenseCol, makeCol, modelCol, yearCol, colorCol,
                 odometerCol, vtnameCol, locationCol, cityCol, statusCol);
 
+
+
+
+
+
+    }
+
+    @Override
+    public void loadParameter(Object[]...params) {
+        if (params != null && params[0].length == 2) {
+            String[] paramsStr = (String[]) params[0];
+            forRent = paramsStr[0].equals("rental");
+            branch = paramsStr[1];
+            this.branch = branch;
+            this.forRent = forRent;
+            branchTag.setText("Branch: "+ branch);
+            if(forRent)
+                SubTitleText.setText("Daily Rental");
+            else SubTitleText.setText("Daily Return");
+        }
+
+        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
+
+        ClerkHandler clerkHandler = new ClerkHandler(dbHandler);
+        String bcity = "";
+        if(this.branch == "122 Walter Hardwick Ave 305")
+            bcity = "Vancouer";
+        else bcity = "Burnaby";
+
         if(forRent) {
-            RentalBranchReport rentalBranchReport = clerkHandler.generateBranchRentalReport(blocation, this.branch);
+            RentalBranchReport rentalBranchReport = clerkHandler.generateBranchRentalReport(this.branch, bcity);
 
             ArrayList<Vehicle> vehicles = rentalBranchReport.getVehicleList();
 
@@ -103,7 +124,7 @@ public class PageController4bcb extends PageController implements Initializable 
                 typeTag.setText(typeResult);
             }
         }else {
-            ReturnBranchReport returnBranchReport = clerkHandler.generateBranchReturnReport(blocation, this.branch);
+            ReturnBranchReport returnBranchReport = clerkHandler.generateBranchReturnReport(this.branch, bcity);
 
             ArrayList<Vehicle> vehicles = returnBranchReport.getVehicleList();
 
@@ -135,25 +156,8 @@ public class PageController4bcb extends PageController implements Initializable 
                 else BurTag.setText(BurSum);
             }
 
-        }
+            dbHandler.close();
 
-
-
-
-    }
-
-    @Override
-    public void loadParameter(Object[]...params) {
-        if (params != null && params[0].length == 2) {
-            String[] paramsStr = (String[]) params[0];
-            forRent = paramsStr[0].equals("rental");
-            branch = paramsStr[1];
-            this.branch = branch;
-            this.forRent = forRent;
-            branchTag.setText("Branch: "+ branch);
-            if(forRent)
-                SubTitleText.setText("Daily Rental");
-            else SubTitleText.setText("Daily Return");
         }
     }
 
