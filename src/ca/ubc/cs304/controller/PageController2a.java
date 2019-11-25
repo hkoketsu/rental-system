@@ -65,6 +65,40 @@ public class PageController2a extends PageController implements Initializable {
                 );
         pickupTimeChoices.setItems(hours);
         returnTimeChoices.setItems(hours);
+
+
+        TableColumn vlicenseCol = new TableColumn("License");
+        vlicenseCol.setCellValueFactory(new PropertyValueFactory<>("vlicense"));
+
+        TableColumn makeCol = new TableColumn("Make");
+        makeCol.setCellValueFactory(new PropertyValueFactory<>("make"));
+
+        TableColumn modelCol = new TableColumn("Model");
+        modelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
+
+        TableColumn yearCol = new TableColumn("Year");
+        yearCol.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+        TableColumn colorCol = new TableColumn("Color");
+        colorCol.setCellValueFactory(new PropertyValueFactory<>("vlicense"));
+
+        TableColumn odometerCol = new TableColumn("Odometer");
+        odometerCol.setCellValueFactory(new PropertyValueFactory<>("odometer"));
+
+        TableColumn vtnameCol = new TableColumn("Type");
+        odometerCol.setCellValueFactory(new PropertyValueFactory<>("vtname"));
+
+        TableColumn locationCol = new TableColumn("Location");
+        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+
+        TableColumn cityCol = new TableColumn("City");
+        cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+
+        TableColumn statusCol = new TableColumn("Status");
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        resultTable.getColumns().addAll(vlicenseCol, makeCol, modelCol, yearCol, colorCol,
+                odometerCol, vtnameCol, locationCol, cityCol, statusCol);
     }
 
     public void onClickSearchButton() {
@@ -117,18 +151,12 @@ public class PageController2a extends PageController implements Initializable {
 
         }
 
-        TableColumn vlicenseCol = new TableColumn("License");
-        vlicenseCol.setCellValueFactory(new PropertyValueFactory<>("vlicense"));
-        TableColumn makeCol = new TableColumn("Make");
-        TableColumn modelCol = new TableColumn("Model");
-        TableColumn yearCol = new TableColumn("Year");
-        TableColumn colorCol = new TableColumn("Color");
-        TableColumn odometerCol = new TableColumn("Odometer");
-        TableColumn locationCol = new TableColumn("Location");
-        TableColumn cityCol = new TableColumn("City");
-        TableColumn statusCol = new TableColumn("Status");
+        resultTable.getItems().clear();
+        for (Vehicle v : vehicles) {
+            resultTable.getItems().add(v);
+        }
 
-
+        reserveButton.setVisible(true);
         dbHandler.close();
 
         // TODO: get search result, put the result on resultLabel and resultTable
