@@ -148,7 +148,7 @@ public class RentalReportRepository {
                         rs.getString("vtname"),
                         rs.getString("location"),
                         rs.getString("city"),
-                        rs.getString("status"));
+                        "rented");
                 vehicles.add(model);
             }
 

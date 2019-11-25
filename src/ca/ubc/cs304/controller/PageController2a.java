@@ -88,13 +88,13 @@ public class PageController2a extends PageController implements Initializable {
         yearCol.setCellValueFactory(new PropertyValueFactory<>("year"));
 
         TableColumn colorCol = new TableColumn("Color");
-        colorCol.setCellValueFactory(new PropertyValueFactory<>("vlicense"));
+        colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
 
         TableColumn odometerCol = new TableColumn("Odometer");
         odometerCol.setCellValueFactory(new PropertyValueFactory<>("odometer"));
 
         TableColumn vtnameCol = new TableColumn("Type");
-        odometerCol.setCellValueFactory(new PropertyValueFactory<>("vtname"));
+        vtnameCol.setCellValueFactory(new PropertyValueFactory<>("vtname"));
 
         TableColumn locationCol = new TableColumn("Location");
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
