@@ -33,7 +33,7 @@ public class DatabaseConnectionHandler {
 	private ReturnReportRepository returnReportRepository;
 
 	public DatabaseConnectionHandler() {
-		connection = getConnection();
+		getConnection();
 		branchRepository = new BranchRepository(connection);
 		customerRepository = new CustomerRepository(connection);
 		rentalRepository = new RentalRepository(connection);
@@ -104,8 +104,10 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
-	private Connection getConnection() {
-		Connection connection = null;
+	private void getConnection() {
+		if (connection != null) {
+			return;
+		}
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			connection = DriverManager.getConnection(ORACLE_URL, username, password);
@@ -113,6 +115,5 @@ public class DatabaseConnectionHandler {
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
-		return connection;
 	}
 }
