@@ -98,7 +98,7 @@ public class PageController4bcb extends PageController implements Initializable 
 
         ClerkHandler clerkHandler = new ClerkHandler(dbHandler);
         String bcity = "";
-        if(this.branch == "122 Walter Hardwick Ave 305")
+        if(this.branch.equals("122 Walter Hardwick Ave 305"))
             bcity = "Vancouer";
         else bcity = "Burnaby";
 
@@ -140,18 +140,18 @@ public class PageController4bcb extends PageController implements Initializable 
                 String VanSum = "Vancouver: ";
                 String BurSum = "Burnaby: ";
                 for(ReturnReportBranchSummary r: returnBranchReport.getBreports()){
-                    if(r.getCity() == "Vancouver")
+                    if(r.getCity().equals("Vancouver"))
                         VanSum += r.getSummary();
                 }
                 for(ReturnReportBranchSummary r: returnBranchReport.getBreports()){
-                    if(r.getCity() == "Burnaby")
+                    if(r.getCity().equals("Burnaby"))
                         BurSum += r.getSummary();
                 }
 
                 VanTag.setText("");
                 BurTag.setText("");
 
-                if(this.branch == "Vancouver")
+                if(this.branch.equals("Vancouver"))
                     VanTag.setText(VanSum);
                 else BurTag.setText(BurSum);
             }

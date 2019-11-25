@@ -35,21 +35,23 @@ public class ReturnReportRepository {
             Statement stmt = connection.createStatement();
             ResultSet rs;
             if(location == null || city == null){
-                rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.vtname, SUM(r.value) AS revenue, v.city FROM" +
+                String query = "SELECT COUNT(*) AS vehicles, v.vtname, SUM(r.value) AS revenue, v.city FROM" +
                         " ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
-                        "r.rdate = "+ dateString +" GROUP BY v.vtname, v.location, v.city ORDER BY v.location, v.vtname");
+                        "r.rdate = "+ dateString +" GROUP BY v.vtname, v.location, v.city ORDER BY v.location, v.vtname";
+                rs = stmt.executeQuery(query);
             }
             else {
-                rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.vtname, SUM(r.value) AS revenue, v.city FROM" +
+                String query = "SELECT COUNT(*) AS vehicles, v.vtname, SUM(r.value) AS revenue, v.city FROM" +
                         " ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
-                        "r.rdate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY v.vtname ORDER BY v.vtname");
+                        "r.rdate = "+ dateString +" AND v.location = '"+ location +"' AND v.city = '"+ city +"' GROUP BY v.vtname, v.city ORDER BY v.vtname";
+                rs = stmt.executeQuery(query);
             }
 
             while (rs.next()) {
                 ReturnReportBranchSummary model = new ReturnReportBranchSummary(rs.getString("city"),
                         rs.getString("vehicles"),
                         rs.getString("vtname"),
-                        rs.getDouble("value")
+                        rs.getDouble("revenue")
                 );
                 branches.add(model);
             }
@@ -79,7 +81,7 @@ public class ReturnReportRepository {
                 rs = stmt.executeQuery("SELECT " +
                         "v.vlicense, v.make, v.model, v.year, v.color, v.odometer, v.vtname, v.location, v.city, v.status " +
                         "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
-                        "r.rdate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city + " ORDER BY v.location, r.rtime");
+                        "r.rdate = "+ dateString +" AND v.location = '"+ location +"' AND v.city = '"+ city + "' ORDER BY v.location, r.rtime");
             }
 
             while (rs.next()) {
@@ -134,8 +136,10 @@ public class ReturnReportRepository {
 
             rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city , SUM(r.value) AS revenue " +
                     " FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid)  WHERE " +
-                    "r.rdate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city);
-            result = rs.getString("city")+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
+                    "r.rdate = "+ dateString +" AND v.location = '"+ location +"' AND v.city = '"+ city+"' GROUP BY v.city");
+            while(rs.next()){
+                result = rs.getString("city")+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
+            }
 
             rs.close();
             stmt.close();
@@ -155,8 +159,9 @@ public class ReturnReportRepository {
             rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, SUM(r.value) AS revenue " +
                     "FROM ((rentals re INNER JOIN vehicles v ON re.vlicense = v.vlicense) INNER JOIN returns r ON r.rid = re.rid) WHERE " +
                     "r.rdate = "+ dateString +" GROUP BY r.rdate");
-            result = "Total "+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
-
+            while(rs.next()){
+                result = "Total "+ " returns: "+rs.getString("vehicles") + " revenue: "+ rs.getString("revenue");
+            }
             rs.close();
             stmt.close();
         } catch (SQLException e) {

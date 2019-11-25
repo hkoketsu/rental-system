@@ -37,7 +37,7 @@ public class RentalReportRepository {
             }
             else {
                 String query = "SELECT COUNT(*) AS typeSum, v.vtname FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                        "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY v.vtname ORDER BY v.vtname";
+                        "fromDate = "+ dateString +" AND v.location = '"+ location +"' AND v.city = '"+ city +"' GROUP BY v.vtname ORDER BY v.vtname";
                 rs = stmt.executeQuery(query);
             }
 
@@ -80,10 +80,12 @@ public class RentalReportRepository {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs;
-
-            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles, v.city FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                    "fromDate = "+ dateString +" AND v.location = "+ location +" AND v.city = "+ city +" GROUP BY fromDate");
-            result = rs.getString("city") + ": " + rs.getString("vehicles");
+            String query = "SELECT COUNT(*) AS vehicles, v.city FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
+                    "fromDate = "+ dateString +" AND v.location = '"+ location +"' AND v.city = '"+ city +"' GROUP BY v.city";
+            rs = stmt.executeQuery(query);
+            while(rs.next()){
+                result = rs.getString("city") + ": " + rs.getString("vehicles");
+            }
 
             rs.close();
             stmt.close();
@@ -99,10 +101,12 @@ public class RentalReportRepository {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs;
-
-            rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
-                    "fromDate = "+ dateString +" GROUP BY fromDate");
-            result = "Total: " + rs.getString("vehicles");
+            String query = "SELECT COUNT(*) AS vehicles FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
+                    "fromDate = "+ dateString +" GROUP BY fromDate";
+            rs = stmt.executeQuery(query);
+            while(rs.next()){
+                result = "Total: " + rs.getString("vehicles");
+            }
 
             rs.close();
             stmt.close();

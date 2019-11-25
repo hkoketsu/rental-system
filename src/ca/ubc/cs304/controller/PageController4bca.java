@@ -149,11 +149,11 @@ public class PageController4bca extends PageController implements Initializable 
                 String VanSum = "Vancouver: ";
                 String BurSum = "Burnaby: ";
                 for(ReturnReportBranchSummary r: returnReport.getBreports()){
-                    if(r.getCity() == "Vancouver")
+                    if(r.getCity().equals("Vancouver"))
                         VanSum += r.getSummary();
                 }
                 for(ReturnReportBranchSummary r: returnReport.getBreports()){
-                    if(r.getCity() == "Burnaby")
+                    if(r.getCity().equals("Burnaby"))
                         BurSum += r.getSummary();
                 }
                 VanTag.setText("");
