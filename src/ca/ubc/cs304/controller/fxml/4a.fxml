@@ -72,7 +72,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="33.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Driver License Number:">
+            <Text layoutX="31.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
                <font>
                   <Font size="14.0" />
                </font>
@@ -82,9 +82,9 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <TextField fx:id="nameTextField" layoutX="31.0" layoutY="98.0" prefHeight="25.0" prefWidth="236.0" />
-            <TextField fx:id="phoneNumberTextField" layoutX="31.0" layoutY="174.0" prefHeight="25.0" prefWidth="236.0" />
-            <TextField fx:id="driverLicenseTextField" layoutX="31.0" layoutY="253.0" prefHeight="25.0" prefWidth="236.0" />
+            <TextField fx:id="nameTextField" layoutX="30.0" layoutY="88.0" prefHeight="25.0" prefWidth="236.0" />
+            <TextField fx:id="phoneNumberTextField" layoutX="30.0" layoutY="155.0" prefHeight="25.0" prefWidth="236.0" />
+            <TextField fx:id="driverLicenseTextField" layoutX="30.0" layoutY="219.0" prefHeight="25.0" prefWidth="236.0" />
             <Label fx:id="errorLabel" layoutX="31.0" layoutY="294.0" text="Error: Please fill in all the information" textFill="RED" visible="false">
                <font>
                   <Font size="14.0" />
@@ -95,6 +95,12 @@
                   <Font size="14.0" />
                </font>
             </Button>
+            <Text layoutX="30.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Driver License Number:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="addressTextField" layoutX="30.0" layoutY="282.0" prefHeight="25.0" prefWidth="236.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
