@@ -118,7 +118,6 @@ public class PageController2a extends PageController implements Initializable {
             vehicleTypeLabel.setText("Any");
         }
         if (branch != null) {
-            branch = "122 Walter Hardwick Ave 305"; // TODO: Remove --------------------------------------------------------------------------------------------------------------------
             this.branch = branch;
             branchLabel.setText(branch);
         } else {
