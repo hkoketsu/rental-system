@@ -19,8 +19,8 @@ public class DatabaseConnectionHandler {
 	private static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1522:stu";
 	private static final String EXCEPTION_TAG = "[EXCEPTION]";
 	private static final String WARNING_TAG = "[WARNING]";
-	private static final String username = "ora_hkoketsu";
-	private static final String password = "a93547966";
+	private static final String username = "ora_abramwwy";
+	private static final String password = "a46086161";
 
 	private static Connection connection;
 	private BranchRepository branchRepository;

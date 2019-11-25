@@ -100,7 +100,7 @@ public class RentalReportRepository {
 
             rs = stmt.executeQuery("SELECT COUNT(*) AS vehicles FROM rentals r INNER JOIN vehicles v ON r.vlicense = v.vlicense WHERE " +
                     "fromDate = "+ dateString +" GROUP BY fromDate");
-            result = "total: " + rs.getString("vehicles");
+            result = "Total: " + rs.getString("vehicles");
 
             rs.close();
             stmt.close();
@@ -140,7 +140,7 @@ public class RentalReportRepository {
                         rs.getString("vtname"),
                         rs.getString("location"),
                         rs.getString("city"),
-                        null);
+                        rs.getString("status"));
                 vehicles.add(model);
             }
 

@@ -22,5 +22,8 @@ public class ReturnReportBranchSummary {
     //This is the total revenue of Vtype for specific branch
     public Double getRevenue() {return revenue;}
 
+    public String getSummary() {
+        return "#"+getVtype()+": "+ getVnum() +" revenue: "+ getRevenue();
+    }
 
 }

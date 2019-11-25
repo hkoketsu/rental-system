@@ -5,32 +5,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController4bcb">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs304.controller.PageController4bcb">
    <children>
       <Text id="TitleText" layoutX="39.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch Report">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text id="SubTitleText" layoutX="39.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Rental">
+      <Text fx:id="SubTitleText" layoutX="39.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Rental">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <ScrollPane hbarPolicy="NEVER" layoutX="40.0" layoutY="128.0" prefHeight="422.0" prefWidth="405.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="40.0" layoutY="120.0" prefHeight="450.0" prefWidth="850">
          <content>
             <AnchorPane>
                <children>
-                  <TitledPane id="CategoryTitlePane" animated="false" prefHeight="300.0" prefWidth="405.0" text="Economy">
-                     <content>
-                        <AnchorPane id="CategoryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="403.0" />
-                     </content>
-                  </TitledPane>
+                  <TableView fx:id="vehicleTable" layoutX="40.0" layoutY="120.0" prefHeight="450.0" prefWidth="850">
+                     <columns>
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Text layoutX="258.0" layoutY="588.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: ">
+      <Text fx:id="totalTag" layoutX="258.0" layoutY="588.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="typeTag" layoutX="258.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Types: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="VanTag" layoutX="258.0" layoutY="658.0" strokeType="OUTSIDE" strokeWidth="0.0" text="">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="BurTag" layoutX="258.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="">
          <font>
             <Font size="14.0" />
          </font>
@@ -40,7 +54,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Text layoutX="40.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch: ">
+      <Text fx:id="branchTag" layoutX="40.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch: ">
          <font>
             <Font size="14.0" />
          </font>
