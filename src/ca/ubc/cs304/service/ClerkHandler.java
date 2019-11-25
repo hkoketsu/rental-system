@@ -2,8 +2,15 @@ package ca.ubc.cs304.service;
 
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.domain.Return;
+import ca.ubc.cs304.domain.reports.RentalBranchReport;
+import ca.ubc.cs304.domain.reports.ReturnBranchReport;
+import ca.ubc.cs304.domain.reports.ReturnReport;
 import ca.ubc.cs304.model.RentalReceipt;
-import ca.ubc.cs304.model.RentalReport;
+import ca.ubc.cs304.domain.reports.RentalReport;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ClerkHandler {
 
@@ -26,19 +33,52 @@ public class ClerkHandler {
     }
 
     public RentalReport generateRentalReport() {
-        return null;
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String formatted = format1.format(cal.getTime());
+        Date curdate = java.sql.Date.valueOf(formatted);
+
+        RentalReport report = cdh.getRentalReport(curdate);
+
+        return report;
     }
 
-    public RentalReport generateBranchRentalReport(String branchLocation, String branchCity) {
-        return null;
+    public RentalBranchReport generateBranchRentalReport(String branchLocation, String branchCity) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String formatted = format1.format(cal.getTime());
+        Date curdate = java.sql.Date.valueOf(formatted);
+
+        RentalBranchReport report = cdh.getRentalBranchReport(curdate, branchLocation, branchCity);
+
+        return report;
     }
 
-    public Return generateReturnReport() {
-        return null;
+    public ReturnReport generateReturnReport() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String formatted = format1.format(cal.getTime());
+        Date curdate = java.sql.Date.valueOf(formatted);
+
+        ReturnReport report = cdh.getReturnReport(curdate);
+
+        return report;
     }
 
-    public Return generateBranchReturnReport(String branchLocation, String branchCity) {
-        return null;
+    public ReturnBranchReport generateBranchReturnReport(String branchLocation, String branchCity) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String formatted = format1.format(cal.getTime());
+        Date curdate = java.sql.Date.valueOf(formatted);
+
+        ReturnBranchReport report = cdh.getReturnBranchReport(curdate, branchLocation, branchCity);
+
+        return report;
     }
 
 
