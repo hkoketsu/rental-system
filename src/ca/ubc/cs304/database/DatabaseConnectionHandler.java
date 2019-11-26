@@ -184,7 +184,7 @@ public class DatabaseConnectionHandler {
 	public void viewVehiclesTypes () {
 		try {
 
-			String query = "select * from vehiclesTypes";
+			String query = "select * from vehicleTypes";
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -320,10 +320,29 @@ public class DatabaseConnectionHandler {
 	public void viewAllTables(){
 		viewBranch();
 		viewVehicles();
+		viewVehiclesTypes();
 		viewCustomers();
 		viewRentals();
 		viewReservations();
 		viewReturns();
+	}
+
+
+	public void insertBranch(Branch model) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?)");
+			ps.setString(1, model.getLocation());
+			ps.setString(2, model.getCity());
+
+			ps.executeUpdate();
+			connection.commit();
+
+			ps.close();
+			System.out.println("SUCCESS!");
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
 	}
 
 	public void insertVehicles(Vehicle model) {
@@ -446,4 +465,188 @@ public class DatabaseConnectionHandler {
 //			rollbackConnection();
 //		}
 	}
+
+
+
+	public void deleteBranch(String location, String city) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM branch b WHERE b.location = ? AND b.city = ?");
+			ps.setString(1, location);
+			ps.setString(2, city);
+
+			int rowCount = ps.executeUpdate();
+			connection.commit();
+
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			} else {
+				System.out.println("SUCCESS!");
+			}
+
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void deleteVehicle(String vlicense) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM vehicles v WHERE v.vlicense= ?");
+			ps.setString(1, vlicense);
+
+			int rowCount = ps.executeUpdate();
+
+			connection.commit();
+
+
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			} else {
+				System.out.println("SUCCESS!");
+			}
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void deleteVehicleType(String vtname) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM vehicleTypes v WHERE v.vtname = ?");
+			ps.setString(1, vtname);
+
+			int rowCount = ps.executeUpdate();
+
+			connection.commit();
+
+
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			} else {
+				System.out.println("SUCCESS!");
+			}
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+
+	public void deleteCustomer(String dlicense) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM customers c WHERE c.dlicense = ?");
+			ps.setString(1, dlicense);
+
+			int rowCount = ps.executeUpdate();
+
+			connection.commit();
+
+
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			} else {
+				System.out.println("SUCCESS!");
+			}
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void deleteReservation(String confNo) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM reservations r WHERE r.confNo = ?");
+			ps.setString(1, confNo);
+
+			int rowCount = ps.executeUpdate();
+
+			connection.commit();
+
+
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			} else {
+				System.out.println("SUCCESS!");
+			}
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void deleteRental(String rid) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM rentals r WHERE r.rid = ?");
+			ps.setString(1, rid);
+
+			int rowCount = ps.executeUpdate();
+
+			connection.commit();
+
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			} else {
+				System.out.println("SUCCESS!");
+			}
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void deleteReturn(String rid) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM returns r WHERE r.rid = ?");
+			ps.setString(1, rid);
+
+			int rowCount = ps.executeUpdate();
+			connection.commit();
+
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			} else {
+				System.out.println("SUCCESS!");
+			}
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void updateCustomer(Customer model) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("UPDATE customers SET cellphone = ? , name = ? , address = ?  WHERE dlicense = ?");
+			ps.setString(1, model.getCellphone());
+			ps.setString(2, model.getName());
+			ps.setString(3, model.getAddress());
+			ps.setString(4, model.getDlicense());
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 0) {
+				System.out.println(WARNING_TAG + " does not exist!");
+			}
+
+			connection.commit();
+
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
 }
