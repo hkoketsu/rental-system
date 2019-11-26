@@ -160,6 +160,27 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
+	public void viewBranch(){
+		try {
+
+			String query = "select * from branch";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			System.out.println("##################branch##################");
+			while(rs.next()) {
+				System.out.println("------------------------------------------------");
+				System.out.println("location: " + rs.getString("location"));
+				System.out.println("city: " + rs.getString("city"));
+				System.out.println("------------------------------------------------");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void viewVehiclesTypes () {
 		try {
 
@@ -297,6 +318,7 @@ public class DatabaseConnectionHandler {
 	}
 
 	public void viewAllTables(){
+		viewBranch();
 		viewVehicles();
 		viewCustomers();
 		viewRentals();
@@ -304,5 +326,124 @@ public class DatabaseConnectionHandler {
 		viewReturns();
 	}
 
-	
+	public void insertVehicles(Vehicle model) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO vehicles VALUES (?,?,?,?,?,?,?,?,?,?)");
+			ps.setString(1, model.getVlicense());
+			ps.setString(2, model.getMake());
+			ps.setString(3, model.getModel());
+			ps.setInt(4, Integer.getInteger(model.getYear()));
+			ps.setString(5, model.getColor());
+			ps.setInt(6, Integer.getInteger(model.getOdometer()));
+			ps.setString(7, model.getVtname());
+			ps.setString(8, model.getLocation());
+			ps.setString(9, model.getCity());
+			ps.setString(10, model.getStatus());
+
+			ps.executeUpdate();
+			connection.commit();
+
+			ps.close();
+			System.out.println("SUCCESS!");
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void insertVehicleTypes(VehicleType model) {
+		try {
+			InsuranceRate iRate = model.getInsuranceRate();
+			VehicleRate vRate = model.getVehicleRate();
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO vehicleTypes VALUES (?,?,?,?,?,?,?,?,?)");
+			ps.setString(1, model.getId());
+			ps.setString(2, model.getFeatures());
+			ps.setInt(3, vRate.getWeekRate());
+			ps.setInt(4, vRate.getDayRate());
+			ps.setInt(5, vRate.getHourRate());
+			ps.setInt(6, iRate.getWeekRate());
+			ps.setInt(7, iRate.getDayRate());
+			ps.setInt(8, iRate.getHourRate());
+			ps.setInt(9, model.getKmRate());
+
+			ps.executeUpdate();
+			connection.commit();
+
+			ps.close();
+			System.out.println("SUCCESS!");
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void insertCustomers(String dlicense, String cellphone, String name, String address) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO vehicleTypes VALUES (?,?,?,?)");
+			ps.setString(1, dlicense);
+			ps.setString(2, cellphone);
+			ps.setString(3, name);
+			ps.setString(4, address);
+
+			ps.executeUpdate();
+			connection.commit();
+
+			ps.close();
+			System.out.println("SUCCESS!");
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
+		}
+	}
+
+	public void insertReservation() {
+		System.out.println("for the sake of time, insert through normal gui");
+//		try {
+//			PreparedStatement ps = connection.prepareStatement("INSERT INTO vehicleTypes VALUES (?,?,?,?)");
+//			ps.setString(1, model.get);
+//
+//			ps.executeUpdate();
+//			connection.commit();
+//
+//			ps.close();
+//			System.out.println("SUCCESS!");
+//		} catch (SQLException e) {
+//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+//			rollbackConnection();
+//		}
+	}
+
+	public void insertRental() {
+		System.out.println("for the sake of time, insert through normal gui");
+//		try {
+//			PreparedStatement ps = connection.prepareStatement("INSERT INTO vehicleTypes VALUES (?,?,?,?)");
+//			ps.setString(1, model.get);
+//
+//			ps.executeUpdate();
+//			connection.commit();
+//
+//			ps.close();
+//			System.out.println("SUCCESS!");
+//		} catch (SQLException e) {
+//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+//			rollbackConnection();
+//		}
+	}
+
+	public void insertReturn() {
+		System.out.println("for the sake of time, insert through normal gui");
+//		try {
+//			PreparedStatement ps = connection.prepareStatement("INSERT INTO vehicleTypes VALUES (?,?,?,?)");
+//			ps.setString(1, model.get);
+//
+//			ps.executeUpdate();
+//			connection.commit();
+//
+//			ps.close();
+//			System.out.println("SUCCESS!");
+//		} catch (SQLException e) {
+//			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+//			rollbackConnection();
+//		}
+	}
 }
