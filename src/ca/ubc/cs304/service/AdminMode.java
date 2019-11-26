@@ -211,8 +211,9 @@ public class AdminMode {
                 "DELETE TABLES",
                 "",
                 "(1) delete customer",
+                "(2) delete branch",
                 "",
-                "(2) back to main menu",
+                "(3) back to main menu",
                 ""
         );
         try {
@@ -223,6 +224,10 @@ public class AdminMode {
                     deleteCustomer();
                     break;
                 case 2:
+                    clearScreen();
+                    deleteBranch();
+                    break;
+                case 3:
                     clearScreen();
                     mainMenu();
                     break;
@@ -263,6 +268,43 @@ public class AdminMode {
             backToMainMenuAfterInput();
         } else {
             deleteCustomer();
+        }
+        mainMenu();
+    }
+
+    private void deleteBranch(){
+        clearScreen();
+        sc = new Scanner(System.in);
+
+        String location, city;
+        printInBox('$',
+                "",
+                "location:  ",
+                "city: ",
+                "");
+        printInBox('*',
+                "enter branch's location");
+        location = scanLine();
+        clearScreen();
+        printInBox('$',
+                "",
+                "location: " + location,
+                "city: ",
+                "");
+        printInBox('*',
+                "enter branch's city");
+        city = scanLine();
+        clearScreen();
+        printInBox('$',
+                "",
+                "location: " + location,
+                "city: " + city,
+                "");
+        if (validateOption()) {
+            dbHandler.deleteBranch(location, city);
+            backToMainMenuAfterInput();
+        } else {
+            deleteBranch();
         }
         mainMenu();
     }
@@ -379,7 +421,7 @@ public class AdminMode {
     }
 
     private boolean validateOption(){
-
+        sc = new Scanner(System.in);
         printInBox('+',
                 "is this correct?",
                 "",
