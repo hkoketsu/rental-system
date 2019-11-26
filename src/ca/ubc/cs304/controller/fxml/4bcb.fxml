@@ -59,6 +59,11 @@
             <Font size="14.0" />
          </font>
       </Text>
+       <Button fx:id="backButton" layoutX="150.0" layoutY="588.0" mnemonicParsing="false" onAction="#onClickBackButton" prefHeight="30.0" prefWidth="95.0" text="Back">
+           <font>
+               <Font size="14.0" />
+           </font>
+       </Button>
       <Label id="BranchLabel" layoutX="119.0" layoutY="92.0" prefHeight="20.0" prefWidth="292.0">
          <font>
             <Font size="14.0" />

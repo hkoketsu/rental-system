@@ -99,7 +99,7 @@ public class PageController4bcb extends PageController implements Initializable 
         ClerkHandler clerkHandler = new ClerkHandler(dbHandler);
         String bcity = "";
         if(this.branch.equals("122 Walter Hardwick Ave 305"))
-            bcity = "Vancouer";
+            bcity = "Vancouver";
         else bcity = "Burnaby";
 
         if(forRent) {
@@ -156,12 +156,10 @@ public class PageController4bcb extends PageController implements Initializable 
                 else BurTag.setText(BurSum);
             }
 
-            dbHandler.close();
-
         }
     }
 
-    public void onClickTopButton() {
-        setPage(PageController1.class, "1");
+    public void onClickBackButton() {
+        setPage(PageController3bc.class, "3bc");
     }
 }
