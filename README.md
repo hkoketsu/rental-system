@@ -7,14 +7,8 @@ CPSC 304 project
   $ ssh -l username -L localhost:1522:dbhost.students.cs.ubc.ca:1522 remote.students.cs.ubc.ca
 ```
   change username to your CWL id
- 
-2. Change oracle database username and password to yours
   
-  src/ca/ubc/cs304/databaseDatabaseConnectionHandler 
-  
-  line 20, 21
-
-3. Compile and Run
+2. Compile and Run
 ```
   $ cd src/ca/ubc/cs304/app
   $ javac App.java
