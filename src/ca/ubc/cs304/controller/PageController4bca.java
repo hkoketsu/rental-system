@@ -129,10 +129,10 @@ public class PageController4bca extends PageController implements Initializable 
 
             if(returnReport.getTotal() != ""){
                 String totalstr = returnReport.getTotal();
-                for(String s : returnReport.getBranchSum()){
-                    totalstr += "  ";
-                    totalstr += s;
-                }
+//                for(String s : returnReport.getBranchSum()){
+//                    totalstr += "  ";
+//                    totalstr += s;
+//                }
                 totalTag.setText(totalstr);
             }
 
@@ -162,12 +162,10 @@ public class PageController4bca extends PageController implements Initializable 
                 BurTag.setText(BurSum);
             }
 
-            dbHandler.close();
-
         }
     }
 
-    public void onClickTopButton() {
-        setPage(PageController1.class, "1");
+    public void onClickBackButton() {
+        setPage(PageController3bc.class, "3bc");
     }
 }
