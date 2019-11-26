@@ -2,6 +2,7 @@ package ca.ubc.cs304.app;
 
 import ca.ubc.cs304.controller.PageController;
 import ca.ubc.cs304.controller.PageController1;
+import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,7 +47,20 @@ public class App extends Application {
         }
     }
 
+    public void adminMode(){
+        DatabaseConnectionHandler dbHandler = new DatabaseConnectionHandler();
+        dbHandler.viewAllTables();
+    }
+
     public static void main(String[] args) {
+        if (args.length > 0) {
+            for (String s : args) {
+                if (s.equals("admin")){
+                    new App().adminMode();
+                    System.exit(0);
+                }
+            }
+        }
         launch(args);
     }
 }

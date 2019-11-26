@@ -1,9 +1,6 @@
 package ca.ubc.cs304.database;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 import ca.ubc.cs304.domain.*;
@@ -133,4 +130,178 @@ public class DatabaseConnectionHandler {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
 	}
+
+	public void viewVehicles () {
+		try {
+
+			String query = "select * from vehicles";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			System.out.println("##################vehicles##################");
+			while(rs.next()) {
+				System.out.println("------------------------------------------------");
+				System.out.println("vlicense: " + rs.getString("vlicense"));
+				System.out.println("make: " + rs.getString("make"));
+				System.out.println("model: " + rs.getString("model"));
+				System.out.println("year: " + rs.getInt("year"));
+				System.out.println("color: " + rs.getString("color"));
+				System.out.println("odometer: " + rs.getInt("odometer"));
+				System.out.println("vtname: " + rs.getString("vtname"));
+				System.out.println("location: " + rs.getString("location"));
+				System.out.println("city: " + rs.getString("city"));
+				System.out.println("status: " + rs.getString("status"));
+				System.out.println("------------------------------------------------");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void viewVehiclesTypes () {
+		try {
+
+			String query = "select * from vehiclesTypes";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			System.out.println("##################vehicleTypes##################");
+			while(rs.next()) {
+				System.out.println("------------------------------------------------");
+				System.out.println("vtname: " + rs.getString("vtname"));
+				System.out.println("features: " + rs.getString("features"));
+				System.out.println("wrate: " + rs.getInt("wrate"));
+				System.out.println("drate: " + rs.getInt("drate"));
+				System.out.println("hrate: " + rs.getInt("hrate"));
+				System.out.println("wirate: " + rs.getInt("wirate"));
+				System.out.println("dirate: " + rs.getInt("dirate"));
+				System.out.println("hirate: " + rs.getInt("hirate"));
+				System.out.println("krate: " + rs.getInt("krate"));
+				System.out.println("------------------------------------------------");
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void viewCustomers () {
+		try {
+
+			String query = "select * from customers";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			System.out.println("##################customers##################");
+			while(rs.next()) {
+				System.out.println("------------------------------------------------");
+				System.out.println("dlicense: " + rs.getString("dlicense"));
+				System.out.println("cellphone: " + rs.getString("cellphone"));
+				System.out.println("name: " + rs.getString("name"));
+				System.out.println("address: " + rs.getString("address"));
+				System.out.println("------------------------------------------------");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void viewReservations() {
+		try {
+
+			String query = "select * from reservations";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+
+			System.out.println("##################reservations##################");
+			while(rs.next()) {
+				System.out.println("------------------------------------------------");
+				System.out.println("confNo: " + rs.getString("confNo"));
+				System.out.println("vtname: " + rs.getString("vtname"));
+				System.out.println("dlicense: " + rs.getString("dlicense"));
+				System.out.println("fromDate: " + rs.getDate("fromDate"));
+				System.out.println("fromTime: " + rs.getString("fromTime"));
+				System.out.println("toDate: " + rs.getDate("toDate"));
+				System.out.println("toTime: " + rs.getString("toTime"));
+				System.out.println("------------------------------------------------");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void viewRentals() {
+		try {
+
+			String query = "select * from rentals";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			System.out.println("##################rentals##################");
+			while(rs.next()) {
+				System.out.println("------------------------------------------------");
+				System.out.println("rid: " + rs.getString("rid"));
+				System.out.println("vlicense: " + rs.getString("vlicense"));
+				System.out.println("dlicense: " + rs.getString("dlicense"));
+				System.out.println("fromDate: " + rs.getDate("fromDate"));
+				System.out.println("fromTime: " + rs.getString("fromTime"));
+				System.out.println("toDate: " + rs.getDate("toDate"));
+				System.out.println("toTime: " + rs.getString("toTime"));
+				System.out.println("odometer: " + rs.getInt("odometer"));
+				System.out.println("cardName: " + rs.getString("cardName"));
+				System.out.println("cardNo: " + rs.getString("cardNo"));
+				System.out.println("expDate: " + rs.getString("expDate"));
+				System.out.println("confNo: " + rs.getString("confNo"));
+				System.out.println("------------------------------------------------");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void viewReturns() {
+		try {
+
+			String query = "select * from returns";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+
+			System.out.println("##################returns##################");
+			while(rs.next()) {
+				System.out.println("------------------------------------------------");
+				System.out.println("rid: " + rs.getString("rid"));
+				System.out.println("rdate: " + rs.getDate("rdate"));
+				System.out.println("rtime: " + rs.getString("rtime"));
+				System.out.println("odometer: " + rs.getInt("odometer"));
+				System.out.println("fulltank: " + rs.getString("fulltank"));
+				System.out.println("value: " + rs.getInt("value"));
+				System.out.println("------------------------------------------------");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void viewAllTables(){
+		viewVehicles();
+		viewCustomers();
+		viewRentals();
+		viewReservations();
+		viewReturns();
+	}
+
 }
