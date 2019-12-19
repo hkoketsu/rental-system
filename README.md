@@ -1,5 +1,5 @@
-# CarRentalSystem
-CPSC 304 project
+# About
+This is a course project from CPSC 304
 
 ## To run this program
 1. Tunnel into undergrad server
